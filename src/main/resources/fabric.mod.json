@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "waifuhax",
+  "version": "${version}",
+  "name": "Waifuhax",
+  "description": "WaifuWare on top!",
+  "authors": [
+    "SomeBoringNerd"
+  ],
+  "contact": {
+    "homepage": "https://github.com/WaifuWare",
+    "sources": "https://github.com/WaifuWare/WaifuHax"
+  },
+  "license": "MIT",
+  "icon": "assets/waifuhax/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "lol.waifuware.waifuhax.Waifuhax"
+    ]
+  },
+  "mixins": [
+    "waifuhax.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
