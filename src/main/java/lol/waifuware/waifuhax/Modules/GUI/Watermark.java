@@ -1,14 +1,22 @@
 package lol.waifuware.waifuhax.Modules.GUI;
 
+import com.google.gson.Gson;
 import lol.waifuware.waifuhax.Modules.Module;
+import lol.waifuware.waifuhax.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class Watermark extends Module
 {
     public Watermark(String name, int Key)
     {
         super(name, Key);
+
+        Create();
     }
 
     @Override

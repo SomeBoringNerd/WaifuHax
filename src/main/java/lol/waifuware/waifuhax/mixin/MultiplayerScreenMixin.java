@@ -23,7 +23,7 @@ abstract class MultiplayerScreenMixin extends Screen
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci)
     {
-        addDrawableChild(new ButtonWidget(this.width - 175 - 3, 3, 175, 20, Text.literal("Find IP of a server"), button -> {
+        addDrawableChild(new ButtonWidget(175 + 3, 3, 175, 20, Text.literal("Find IP of a server"), button -> {
 
         }));
     }

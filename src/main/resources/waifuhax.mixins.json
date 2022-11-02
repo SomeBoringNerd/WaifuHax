@@ -12,7 +12,9 @@
     "PlayerEntityMixin",
     "InGameOverlayRendererMixin",
     "InGameHudMixin",
-    "ChatHudMixin"
+    "ChatHudMixin",
+    "ClientConnexionMixin",
+    "ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

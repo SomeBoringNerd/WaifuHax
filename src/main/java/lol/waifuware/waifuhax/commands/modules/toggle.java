@@ -4,6 +4,7 @@ import lol.waifuware.waifuhax.Modules.Module;
 import lol.waifuware.waifuhax.Modules.ModuleManager;
 import lol.waifuware.waifuhax.Waifuhax;
 import lol.waifuware.waifuhax.commands.Command;
+import lol.waifuware.waifuhax.util.ChatUtil;
 
 import java.util.Locale;
 
@@ -34,6 +35,8 @@ public class toggle extends Command
             if(mod.name.toLowerCase().equals(commandArgs[1].toLowerCase()))
             {
                 mod.Toggle();
+                mod.save();
+                ChatUtil.SendMessage("Module " + mod.name + " was toggled " + (mod.isEnabled ? "§aON§r" : "§4OFF§r"));
             }
         }
     }

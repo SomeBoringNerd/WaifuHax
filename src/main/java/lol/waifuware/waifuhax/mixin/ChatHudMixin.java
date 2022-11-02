@@ -1,5 +1,6 @@
 package lol.waifuware.waifuhax.mixin;
 
+import lol.waifuware.waifuhax.GlobalVariables;
 import lol.waifuware.waifuhax.Modules.Module;
 import lol.waifuware.waifuhax.Modules.ModuleManager;
 import lol.waifuware.waifuhax.Waifuhax;
@@ -22,20 +23,13 @@ public class ChatHudMixin
     @Inject(at = @At("HEAD"), method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", cancellable = true)
     private void onAddMessage(Text message, @Nullable MessageSignatureData signature, int ticks, @Nullable MessageIndicator indicator, boolean refresh, CallbackInfo info)
     {
-        Waifuhax.Log(message.getString());
-        Waifuhax.Log(message.getString().replace("<" + MinecraftClient.getInstance().player.getEntityName() + "> -", ""));
-        Waifuhax.Log(MinecraftClient.getInstance().player.getEntityName());
-
-        if(message.getString().startsWith("<" + MinecraftClient.getInstance().player.getEntityName() + "> " + "-"))
+        if(GlobalVariables.HighLightEnabled)
         {
-            for (Command mod : CommandManager.Commands)
-            {
-                Waifuhax.Log("Command : " + mod.name + " | typed : " + message.getString().replace("<" + MinecraftClient.getInstance().player.getEntityName() + "> -", ""));
-                if (message.getString().replace("<" + MinecraftClient.getInstance().player.getEntityName() + "> -", "").toLowerCase().trim().startsWith(mod.name.trim().toLowerCase())) {
-                    mod.Execute(message.getString().replace("<" + MinecraftClient.getInstance().player.getEntityName() + "> -", ""));
-                    info.cancel();
-                }
+            if (!message.getString().startsWith("<" + MinecraftClient.getInstance().player.getEntityName() + "> " + "-")) {
+                message = Text.literal(message.getString().replace(MinecraftClient.getInstance().player.getEntityName().toString(), "§4§l" + MinecraftClient.getInstance().player.getEntityName() + "§r"));
             }
         }
     }
+
+
 }

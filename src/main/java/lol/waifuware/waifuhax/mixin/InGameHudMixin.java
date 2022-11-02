@@ -15,7 +15,6 @@ public class InGameHudMixin
     @Inject(method = "render", at = @At("TAIL"))
     private void onRender(MatrixStack matrixStack, float tickDelta, CallbackInfo info)
     {
-
         for (Module mod: ModuleManager.modules)
         {
             if(mod.isEnabled) {
