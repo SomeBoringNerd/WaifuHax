@@ -4,5 +4,6 @@ public enum CATEGORY
 {
     GUI,
     EXPLOIT,
-    CHAT
+    CHAT,
+    BOT
 }

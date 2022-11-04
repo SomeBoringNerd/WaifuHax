@@ -14,12 +14,12 @@ public class ClientPlayerEntityMixin
     @Inject(method = "sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
     private void onSendChatMessage(String message, Text preview, CallbackInfo info)
     {
-
         if (!message.startsWith("-") && !message.startsWith("/") && !message.startsWith("#"))
         {
             if(GlobalVariables.SuffixEnabled)
             {
                 message += " | ᴡᴀɪꜰᴜʜᴀx ♥";
+                preview = Text.literal(message);
             }
         }
     }

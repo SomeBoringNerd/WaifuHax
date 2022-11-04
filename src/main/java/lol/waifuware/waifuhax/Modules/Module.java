@@ -52,6 +52,9 @@ public abstract class Module
     public abstract void Render(MatrixStack matrice);
     public abstract void onActivate();
     public abstract void onDisable();
+
+    public void onChat(String message){};
+
     public void save()
     {
         JSONObject object = new JSONObject();

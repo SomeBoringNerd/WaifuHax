@@ -1,5 +1,6 @@
 package lol.waifuware.waifuhax.Modules;
 
+import lol.waifuware.waifuhax.Modules.BOT.AutoTpa;
 import lol.waifuware.waifuhax.Modules.CHAT.Highlight;
 import lol.waifuware.waifuhax.Modules.CHAT.Suffix;
 import lol.waifuware.waifuhax.Modules.GUI.ArrayList;
@@ -24,14 +25,10 @@ public class ModuleManager
         Waifuhax.LOGGER.info("Registering GUI modules");
 
         modules.add(new ArrayList("ArrayList", 0));
+        modules.add(new AutoTpa("AutoTpa", 0));
         modules.add(new Highlight("HighLight", 0));
         modules.add(new Suffix("Suffix", 0));
         modules.add(new Watermark("Watermark", 0));
-
-
-
-
-
     }
 
     void CheckForFolder(){

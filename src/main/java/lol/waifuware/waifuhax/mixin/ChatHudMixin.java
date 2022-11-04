@@ -29,6 +29,16 @@ public class ChatHudMixin
                 message = Text.literal(message.getString().replace(MinecraftClient.getInstance().player.getEntityName().toString(), "§4§l" + MinecraftClient.getInstance().player.getEntityName() + "§r"));
             }
         }
+
+        if(GlobalVariables.IsThisAccountABot)
+        {
+            for (Module module : ModuleManager.modules)
+            {
+                if(module.isEnabled){
+                    module.onChat(message.getString());
+                }
+            }
+        }
     }
 
 
