@@ -18,7 +18,7 @@ public class PlayerEntityMixin
     private void Update(CallbackInfo ci)
     {
         if(!ranOnce){
-            if(MinecraftClient.getInstance().player.getEntityName().equals("2b2flat"))
+            if(MinecraftClient.getInstance().player.getEntityName().equals("SomeBoringNerd") || MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
             {
                 GlobalVariables.IsThisAccountABot = true;
             }
@@ -27,8 +27,11 @@ public class PlayerEntityMixin
         {
             mod.Update();
 
-            if(!ranOnce && mod.name.trim().toLowerCase().equals("autotpa") && MinecraftClient.getInstance().player.getEntityName().equals("2b2flat")){
-                mod.isEnabled = true;
+            if(!ranOnce && mod.name.toLowerCase().equals("autotpa")){
+                if(MinecraftClient.getInstance().player.getEntityName().equals("SomeBoringNerd") || MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
+                {
+                    mod.isEnabled = true;
+                }
             }
         }
 

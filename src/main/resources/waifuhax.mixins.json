@@ -14,7 +14,9 @@
     "InGameHudMixin",
     "ChatHudMixin",
     "ClientConnexionMixin",
-    "ClientPlayerEntityMixin"
+    "ClientPlayerEntityMixin",
+    "AnvilScreenMixin",
+    "AnvilScreenHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

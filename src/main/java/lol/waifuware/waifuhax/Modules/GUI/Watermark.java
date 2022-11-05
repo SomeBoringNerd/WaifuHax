@@ -1,6 +1,7 @@
 package lol.waifuware.waifuhax.Modules.GUI;
 
 import com.google.gson.Gson;
+import lol.waifuware.waifuhax.GlobalVariables;
 import lol.waifuware.waifuhax.Modules.Module;
 import lol.waifuware.waifuhax.Waifuhax;
 import net.minecraft.client.MinecraftClient;
@@ -27,7 +28,7 @@ public class Watermark extends Module
     @Override
     public void Render(MatrixStack matrice)
     {
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V1.0", 5, 5, fromRGBA(255, 255, 255, 255 ));
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V1.0" + (GlobalVariables.IsThisAccountABot ? " [BOT MODE]" : ""), 5, 5, fromRGBA(255, 255, 255, 255 ));
     }
 
     private int fromRGBA(int r, int g, int b, int a) {
