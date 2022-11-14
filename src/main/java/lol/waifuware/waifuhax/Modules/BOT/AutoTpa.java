@@ -119,7 +119,7 @@ class ThreadedRequest implements Runnable
                         }else
                         {
                             MinecraftClient.getInstance().player.sendCommand("msg " + json.getString("message") + " you are not assigned to this base, but the base " + json.getString("assignedBase") + ". TPA to " + getTpaBot(json.getString("assignedBase")) + " in order to teleport to your base");
-                            MinecraftClient.getInstance().player.sendCommand("tpn" + _Player);
+                            MinecraftClient.getInstance().player.sendCommand("tpn " + _Player);
                         }
                     }else if(MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
                     {

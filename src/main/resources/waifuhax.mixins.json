@@ -16,7 +16,8 @@
     "ClientConnexionMixin",
     "ClientPlayerEntityMixin",
     "AnvilScreenMixin",
-    "AnvilScreenHandlerMixin"
+    "AnvilScreenHandlerMixin",
+    "ChestMixin"
   ],
   "injectors": {
     "defaultRequire": 1
