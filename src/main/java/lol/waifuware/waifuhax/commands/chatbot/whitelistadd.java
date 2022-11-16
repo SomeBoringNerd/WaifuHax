@@ -30,17 +30,17 @@ public class whitelistadd extends Command {
             // array[3] : AllClear
             // array[4] : base
 
-            new ThreadedRequest(array[2], array);
+            new WhiteListAddRequest(array[2], array);
         }
     }
 }
 
-class ThreadedRequest implements Runnable
+class WhiteListAddRequest implements Runnable
 {
     private String _Player;
     private String[] _Args;
     private static final String USER_AGENT = "Mozilla/5.0";
-    public ThreadedRequest(String player_name, String[] arguments)
+    public WhiteListAddRequest(String player_name, String[] arguments)
     {
         _Player = player_name;
         _Args = arguments;
@@ -78,7 +78,7 @@ class ThreadedRequest implements Runnable
             in.close();
 
             ChatUtil.SendMessage("Player " + _Player + " was added to the whitelist.");
-
+            MinecraftClient.getInstance().player.sendCommand("msg " + _Player + " you have been added to the FeurGroup's whitelist. Your main base is " + _Args[4] + " and you can tpa to " + AutoTpa.getTpaBot(_Args[4]) + " to access it.");
         }else{
             ChatUtil.SendMessage("An error has occured");
         }

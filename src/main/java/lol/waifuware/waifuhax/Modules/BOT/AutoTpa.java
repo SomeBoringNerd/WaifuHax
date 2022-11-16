@@ -68,6 +68,18 @@ public class AutoTpa extends Module
     public void onDisable() {
 
     }
+
+    public static String getTpaBot(String BaseName)
+    {
+        switch (BaseName){
+            case "achille":
+                return "SomeBoringNerd";
+            case "degand":
+                return "EzN1GGER";
+            default:
+                return "${b0T} (there is no tpbot at this base)";
+        }
+    }
 }
 
 class ThreadedRequest implements Runnable
@@ -118,7 +130,7 @@ class ThreadedRequest implements Runnable
                             MinecraftClient.getInstance().player.sendCommand("tpy " + json.getString("message"));
                         }else
                         {
-                            MinecraftClient.getInstance().player.sendCommand("msg " + json.getString("message") + " you are not assigned to this base, but the base " + json.getString("assignedBase") + ". TPA to " + getTpaBot(json.getString("assignedBase")) + " in order to teleport to your base");
+                            MinecraftClient.getInstance().player.sendCommand("msg " + json.getString("message") + " you are not assigned to this base, but the base " + json.getString("assignedBase") + ". TPA to " + AutoTpa.getTpaBot(json.getString("assignedBase")) + " in order to teleport to your base");
                             MinecraftClient.getInstance().player.sendCommand("tpn " + _Player);
                         }
                     }else if(MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
@@ -128,7 +140,7 @@ class ThreadedRequest implements Runnable
                             MinecraftClient.getInstance().player.sendCommand("tpy " + json.getString("message"));
                         }else
                         {
-                            MinecraftClient.getInstance().player.sendCommand("msg " + json.getString("message") + " you are not assigned to this base, but the base " + json.getString("assignedBase") + ". TPA to " + getTpaBot(json.getString("assignedBase")) + " in order to teleport to your base");
+                            MinecraftClient.getInstance().player.sendCommand("msg " + json.getString("message") + " you are not assigned to this base, but the base " + json.getString("assignedBase") + ". TPA to " + AutoTpa.getTpaBot(json.getString("assignedBase")) + " in order to teleport to your base");
                             MinecraftClient.getInstance().player.sendCommand("tpn " + _Player);
                         }
                     }
@@ -150,18 +162,6 @@ class ThreadedRequest implements Runnable
         }else{
             MinecraftClient.getInstance().player.sendCommand("msg " + _Player + " an unknown error has occured and I can't communicate with the API at the moment. here's the error code : " + responseCode);
             MinecraftClient.getInstance().player.sendCommand("tpn " + _Player);
-        }
-    }
-
-    private String getTpaBot(String BaseName)
-    {
-        switch (BaseName){
-            case "achille":
-                return "SomeBoringNerd";
-            case "degand":
-                return "EzN1GGER";
-            default:
-                return "${b0T} (there is no tpbot at this base)";
         }
     }
 

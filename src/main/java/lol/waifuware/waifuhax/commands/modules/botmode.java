@@ -17,11 +17,5 @@ public class botmode extends Command
     {
         GlobalVariables.IsThisAccountABot = !GlobalVariables.IsThisAccountABot;
         ChatUtil.SendMessage("Bot mode has been turned " + (GlobalVariables.IsThisAccountABot ? "§aON" : "§4OFF"));
-        /*
-        if(GlobalVariables.IsThisAccountABot){
-            MinecraftClient.getInstance().player.sendChatMessage(">This account is being used as a bot by FeurGroup (commands available for everyone will eventually be added)", Text.literal(">This account is being used as a bot by FeurGroup (commands available for everyone will eventually be added)"));
-        }else{
-            MinecraftClient.getInstance().player.sendChatMessage(">This account is no longer being used as a bot", Text.literal(">This account is no longer being used as a bot"));
-        }*/
     }
 }
