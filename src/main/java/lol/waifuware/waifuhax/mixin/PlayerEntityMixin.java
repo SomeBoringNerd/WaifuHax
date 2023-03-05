@@ -13,28 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin
 {
-    boolean ranOnce = false;
+    int tick = 0;
     @Inject(method = "tick", at = @At("TAIL"))
     private void Update(CallbackInfo ci)
     {
-        if(!ranOnce){
-            if(MinecraftClient.getInstance().player.getEntityName().equals("SomeBoringNerd") || MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
-            {
-                GlobalVariables.IsThisAccountABot = true;
-            }
-        }
         for (Module mod: ModuleManager.modules)
         {
             mod.Update();
-
-            if(!ranOnce && mod.name.toLowerCase().equals("autotpa")){
-                if(MinecraftClient.getInstance().player.getEntityName().equals("SomeBoringNerd") || MinecraftClient.getInstance().player.getEntityName().equals("EzN1GGER"))
-                {
-                    mod.isEnabled = true;
-                }
-            }
         }
-
-        ranOnce = false;
     }
 }

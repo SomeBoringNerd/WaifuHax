@@ -17,7 +17,8 @@
     "ClientPlayerEntityMixin",
     "AnvilScreenMixin",
     "AnvilScreenHandlerMixin",
-    "ChestMixin"
+    "ChestMixin",
+    "KeyBoardMixin"
   ],
   "injectors": {
     "defaultRequire": 1

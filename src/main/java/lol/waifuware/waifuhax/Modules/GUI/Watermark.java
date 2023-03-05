@@ -2,6 +2,7 @@ package lol.waifuware.waifuhax.Modules.GUI;
 
 import com.google.gson.Gson;
 import lol.waifuware.waifuhax.GlobalVariables;
+import lol.waifuware.waifuhax.Modules.CATEGORY;
 import lol.waifuware.waifuhax.Modules.Module;
 import lol.waifuware.waifuhax.Waifuhax;
 import net.minecraft.client.MinecraftClient;
@@ -15,20 +16,18 @@ public class Watermark extends Module
 {
     public Watermark(String name, int Key)
     {
-        super(name, Key);
+        super(name, Key, CATEGORY.GUI);
 
         Create();
-    }
 
-    @Override
-    public void Update() {
-
+        desc[0] = "Fancy text on your screen";
     }
 
     @Override
     public void Render(MatrixStack matrice)
     {
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V1.0" + (GlobalVariables.IsThisAccountABot ? " [BOT MODE]" : ""), 5, 5, fromRGBA(255, 255, 255, 255 ));
+        String name = MinecraftClient.getInstance().player.getEntityName();
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V1.0 | " + name, 5, 5, fromRGBA(255, 255, 255, 255 ));
     }
 
     private int fromRGBA(int r, int g, int b, int a) {

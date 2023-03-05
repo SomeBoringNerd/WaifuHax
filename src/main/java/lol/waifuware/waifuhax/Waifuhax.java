@@ -1,6 +1,7 @@
 package lol.waifuware.waifuhax;
 
 import lol.waifuware.waifuhax.Modules.ModuleManager;
+import lol.waifuware.waifuhax.clickgui.ClickGUI;
 import lol.waifuware.waifuhax.commands.CommandManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ public class Waifuhax implements ModInitializer
         Log("Hello World !");
         new ModuleManager();
         new CommandManager();
+        new ClickGUI();
     }
 
     public static void Log(String message)
