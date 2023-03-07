@@ -1,6 +1,7 @@
 package lol.waifuware.waifuhax.clickgui;
 
 import lol.waifuware.waifuhax.Modules.CATEGORY;
+import lol.waifuware.waifuhax.Modules.GUI.ClickGUI;
 import lol.waifuware.waifuhax.Modules.Module;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -37,11 +38,11 @@ public class DescriptionPanel
     {
         x = MinecraftClient.getInstance().getWindow().getScaledWidth() - 255;
 
-        DrawableHelper.fill(matrices, x - 1, y - 1, x + width + 1 , y + height + 1, Color.blue.getRGB());
+        DrawableHelper.fill(matrices, x - 1, y - 1, x + width + 1 , y + height + 1, ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        DrawableHelper.fill(matrices, x + 1, y + 1, x + width - 1, y + height - 1, Color.black.getRGB());
+        DrawableHelper.fill(matrices, x + 1, y + 1, x + width - 1, y + height - 1, ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
 
-        DrawableHelper.fill(matrices, x - 1, y + 18, x + width + 1 , y + 20, Color.blue.getRGB());
+        DrawableHelper.fill(matrices, x - 1, y + 18, x + width + 1 , y + 20, ClickGUI.getInstance().getColor("MainColor").getRGB());
 
         if(butt == null)
         {

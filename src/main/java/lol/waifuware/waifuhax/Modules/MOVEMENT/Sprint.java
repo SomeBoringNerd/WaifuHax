@@ -24,7 +24,10 @@ public class Sprint extends Module
         if(isEnabled)
         {
             assert MinecraftClient.getInstance().player != null;
-            MinecraftClient.getInstance().player.setSprinting(true);
+            if(!MinecraftClient.getInstance().player.isSprinting())
+            {
+                MinecraftClient.getInstance().player.setSprinting(true);
+            }
         }
     }
 

@@ -17,7 +17,6 @@ public class Waifuhax implements ModInitializer
         Log("Hello World !");
         new ModuleManager();
         new CommandManager();
-        new ClickGUI();
     }
 
     public static void Log(String message)

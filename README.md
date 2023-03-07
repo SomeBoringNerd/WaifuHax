@@ -1,7 +1,5 @@
 # WaifuHax
 
-@TODO : move bot functionality to SomeBoringNerd/FeurBot
-@TODO : rename whitelistremove to whitelistdel
 @TODO : try and debug coord exploit
 
 # Infos

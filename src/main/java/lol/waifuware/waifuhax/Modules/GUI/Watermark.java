@@ -27,7 +27,7 @@ public class Watermark extends Module
     public void Render(MatrixStack matrice)
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V1.0 | " + name, 5, 5, fromRGBA(255, 255, 255, 255 ));
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "WaifuHax V2 (WIP) | " + name, 5, 5, fromRGBA(255, 255, 255, 255 ));
     }
 
     private int fromRGBA(int r, int g, int b, int a) {

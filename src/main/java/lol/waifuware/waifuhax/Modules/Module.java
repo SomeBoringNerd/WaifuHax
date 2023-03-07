@@ -24,10 +24,12 @@ public abstract class Module
     // note : make all modules extended from this one
 
     public String name;
-
+    public String getName(){
+        return name;
+    }
     public HashMap<String, Object> settings = new HashMap();
     public String[] desc = new String[5];
-    int key;
+    public int key;
     public CATEGORY cat;
 
     public Module(String name, int Key, CATEGORY cat)
@@ -36,6 +38,7 @@ public abstract class Module
 
         this.name = name;
         this.cat = cat;
+        this.key = key;
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
     }
@@ -53,6 +56,8 @@ public abstract class Module
         }else{
             onDisable();
         }
+
+        save();
     }
 
     int tick = 0;

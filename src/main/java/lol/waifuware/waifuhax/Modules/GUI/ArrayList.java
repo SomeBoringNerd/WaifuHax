@@ -6,6 +6,8 @@ import lol.waifuware.waifuhax.Modules.ModuleManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 
+import java.util.Map;
+
 public class ArrayList extends Module
 {
     public ArrayList(String name, int Key) {
@@ -23,7 +25,9 @@ public class ArrayList extends Module
     {
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "Active modules : ", 5, 15, fromRGBA(255, 255, 255, 255 ));
         int i = 10;
-        for(Module mod : ModuleManager.modules){
+        for (Map.Entry<String, Module> modMap : ModuleManager.modules.entrySet())
+        {
+            Module mod = modMap.getValue();
             if(mod.isEnabled){
                 MinecraftClient.getInstance().textRenderer.drawWithShadow(matrice, "> " + mod.name, 5, 15 + i, fromRGBA(255, 255, 255, 255));
                 i += 10;

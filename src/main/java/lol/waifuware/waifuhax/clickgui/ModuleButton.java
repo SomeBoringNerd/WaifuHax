@@ -1,5 +1,6 @@
 package lol.waifuware.waifuhax.clickgui;
 
+import lol.waifuware.waifuhax.Modules.GUI.ClickGUI;
 import lol.waifuware.waifuhax.Modules.Module;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -28,7 +29,7 @@ public class ModuleButton
         if(isHovered(mouseX, mouseY))
         {
             DescriptionPanel.butt = this;
-            DrawableHelper.fill(matrices, parent.x + 1 , parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14 , (mod.isEnabled ? new Color(255, 0, 255, 255).getRGB() : new Color(132, 0, 132, 255).getRGB()));
+            DrawableHelper.fill(matrices, parent.x + 1 , parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorHoveredAndEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColorHovered").darker().darker().getRGB()));
         }
         else
         {
@@ -39,7 +40,7 @@ public class ModuleButton
                     DescriptionPanel.butt = null;
                 }
             }
-            DrawableHelper.fill(matrices, parent.x + 1, parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14, (mod.isEnabled ? new Color(255, 0, 255, 160).getRGB() : new Color(132, 0, 132, 160).getRGB()));
+            DrawableHelper.fill(matrices, parent.x + 1 , parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColor").getRGB()));
         }
 
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mod.name, parent.x + 5, parent.y + offset + 4, -1);

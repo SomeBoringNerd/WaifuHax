@@ -10,7 +10,7 @@ public class BoatFly extends Module
     {
         super(name, Key, cat);
         Create();
-        desc[0] = "make boat go brrrrrrrrrrrr";
+        desc[0] = "Make boat go brrrrrrrrrrrr";
     }
 
     @Override

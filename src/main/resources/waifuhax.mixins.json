@@ -18,7 +18,8 @@
     "AnvilScreenMixin",
     "AnvilScreenHandlerMixin",
     "ChestMixin",
-    "KeyBoardMixin"
+    "KeyBoardMixin",
+    "LightMapRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,6 +7,7 @@ import lol.waifuware.waifuhax.commands.Command;
 import lol.waifuware.waifuhax.util.ChatUtil;
 
 import java.util.Locale;
+import java.util.Map;
 
 public class toggle extends Command
 {
@@ -28,8 +29,9 @@ public class toggle extends Command
             i++;
         }
 
-        for (Module mod: ModuleManager.modules)
+        for (Map.Entry<String, Module> modMap : ModuleManager.modules.entrySet())
         {
+            Module mod = modMap.getValue();
             Waifuhax.Log(mod.name.toLowerCase() + "|" + commandArgs[1] + "");
             Waifuhax.Log(String.valueOf(mod.name.toLowerCase().equals(commandArgs[1].toLowerCase())));
             if(mod.name.toLowerCase().equals(commandArgs[1].toLowerCase()))

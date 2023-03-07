@@ -2,13 +2,15 @@ package lol.waifuware.waifuhax.Modules;
 
 public enum CATEGORY
 {
-    GUI("『 Ｒｅｎｄｅｒ 』"),
-    EXPLOIT("『 Ｅｘｐｌｏｉｔｓ 』"),
-    CHAT("『 Ｃｈａｔ 』"),
-    MOVEMENT("『 Ｍｏｖｅｍｅｎｔ 』"),
-    BOT("『 Ａｕｔｏｍａｔｉｏｎ 』");
+    BOT("『Automation』"),
+    CHAT("『Chat』"),
+    COMBAT("『Combat』"),
+    EXPLOIT("『Exploit』"),
 
+    GUI("『HUD』"),
+    MOVEMENT("『Movement』"),
 
+    RENDER("『Render』");
 
     public String name;
 

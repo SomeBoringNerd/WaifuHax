@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
+
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin
 {
@@ -17,9 +19,12 @@ public class PlayerEntityMixin
     @Inject(method = "tick", at = @At("TAIL"))
     private void Update(CallbackInfo ci)
     {
-        for (Module mod: ModuleManager.modules)
+        for (Map.Entry<String, Module> mod : ModuleManager.modules.entrySet())
         {
-            mod.Update();
+            if (mod.getValue().isEnabled)
+            {
+                mod.getValue().Update();
+            }
         }
     }
 }

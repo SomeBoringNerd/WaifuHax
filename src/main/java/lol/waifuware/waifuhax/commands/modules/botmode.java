@@ -15,7 +15,7 @@ public class botmode extends Command
     @Override
     public void Execute(String command)
     {
-        GlobalVariables.IsThisAccountABot = !GlobalVariables.IsThisAccountABot;
-        ChatUtil.SendMessage("Bot mode has been turned " + (GlobalVariables.IsThisAccountABot ? "§aON" : "§4OFF"));
+        //GlobalVariables.IsThisAccountABot = !GlobalVariables.IsThisAccountABot;
+        //ChatUtil.SendMessage("Bot mode has been turned " + (GlobalVariables.IsThisAccountABot ? "§aON" : "§4OFF"));
     }
 }

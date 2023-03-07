@@ -1,6 +1,7 @@
 package lol.waifuware.waifuhax.clickgui;
 
 import lol.waifuware.waifuhax.Modules.CATEGORY;
+import lol.waifuware.waifuhax.Modules.GUI.ClickGUI;
 import lol.waifuware.waifuhax.Modules.Module;
 import lol.waifuware.waifuhax.Modules.ModuleManager;
 import net.minecraft.client.MinecraftClient;
@@ -21,7 +22,7 @@ public class CategoryPanel
     public boolean onModule;
 
     private List<ModuleButton> modList;
-
+    int moduleAmount = 0;
     public CategoryPanel(CATEGORY category, int x, int y, int width, int height)
     {
         this.category = category;
@@ -41,6 +42,9 @@ public class CategoryPanel
             modList.add(new ModuleButton(mod, this, offset));
             offset += 16;
         }
+
+        moduleAmount = ModuleManager.getInstance().getModsInCat(category).size();
+
         this.height = offset + 2;
     }
 
@@ -51,13 +55,15 @@ public class CategoryPanel
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
-        DrawableHelper.fill(matrices, x - 2, y - 2, x + width + 2, (showModule() ? y + height + 2 : y +13), Color.blue.getRGB());
+        DrawableHelper.fill(matrices, x - 2, y - 2, x + width + 2, (showModule() ? y + height + 2 : y +13), ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        DrawableHelper.fill(matrices, x, y, x + width, (showModule() ? y + height : y + 12), Color.black.getRGB());
+        DrawableHelper.fill(matrices, x, y, x + width, (showModule() ? y + height : y + 12), ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
 
-        DrawableHelper.fill(matrices, x - 2, y + 12, x + width + 2, y + 14, Color.blue.getRGB());
+        DrawableHelper.fill(matrices, x - 2, y + 12, x + width + 2, y + 14, ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        MinecraftClient.getInstance().textRenderer.draw(matrices, category.name, x + 4 , y + 2, Color.white.getRGB());
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, category.name, x + 2 , y + 2, Color.white.getRGB());
+        int e = ("[" + moduleAmount + "]").length();
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "[" + moduleAmount + "]", x + (width - 20) , y + 2, Color.white.getRGB());
 
         if(showModule())
         {

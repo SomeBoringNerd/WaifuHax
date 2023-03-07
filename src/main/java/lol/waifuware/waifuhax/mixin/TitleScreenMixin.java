@@ -2,6 +2,7 @@ package lol.waifuware.waifuhax.mixin;
 
 import com.mojang.authlib.minecraft.BanDetails;
 import lol.waifuware.waifuhax.Waifuhax;
+import lol.waifuware.waifuhax.clickgui.ClickGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -27,8 +28,9 @@ public class TitleScreenMixin {
     @Inject(at = @At("HEAD"), method = "init()V")
     private void init(CallbackInfo info)
     {
-        COPYRIGHT = Text.literal("WaifuWare INC 2022");
+        COPYRIGHT = Text.literal("WaifuWare INC 2023");
         Waifuhax.Log("Mixin title screen was loaded");
+        new ClickGUI();
     }
 
     @Inject(method = "render", at = @At("TAIL"))

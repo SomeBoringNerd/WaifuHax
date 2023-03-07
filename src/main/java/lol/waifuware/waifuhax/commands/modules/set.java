@@ -27,8 +27,9 @@ public class set extends Command
         if(commandArgs.length < 2){
             ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
         }else{
-            for (Module mod: ModuleManager.modules)
+            for (Map.Entry<String, Module> modMap : ModuleManager.modules.entrySet())
             {
+                Module mod = modMap.getValue();
                 if(mod.name.toLowerCase(Locale.ROOT).trim().equals(commandArgs[1].toLowerCase(Locale.ROOT).trim()))
                 {
                     if(commandArgs[2].toLowerCase().trim().equals("key"))
@@ -40,9 +41,9 @@ public class set extends Command
                         {
                             if(entry.getKey().toLowerCase(Locale.ROOT).trim().equals(commandArgs[2].toString().toLowerCase(Locale.ROOT).trim()))
                             {
-                                entry.setValue(commandArgs[2]);
+                                entry.setValue(commandArgs[3]);
                                 mod.save();
-                                ChatUtil.SendMessage("Set " + commandArgs[1] + " from module " + commandArgs[0] + " to " + commandArgs[2]);
+                                ChatUtil.SendMessage("Set " + commandArgs[2] + " from module " + commandArgs[1] + " to " + commandArgs[3]);
                             }
                         }
                     }

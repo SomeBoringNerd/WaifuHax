@@ -30,9 +30,18 @@ public class ClickGUI extends Screen
         descPan = new DescriptionPanel();
 
         int offset = 0;
-        for(CATEGORY category : CATEGORY.values()){
-            panels.add(new CategoryPanel(category, 5 + offset, 50, 125, 30));
-            offset += 130;
+        int previous = 5;
+        for(CATEGORY category : CATEGORY.values())
+        {
+            CategoryPanel p = new CategoryPanel(category, 5 + offset, previous, 125, 30);
+            panels.add(p);
+            previous += p.height;
+
+            if(previous >= MinecraftClient.getInstance().getWindow().getScaledHeight())
+            {
+                offset += 130;
+                previous = 5;
+            }
         }
     }
 

@@ -22,9 +22,9 @@ public class KeyBoardMixin
     {
         if (key != GLFW.GLFW_KEY_UNKNOWN)
         {
-            if(MinecraftClient.getInstance().currentScreen == null && action == GLFW.GLFW_PRESS && key == GLFW.GLFW_KEY_RIGHT_SHIFT)
+            assert lol.waifuware.waifuhax.Modules.GUI.ClickGUI.getInstance() != null;
+            if(MinecraftClient.getInstance().currentScreen == null && action == GLFW.GLFW_PRESS && key == lol.waifuware.waifuhax.Modules.GUI.ClickGUI.getInstance().key)
             {
-                ChatUtil.SendMessage("Loading GUI");
                 MinecraftClient.getInstance().setScreen(ClickGUI.instance);
             }
             else if (MinecraftClient.getInstance().currentScreen == null && action == GLFW.GLFW_PRESS)
