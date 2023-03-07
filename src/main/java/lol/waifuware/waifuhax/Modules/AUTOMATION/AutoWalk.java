@@ -14,8 +14,6 @@ public class AutoWalk extends Module
     @Override
     public void Update() {
         if(!(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().world != null)) return;
-
-        //MinecraftClient.getInstance().player.
     }
 }
 

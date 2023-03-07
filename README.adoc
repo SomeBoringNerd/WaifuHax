@@ -1,0 +1,84 @@
+= WaifuHax
+
+
+
+= Infos
+
+WaifuHax was a private client for the feurgroup as a side client to FeurHax.
+
+Now I just use it as an excuse to write Minecraft cheats and see what I can do
+
+This client contain no skidded code, which is why it is terrible
+
+made public on the 7th of march 2023, so people could laugh at this pathetic attempt at making a minecraft cheat
+
+= Features
+
+>it compile (most of the time)
+
+>no backdoor
+
+>sick clickgui according to most of the people I've talked to
+
+>weeb jokes
+
+>easy to skid
+
+= How to compile
+
+open a terminal and use type `./gradlew build`
+
+=== How to use
+
+ClickGUI's default key is right shift, if it dont work use the command
+`-set clickgui key` and then press right shift
+
+= Modules and their settings
+
+== Note
+to change a setting, type in chat `-set ${module's name} ${parameter you want to change} ${new value}`
+
+=== ClickGUI
+(all of those are under the form of a 16 bit hexadeciman int (0xRRGGBB)) where RR is for red, GG for green, and BB for blue, and each of those can go from 00 to FF
+
+[cols="~,~"]
+|===
+| ButtonColor
+| default color for button
+
+| ButtonColorHovered
+| color for button when hovered
+
+| ButtonColorEnabled
+| color for enabled button
+
+| ButtonColorHovered
+| color for button when hovered
+
+| BackgroundColor
+| color for the background of the panels
+
+| MainColor
+| color for the outline of the panels
+
+|===
+
+=== AutoFrameDupe
+
+[cols="~,~"]
+|===
+| Hit (int)
+| number of item frame hit per tick (4b4f would let you hit up to 8 item frame in one tick)
+
+| MaxFrame (int)
+| Maximum amount of item frame that will be used to dupe
+
+
+|===
+= Credits
+
+me for the code
+
+google for the json stuff
+
+Tex06 for the good "medicinal plants" that I smoked while working on this.
