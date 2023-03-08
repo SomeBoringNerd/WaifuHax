@@ -16,10 +16,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * @// TODO: 3/8/23 Remove all functions that could be turned into an event
- *
- */
 public abstract class AbstractModule implements IModule
 {
     public String getName()
