@@ -1,23 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "lol.waifuware.waifuhax.mixin",
+  "package": "lol.waifuware.Mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "client": [
     "TitleScreenMixin",
     "MinecraftClientMixin",
-    "MultiplayerScreenMixin",
     "PlayerEntityMixin",
     "InGameOverlayRendererMixin",
     "InGameHudMixin",
     "ChatHudMixin",
     "ClientConnexionMixin",
-    "ClientPlayerEntityMixin",
-    "AnvilScreenMixin",
-    "AnvilScreenHandlerMixin",
-    "ChestMixin",
     "KeyBoardMixin",
     "LightMapRenderer"
   ],

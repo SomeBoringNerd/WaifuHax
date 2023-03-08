@@ -81,4 +81,8 @@ me for the code
 
 google for the json stuff
 
+Meteordev for their event system
+
+Pr3roxDLC for showing me how to use @interfaces
+
 Tex06 for the good "medicinal plants" that I smoked while working on this.
