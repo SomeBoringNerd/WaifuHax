@@ -23,6 +23,6 @@ public class Watermark extends AbstractModule
     public void Render(OnRenderScreen event)
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "WaifuHax V2 (WIP) | " + name, 5, 5, 0xFFFFFF);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dWelcome to §5WaifuHax V2§d, " + name + " §4♥§c]", 5, 5, 0xFFFFFF);
     }
 }

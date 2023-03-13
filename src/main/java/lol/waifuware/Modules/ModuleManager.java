@@ -6,6 +6,7 @@ import lol.waifuware.Modules.COMBAT.AutoTotem;
 import lol.waifuware.Modules.EXPLOITS.AntiHunger;
 import lol.waifuware.Modules.EXPLOITS.AutoFrameDupe;
 import lol.waifuware.Modules.EXPLOITS.ChestOpenExploit;
+import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.ArrayList;
 import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Modules.RENDER.FullBright;
@@ -60,6 +61,7 @@ public class ModuleManager
         Waifuhax.Log("Registering exploits");
         modules.put("AntiHuger", new AntiHunger());
         modules.put("ChestOpenExploit", new ChestOpenExploit());
+        modules.put("GamemodeDetector", new GameModeDetector());
 
         Waifuhax.Log("Registering movement modules");
         modules.put("BoatFly", new BoatFly());

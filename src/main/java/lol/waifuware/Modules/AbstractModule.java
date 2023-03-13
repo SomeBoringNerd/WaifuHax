@@ -34,9 +34,9 @@ public abstract class AbstractModule implements IModule
     {
         Module module = this.getClass().getAnnotation(Module.class);
 
-        this.name = module.name();
-        this.cat = module.cat();
-        this.key = module.key();
+        name = module.name();
+        cat = module.cat();
+        key = module.key();
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
         Waifuhax.LOGGER.info("module " + name + " was loaded");
