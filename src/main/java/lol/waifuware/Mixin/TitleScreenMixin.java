@@ -19,8 +19,6 @@ public class TitleScreenMixin {
     @Mutable
     @Shadow @Final public static Text COPYRIGHT;
 
-    @Shadow @Final private boolean isMinceraft = true;
-
     @Inject(at = @At("HEAD"), method = "init()V")
     private void init(CallbackInfo info)
     {
