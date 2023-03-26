@@ -2,19 +2,23 @@ package lol.waifuware.Modules;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lol.waifuware.Events.OnMessageReceive;
 import lol.waifuware.Modules.Interfaces.IModule;
 import lol.waifuware.Modules.Interfaces.Module;
+import lol.waifuware.Settings.BooleanSetting;
+import lol.waifuware.Settings.IntSetting;
+import lol.waifuware.Settings.ModeSetting;
+import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Waifuhax;
+import meteordevelopment.orbit.EventHandler;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractModule implements IModule
 {
@@ -23,7 +27,7 @@ public abstract class AbstractModule implements IModule
         return name;
     }
 
-    public HashMap<String, Object> settings = new HashMap();
+    public List<Setting> settings = new ArrayList<>();
     public String[] desc = new String[5];
 
     public String name;
@@ -40,6 +44,36 @@ public abstract class AbstractModule implements IModule
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
         Waifuhax.LOGGER.info("module " + name + " was loaded");
+    }
+
+    @EventHandler
+    public void MessageEvent(OnMessageReceive event)
+    {
+        if(!event.getMessage().toLowerCase().startsWith("-" + name.toLowerCase())) return;
+
+        for(Setting setting : settings.stream().toList())
+        {
+            Waifuhax.Log("§8>>§7" + setting.getName() + " §8: §7" + setting.Description);
+        }
+    }
+
+    public List<Setting> getSettings(){
+        return settings;
+    }
+
+    public void addSetting(Setting setting)
+    {
+        this.settings.add(setting);
+    }
+
+    public void addSettings(Setting... settings)
+    {
+        Waifuhax.Log("Module " + name + " is loading " + settings.length + " settings");
+        for(Setting set : settings)
+        {
+            Waifuhax.Log("Adding setting " + set.name);
+            addSetting(set);
+        }
     }
 
     public boolean isEnabled = false;
@@ -80,10 +114,24 @@ public abstract class AbstractModule implements IModule
 
         object.append("active", isEnabled);
         object.append("key", key);
-
-        for(Map.Entry entry : settings.entrySet())
+        Waifuhax.Log("Setting list for " + name + " is " + getSettings().size());
+        for(Setting setting : getSettings())
         {
-            object.append((String) entry.getKey(), entry.getValue());
+            if(setting instanceof IntSetting e)
+            {
+                Waifuhax.Log("Added " + name + " to save file with " + e.getValue());
+                object.append((String) setting.name, e.getValue());
+            }
+            else if (setting instanceof BooleanSetting e)
+            {
+                Waifuhax.Log("Added " + name + " to save file with " + e.getEnabled());
+                object.append((String) setting.name, e.getEnabled());
+            }
+            else if (setting instanceof ModeSetting e)
+            {
+                Waifuhax.Log("Added " + name + " to save file with " + e.getIndex());
+                object.append((String) setting.name, e.getIndex());
+            }
         }
 
         System.out.println(object);
@@ -113,9 +161,25 @@ public abstract class AbstractModule implements IModule
                 object.append("active", false);
                 object.append("key", key);
 
-                for(Map.Entry entry : settings.entrySet())
+                Waifuhax.Log("Setting list for " + name + " is " + getSettings().size());
+
+                for(Setting setting : settings)
                 {
-                    object.append((String) entry.getKey(), entry.getValue());
+                    if(setting instanceof IntSetting e)
+                    {
+                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getValue());
+                        object.append((String) setting.name, e.getValue());
+                    }
+                    else if (setting instanceof BooleanSetting e)
+                    {
+                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getEnabled());
+                        object.append((String) setting.name, e.getEnabled());
+                    }
+                    else if (setting instanceof ModeSetting e)
+                    {
+                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getIndex());
+                        object.append((String) setting.name, e.getIndex());
+                    }
                 }
 
                 try
@@ -141,7 +205,7 @@ public abstract class AbstractModule implements IModule
 
             JsonObject json = (JsonObject)jsonP.parse(new FileReader("WaifuHax/modules/" + name + ".WaifuConfig"));
 
-            settings.clear();
+            //settings.clear();
 
             for(Map.Entry entry : json.entrySet())
             {
@@ -158,7 +222,24 @@ public abstract class AbstractModule implements IModule
                 }
                 else
                 {
-                    settings.put((String) entry.getKey(), entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", ""));
+                    for(Setting setting : settings)
+                    {
+                        if(setting.name == entry.getKey())
+                        {
+                            IntSetting e = (IntSetting)setting;
+                            e.setValue(Double.parseDouble(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
+                        }
+                        else if (setting instanceof BooleanSetting)
+                        {
+                            BooleanSetting e = (BooleanSetting)setting;
+                            e.setEnabled((entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")) == "true");
+                        }
+                        else if (setting instanceof ModeSetting)
+                        {
+                            ModeSetting e = (ModeSetting)setting;
+                            e.setIndex(Integer.parseInt(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
+                        }
+                    }
                 }
             }
         }catch (IOException e){

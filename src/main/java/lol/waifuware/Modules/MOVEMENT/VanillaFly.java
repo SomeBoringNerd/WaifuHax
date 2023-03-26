@@ -6,6 +6,7 @@ import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 @Module(name = "VanillaFly", key = 0, cat = CATEGORY.MOVEMENT)
 public class VanillaFly extends AbstractModule
@@ -31,6 +32,6 @@ public class VanillaFly extends AbstractModule
     @Override
     public void onDisable() {
         assert MinecraftClient.getInstance().player != null;
-        MinecraftClient.getInstance().player.getAbilities().flying = true;
+        MinecraftClient.getInstance().player.getAbilities().flying = false;
     }
 }

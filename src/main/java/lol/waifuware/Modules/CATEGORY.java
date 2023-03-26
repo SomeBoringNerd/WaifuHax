@@ -8,6 +8,7 @@ public enum CATEGORY
     EXPLOIT("『Exploit』"),
     GUI("『GUI』"),
     MOVEMENT("『Movement』"),
+    MISC("『Miscellaneous』"),
     RENDER("『Render』");
 
     public String name;

@@ -1,10 +1,10 @@
 package lol.waifuware.Mixin;
 
 import lol.waifuware.Events.OnMessageReceive;
+import lol.waifuware.Events.OnPacketEvent;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.ClientConnection;
-import net.minecraft.network.PacketCallbacks;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +21,9 @@ public class ClientConnexionMixin
     @Inject(method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At("HEAD"), cancellable = true)
     private void send(Packet<?> packet, CallbackInfo ci)
     {
+
+        OnPacketEvent.Receive packetEvent = Waifuhax.EVENT_BUS.post(OnPacketEvent.Receive.get(packet));
+
         if (packet instanceof ChatMessageC2SPacket)
         {
             if(dontSend) return;

@@ -45,7 +45,7 @@ public class DescriptionPanel
 
         if(butt == null)
         {
-            MinecraftClient.getInstance().textRenderer.draw(matrices, "Hover over a module to get it's description", x + 8, y + 6, Color.white.getRGB());
+            MinecraftClient.getInstance().textRenderer.draw(matrices, "Hover over a module to get its description", x + 8, y + 6, Color.white.getRGB());
         }
         else
         {

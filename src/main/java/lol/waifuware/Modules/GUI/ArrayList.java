@@ -28,7 +28,11 @@ public class ArrayList extends AbstractModule
     public void Render(OnRenderScreen event)
     {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        int ping = player.networkHandler.getPlayerListEntry(player.getUuid()).getLatency();
+        int ping = -1;
+        if(player.getUuid() != null)
+        {
+             ping = player.networkHandler.getPlayerListEntry(player.getUuid()).getLatency();
+        }
         MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r", 5, 15, fromRGBA(255, 255, 255, 255 ));
         int i = 10;
         for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
@@ -43,7 +47,9 @@ public class ArrayList extends AbstractModule
 
     private String getColorFromPing(int ping)
     {
-        if(ping <= 20){
+        if(ping <= -1){
+            return "§4[CANT GET INFO]";
+        }else if(ping <= 20){
             return "§2" + ping;
         }else if (ping <= 50){
             return "§a" + ping;

@@ -4,17 +4,23 @@ import lol.waifuware.Commands.Interfaces.AbstractCommand;
 import lol.waifuware.Commands.Interfaces.Command;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
+import lol.waifuware.Settings.BooleanSetting;
+import lol.waifuware.Settings.IntSetting;
+import lol.waifuware.Settings.ModeSetting;
+import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
+
 @Command(name = "set")
 public class Set extends AbstractCommand
 {
     @Override
     public void Execute(String[] command)
     {
-        if(command.length < 2){
+        if(command.length < 3){
             ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
         }else{
             for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
@@ -27,12 +33,32 @@ public class Set extends AbstractCommand
                         ModuleManager.bindModule(mod);
                         ChatUtil.SendMessage("Press any key to bind the module " + command[1]);
                     }else{
-                        for(Map.Entry<String, Object> entry : mod.settings.entrySet())
+                        if(command.length < 4){
+                            ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
+                            return;
+                        }
+                        for(Setting setting : mod.getSettings())
                         {
-                            if(entry.getKey().toLowerCase(Locale.ROOT).trim().equals(command[2].toString().toLowerCase(Locale.ROOT).trim()))
+                            if(setting.name.toLowerCase().trim().equals(command[2].toLowerCase().trim()))
                             {
-                                entry.setValue(command[3]);
-                                mod.Save();
+                                if (setting instanceof IntSetting e)
+                                {
+                                    double j;
+                                    Pattern p = Pattern.compile("0x([A-F 0-9])\\w+");
+                                    if(p.matcher(command[3]).find())
+                                    {
+                                        j = (Integer.parseInt(command[3].replace("0x", ""),16));
+                                    }else{
+                                        j = Long.parseLong(command[3]);
+                                    }
+                                    e.setValue(Double.parseDouble("" + j));
+                                } else if (setting instanceof BooleanSetting e)
+                                {
+                                    e.setEnabled(command[3].toLowerCase().equals("true"));
+                                } else if (setting instanceof ModeSetting e) {
+                                    e.setMode((command[3]));
+                                }
+
                                 ChatUtil.SendMessage("Set " + command[2] + " from module " + command[1] + " to " + command[3]);
                             }
                         }

@@ -1,9 +1,11 @@
 package lol.waifuware.ClickGUI;
 
+import lol.waifuware.ClickGUI.SettingPanel.SettingPanelBase;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.GUI.ClickGUI;
+import lol.waifuware.Util.ChatUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -55,11 +57,11 @@ public class CategoryPanel
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
-        DrawableHelper.fill(matrices, x - 2, y - 2, x + width + 2, (showModule() ? y + height + 2 : y +13), ClickGUI.getInstance().getColor("MainColor").getRGB());
+        DrawableHelper.fill(matrices, x - 2, y - 2, x + width + 2, (showModule() ? y + height + 2 + offset: y +13), ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        DrawableHelper.fill(matrices, x, y, x + width, (showModule() ? y + height : y + 12), ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
+        DrawableHelper.fill(matrices, x, y, x + width, (showModule() ? y + height + offset : y + 12 ), ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
 
-        DrawableHelper.fill(matrices, x - 2, y + 12, x + width + 2, y + 14, ClickGUI.getInstance().getColor("MainColor").getRGB());
+        DrawableHelper.fill(matrices, x - 2, y + 12, x + width + 2, y + 14 , ClickGUI.getInstance().getColor("MainColor").getRGB());
 
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, category.name, x + 2 , y + 2, Color.white.getRGB());
         int e = ("[" + moduleAmount + "]").length();
@@ -96,6 +98,10 @@ public class CategoryPanel
     public void mouseRelease(double mouseX, double mouseY, int button)
     {
         if(button == 0 && isPressed) isPressed = false;
+
+        for(ModuleButton buttons : modList){
+            buttons.mouseRelease(mouseX, mouseY, button);
+        }
     }
 
     public void UpdatePosition(double mouseX, double mouseY)
@@ -109,5 +115,29 @@ public class CategoryPanel
     public boolean isHovered(double mouseX, double mouseY)
     {
         return (mouseX > x) && (mouseX < x + width) && (mouseY > y) && (mouseY < y + 14);
+    }
+
+    int offset = 0;
+
+    public void Update()
+    {
+        offset = 0;
+        if (onModule)
+        {
+            for(ModuleButton button : modList)
+            {
+                button.offset = button.defaultOffset + offset;
+                if(button.extended)
+                {
+                    for(SettingPanelBase panel : button.panels)
+                    {
+                        if(panel.setting.getVisible())
+                        {
+                            offset += 18;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

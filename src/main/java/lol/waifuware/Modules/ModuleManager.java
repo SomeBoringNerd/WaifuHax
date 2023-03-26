@@ -9,6 +9,7 @@ import lol.waifuware.Modules.EXPLOITS.ChestOpenExploit;
 import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.ArrayList;
 import lol.waifuware.Modules.GUI.ClickGUI;
+import lol.waifuware.Modules.MISC.PronounDB;
 import lol.waifuware.Modules.RENDER.FullBright;
 import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.MOVEMENT.BoatFly;
@@ -67,6 +68,9 @@ public class ModuleManager
         modules.put("BoatFly", new BoatFly());
         modules.put("VanillaFly", new VanillaFly());
         modules.put("Sprint", new Sprint());
+
+        Waifuhax.Log("Registering misc modules");
+        modules.put("PronounDB", new PronounDB());
 
         List<AbstractModule> moduleToSort = new java.util.ArrayList<>(modules.values());
 
