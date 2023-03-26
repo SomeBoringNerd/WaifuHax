@@ -10,7 +10,9 @@ Now I just use it as an excuse to write Minecraft cheats and see what I can do
 
 This client contain no skidded code, which is why it is terrible
 
-made public on the 7th of march 2023, so people could laugh at this pathetic attempt at making a minecraft cheat
+made public on the 7th of march 2023, so people could laugh at this pathetic attempt at making a minecraft cheat.
+
+This client aim to replicate the feeling of 2014 clients like Nodus.
 
 = Features
 
@@ -18,7 +20,7 @@ made public on the 7th of march 2023, so people could laugh at this pathetic att
 
 >no backdoor
 
->sick clickgui according to most of the people I've talked to
+>sick ClickGUI according to most of the people I've talked to
 
 >weeb jokes
 
@@ -38,43 +40,8 @@ ClickGUI's default key is right shift, if it dont work use the command
 == Note
 to change a setting, type in chat `-set ${module's name} ${parameter you want to change} ${new value}`
 
-=== ClickGUI
-(all of those are under the form of a 16 bit hexadeciman int (0xRRGGBB)) where RR is for red, GG for green, and BB for blue, and each of those can go from 00 to FF
+or you can use the clickgui
 
-[cols="~,~"]
-|===
-| ButtonColor
-| default color for button
-
-| ButtonColorHovered
-| color for button when hovered
-
-| ButtonColorEnabled
-| color for enabled button
-
-| ButtonColorHovered
-| color for button when hovered
-
-| BackgroundColor
-| color for the background of the panels
-
-| MainColor
-| color for the outline of the panels
-
-|===
-
-=== AutoFrameDupe
-
-[cols="~,~"]
-|===
-| Hit (int)
-| number of item frame hit per tick (4b4f would let you hit up to 8 item frame in one tick)
-
-| MaxFrame (int)
-| Maximum amount of item frame that will be used to dupe
-
-
-|===
 = Credits
 
 me for the code
@@ -83,6 +50,10 @@ google for the json stuff
 
 Meteordev for their event system
 
+cyyynthia for creating PronounDB and supporting Minecraft
+
 Pr3roxDLC for showing me how to use @interfaces
 
 Tex06 for the good "medicinal plants" that I smoked while working on this.
+
+Nodus client for the general aesthetic, Earthhack for some ideas.
