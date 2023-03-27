@@ -60,7 +60,6 @@ public class ThreadedRequest implements Runnable {
 
 
             PRONOUN_DB = PRONOUN_DB.replace("%UUID%", addDashesToUUID(_UUID));
-            System.out.println(PRONOUN_DB);
             getPronouns(PRONOUN_DB);
         } else if (!self) {
             ChatUtil.SendMessage("URL : " + UUID_GETTER);
@@ -108,32 +107,33 @@ public class ThreadedRequest implements Runnable {
                             case "any":
                                 if (self) {
                                     Pronoun.self_pronoun = "any pronouns";
-                                }
-                                ChatUtil.SendMessage(Pronoun.username + " is okay with any pronouns");
+                                }else
+                                    ChatUtil.SendMessage(Pronoun.username + " is okay with any pronouns");
                                 break;
                             case "other":
                                 if (self) {
                                     Pronoun.self_pronoun = "other pronouns";
                                 }
-                                ChatUtil.SendMessage(Pronoun.username + " use another set of pronouns that PronounDB don't index");
+                                else
+                                    ChatUtil.SendMessage(Pronoun.username + " use another set of pronouns that PronounDB don't index");
                                 break;
                             case "ask":
                                 if (self) {
                                     Pronoun.self_pronoun = "ask my pronouns";
                                 }
-                                ChatUtil.SendMessage(Pronoun.username + " prefer you ask directly");
+                                else ChatUtil.SendMessage(Pronoun.username + " prefer you ask directly");
                                 break;
                             case "avoid":
                                 if (self) {
                                     Pronoun.self_pronoun = "don't use pronouns";
                                 }
-                                ChatUtil.SendMessage(Pronoun.username + " would rather not use pronouns, refer to " + Pronoun.username + " by username");
+                                else ChatUtil.SendMessage(Pronoun.username + " would rather not use pronouns, refer to " + Pronoun.username + " by username");
                                 break;
                             default:
                                 if (self) {
                                     Pronoun.self_pronoun = "unspecified pronoun";
                                 }
-                                ChatUtil.SendMessage(Pronoun.username + " either dont use PronounDB.org or haven't set their pronouns.");
+                                else ChatUtil.SendMessage(Pronoun.username + " either dont use PronounDB.org or haven't set their pronouns.");
                                 break;
                         }
                     }

@@ -27,7 +27,7 @@ public class PlayerEntityMixin
     @Inject(method = "tick", at = @At("TAIL"))
     private void Update(CallbackInfo ci)
     {
-        if(!once){
+        if(!once && MinecraftClient.getInstance().player != null){
             Thread t = new Thread(new ThreadedRequest(MinecraftClient.getInstance().player.getEntityName(), true), "request");
             t.start();
             once = true;
