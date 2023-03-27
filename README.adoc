@@ -14,6 +14,8 @@ made public on the 7th of march 2023, so people could laugh at this pathetic att
 
 This client aim to replicate the feeling of 2014 clients like Nodus.
 
+We do not condomne the use of WaifuHax on servers that explicitly ban cheating. It is an anarchy client.
+
 = Features
 
 >it compile (most of the time)
