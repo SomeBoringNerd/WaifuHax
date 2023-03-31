@@ -1,10 +1,12 @@
 package lol.waifuware.ClickGUI;
 
 import lol.waifuware.ClickGUI.SettingPanel.SettingPanelBase;
+import lol.waifuware.ClickGUI.SettingPanel.SliderPanel;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.GUI.ClickGUI;
+import lol.waifuware.Settings.IntSetting;
 import lol.waifuware.Util.ChatUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -133,7 +135,8 @@ public class CategoryPanel
                     {
                         if(panel.setting.getVisible())
                         {
-                            offset += 18;
+                            if(panel instanceof SliderPanel) offset += 36;
+                            else offset += 18;
                         }
                     }
                 }

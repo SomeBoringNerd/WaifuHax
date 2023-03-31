@@ -9,16 +9,11 @@ public class Setting
 
     public String Description;
 
-    public Setting()
+    public Setting(String description)
     {
-
-        SettingDescription description = this.getClass().getAnnotation(SettingDescription.class);
         visible = true;
-        if(description != null) {
-            Description = description.name();
-        }else{
-            Description = "No description provided";
-        }
+
+        Description = description;
     }
 
     public String getName()

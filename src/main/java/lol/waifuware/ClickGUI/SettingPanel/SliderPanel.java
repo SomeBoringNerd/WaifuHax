@@ -24,8 +24,8 @@ public class SliderPanel extends SettingPanelBase
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
         if(setting.getVisible()) {
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getName(), parent.parent.x + 5, parent.parent.y + parent.offset + offset + 4, -1);
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getValueInt() + "", parent.parent.x + (int) (parent.parent.width - 20), parent.parent.y + parent.offset + offset + 4, -1);
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getName() + " : ", parent.parent.x + 5, parent.parent.y + parent.offset + offset + 4, -1);
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getValueInt() + "", parent.parent.x + 5, parent.parent.y + parent.offset + (offset + 18) + 4, -1);
         }
     }
 

@@ -13,9 +13,9 @@ import net.minecraft.client.MinecraftClient;
 public class Watermark extends AbstractModule
 {
 
-    public BooleanSetting ShowPronoun = new BooleanSetting("ShowPronoun", false);
-    public BooleanSetting ShowVersion = new BooleanSetting("ShowVersion", true);
-    public BooleanSetting ShowUsername = new BooleanSetting("ShowUsername", true);
+    public BooleanSetting ShowPronoun = new BooleanSetting("ShowPronoun", false, "Show your pronouns fetched from PronounDB");
+    public BooleanSetting ShowVersion = new BooleanSetting("ShowVersion", true, "Show the version of WaifuHax you are using");
+    public BooleanSetting ShowUsername = new BooleanSetting("ShowUsername", true, "Show your username");
 
     public Watermark()
     {

@@ -42,16 +42,19 @@ public class ModuleButton
             if(setting instanceof IntSetting e)
             {
                 panels.add(new SliderPanel(setting, this, setOffset));
+                setOffset += 36;
             }
             else if (setting instanceof BooleanSetting e)
             {
                 panels.add(new CheckBoxPanel(setting, this, setOffset));
+                setOffset += 18;
             }
             else if (setting instanceof ModeSetting e)
             {
                 panels.add(new ModePanel(setting, this, setOffset));
+                setOffset += 18;
             }
-            setOffset += 18;
+
         }
     }
 

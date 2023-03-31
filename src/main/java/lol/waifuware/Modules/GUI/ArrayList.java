@@ -34,7 +34,7 @@ public class ArrayList extends AbstractModule
             if(player.networkHandler.getPlayerListEntry(player.getUuid()) != null)
                 ping = player.networkHandler.getPlayerListEntry(player.getUuid()).getLatency();
         }
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r", 5, 15, fromRGBA(255, 255, 255, 255 ));
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
         int i = 10;
         for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
         {

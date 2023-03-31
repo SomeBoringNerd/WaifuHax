@@ -18,24 +18,18 @@ public class ClickGUI extends AbstractModule
     {
         return instance;
     }
-    @SettingDescription(name = "Color of the outline of the client")
-    public IntSetting MainColor = new IntSetting("MainColor", 0x000000, 0xFFFFFF, 0xFF00FF, 1);
 
-    @SettingDescription(name = "Color of the back of the panels")
-    public IntSetting BackgroundColor = new IntSetting("BackgroundColor", 0x000000, 0xFFFFFF, 0x000000, 1);
+    public IntSetting MainColor = new IntSetting("MainColor", 0x000000, 0xFFFFFF, 0xFF00FF, 1, "Color of the outline of the client");
 
-    @SettingDescription(name = "Color of the buttons in default state (not hovered and not toggled)")
-    public IntSetting ButtonColor = new IntSetting("ButtonColor", 0x000000, 0xFFFFFF, 0x440044, 1);
+    public IntSetting BackgroundColor = new IntSetting("BackgroundColor", 0x000000, 0xFFFFFF, 0x000000, 1, "Color of the back of the panels");
 
-    @SettingDescription(name = "Color of enabled buttons")
-    public IntSetting ButtonColorEnabled = new IntSetting("ButtonColorEnabled", 0x000000, 0xFFFFFF, 0xFF00C4, 1);
+    public IntSetting ButtonColor = new IntSetting("ButtonColor", 0x000000, 0xFFFFFF, 0x440044, 1, "Color of the buttons in default state (not hovered and not toggled)");
 
-    @SettingDescription(name = "Color of toggled disabled buttons when hovered")
-    public IntSetting ButtonColorHovered = new IntSetting("ButtonColorHovered", 0x000000, 0xFFFFFF, 0xFB00FF, 1);
+    public IntSetting ButtonColorEnabled = new IntSetting("ButtonColorEnabled", 0x000000, 0xFFFFFF, 0xFF00C4, 1, "Color of enabled buttons");
 
-    @SettingDescription(name = "Color of toggled enabled buttons when hovered")
-    public IntSetting ButtonColorHoveredAndEnabled = new IntSetting("ButtonColorHoveredAndEnabled", 0x000000, 0xFFFFFF, 0xFF00FF, 1);
+    public IntSetting ButtonColorHovered = new IntSetting("ButtonColorHovered", 0x000000, 0xFFFFFF, 0xFB00FF, 1, "Color of toggled disabled buttons when hovered");
 
+    public IntSetting ButtonColorHoveredAndEnabled = new IntSetting("ButtonColorHoveredAndEnabled", 0x000000, 0xFFFFFF, 0xFF00FF, 1, "Color of toggled enabled buttons when hovered");
 
     public ClickGUI()
     {

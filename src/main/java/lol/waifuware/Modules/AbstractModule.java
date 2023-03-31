@@ -46,17 +46,6 @@ public abstract class AbstractModule implements IModule
         Waifuhax.LOGGER.info("module " + name + " was loaded");
     }
 
-    @EventHandler
-    public void MessageEvent(OnMessageReceive event)
-    {
-        if(!event.getMessage().toLowerCase().startsWith("-" + name.toLowerCase())) return;
-
-        for(Setting setting : settings.stream().toList())
-        {
-            Waifuhax.Log("§8>>§7" + setting.getName() + " §8: §7" + setting.Description);
-        }
-    }
-
     public List<Setting> getSettings(){
         return settings;
     }
@@ -198,6 +187,7 @@ public abstract class AbstractModule implements IModule
             Load();
         }
     }
+
     public void Load()
     {
         try {

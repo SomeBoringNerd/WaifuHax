@@ -3,8 +3,9 @@ package lol.waifuware.Settings;
 public class BooleanSetting extends Setting
 {
     private boolean enabled;
-    public BooleanSetting(String name, boolean defaultValue)
+    public BooleanSetting(String name, boolean defaultValue, String description)
     {
+        super(description);
         this.name = name;
         this.enabled = defaultValue;
     }
