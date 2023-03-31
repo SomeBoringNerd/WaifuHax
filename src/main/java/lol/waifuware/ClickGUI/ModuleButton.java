@@ -66,7 +66,7 @@ public class ModuleButton
         if(isHovered(mouseX, mouseY))
         {
             DescriptionPanel.butt = this;
-            DrawableHelper.fill(matrices, parent.x + 1 , parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorHoveredAndEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColorHovered").darker().darker().getRGB()));
+            DrawableHelper.fill(matrices, parent.xSet.getValueInt()+ 1 , parent.ySet.getValueInt() + offset + 2, parent.xSet.getValueInt() + parent.width - 1, parent.ySet.getValueInt() + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorHoveredAndEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColorHovered").darker().darker().getRGB()));
         }
         else
         {
@@ -77,11 +77,11 @@ public class ModuleButton
                     DescriptionPanel.butt = null;
                 }
             }
-            DrawableHelper.fill(matrices, parent.x + 1 , parent.y + offset + 2, parent.x + parent.width - 1, parent.y + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColor").getRGB()));
+            DrawableHelper.fill(matrices, parent.xSet.getValueInt() + 1 , parent.ySet.getValueInt() + offset + 2, parent.xSet.getValueInt() + parent.width - 1, parent.ySet.getValueInt() + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColor").getRGB()));
         }
 
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mod.name, parent.x + 5, parent.y + offset + 4, -1);
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, extended ? "[-]" : "[+]", parent.x + (int)(parent.width - 20), parent.y + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mod.name, parent.xSet.getValueInt() + 5, parent.ySet.getValueInt() + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, extended ? "[-]" : "[+]", parent.xSet.getValueInt() + (int)(parent.width - 20), parent.ySet.getValueInt() + offset + 4, -1);
 
         if(extended) {
             for (SettingPanelBase set : panels) {
@@ -118,6 +118,6 @@ public class ModuleButton
     }
 
     public boolean isHovered(double mouseX, double mouseY){
-        return (mouseX > parent.x) && (mouseX < parent.x + parent.width) && (mouseY > parent.y + offset) && (mouseY < parent.y + offset + 16);
+        return (mouseX > parent.xSet.getValueInt()) && (mouseX < parent.xSet.getValueInt() + parent.width) && (mouseY > parent.ySet.getValueInt() + offset) && (mouseY < parent.ySet.getValueInt() + offset + 16);
     }
 }

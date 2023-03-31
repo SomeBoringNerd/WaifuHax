@@ -110,6 +110,24 @@ public class ModuleManager
         if(!file.exists()){
             file.mkdir();
         }
+
+        file = new File("WaifuHax/cat");
+
+        if(!file.exists())
+        {
+            file.mkdir();
+        }
+
+        for(CATEGORY cat : CATEGORY.values())
+        {
+            file = new File("WaifuHax/modules/" + cat.name);
+
+            if(!file.exists())
+            {
+                Waifuhax.Log("Creating folder " + cat.name);
+                file.mkdir();
+            }
+        }
     }
 
     public static void onKeyPressed(int keycode)

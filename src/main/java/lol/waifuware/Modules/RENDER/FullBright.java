@@ -19,5 +19,6 @@ public class FullBright extends AbstractModule
         instance = this;
         desc[0] = "\"Enciende las luces\"";
         desc[1] = "- Sombra";
+        Create();
     }
 }

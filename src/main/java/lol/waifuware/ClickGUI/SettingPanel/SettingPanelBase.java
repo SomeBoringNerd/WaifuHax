@@ -35,6 +35,6 @@ public class SettingPanelBase
     }
 
     public boolean isHovered(double mouseX, double mouseY){
-        return (mouseX > parent.parent.x) && (mouseX < parent.parent.x + parent.parent.width) && (mouseY > parent.parent.y + parent.offset + offset) && (mouseY < parent.parent.y + parent.offset + offset + 16);
+        return (mouseX > parent.parent.xSet.getValueInt()) && (mouseX < parent.parent.xSet.getValueInt() + parent.parent.width) && (mouseY > parent.parent.ySet.getValueInt() + parent.offset + offset) && (mouseY < parent.parent.ySet.getValueInt() + parent.offset + offset + 16);
     }
 }

@@ -24,7 +24,6 @@ public class ClickGUI extends Screen
 
         instance = this;
 
-        Waifuhax.Log("We are in the end game now kid");
         panels = new ArrayList<>();
 
         descPan = new DescriptionPanel();

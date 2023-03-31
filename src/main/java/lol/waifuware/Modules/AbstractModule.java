@@ -33,6 +33,8 @@ public abstract class AbstractModule implements IModule
     public String name;
     public int key;
     public CATEGORY cat;
+    
+    private String path;
 
     public AbstractModule()
     {
@@ -44,6 +46,8 @@ public abstract class AbstractModule implements IModule
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
         Waifuhax.LOGGER.info("module " + name + " was loaded");
+        
+        path = "WaifuHax/modules/" + cat.name + "/" + name + ".WaifuConfig";
     }
 
     public List<Setting> getSettings(){
@@ -57,10 +61,8 @@ public abstract class AbstractModule implements IModule
 
     public void addSettings(Setting... settings)
     {
-        Waifuhax.Log("Module " + name + " is loading " + settings.length + " settings");
         for(Setting set : settings)
         {
-            Waifuhax.Log("Adding setting " + set.name);
             addSetting(set);
         }
     }
@@ -76,7 +78,6 @@ public abstract class AbstractModule implements IModule
     {
         isEnabled = Forced;
 
-        Waifuhax.Log("Module " + name + " got toggled");
         ChatUtil.SendMessage("Module " + name + " was toggled " + (isEnabled ? "§aON§r" : "§4OFF§r"));
 
         if(isEnabled)
@@ -99,46 +100,53 @@ public abstract class AbstractModule implements IModule
 
     public void Save()
     {
-        JSONObject object = new JSONObject();
-
-        object.append("active", isEnabled);
-        object.append("key", key);
-        Waifuhax.Log("Setting list for " + name + " is " + getSettings().size());
-        for(Setting setting : getSettings())
+        File file = new File(path);
+        if(file.exists())
         {
-            if(setting instanceof IntSetting e)
+            JSONObject object = new JSONObject();
+
+            object.append("active", isEnabled);
+            object.append("key", key);
+
+            for(Setting setting : getSettings())
             {
-                Waifuhax.Log("Added " + name + " to save file with " + e.getValue());
-                object.append((String) setting.name, e.getValue());
+                if(setting instanceof IntSetting e)
+                {
+                    object.append((String) setting.name, e.getValue());
+                }
+                else if (setting instanceof BooleanSetting e)
+                {
+                    object.append((String) setting.name, e.getEnabled());
+                }
+                else if (setting instanceof ModeSetting e)
+                {
+                    object.append((String) setting.name, e.getIndex());
+                }
             }
-            else if (setting instanceof BooleanSetting e)
+
+            System.out.println(object);
+
+            try
             {
-                Waifuhax.Log("Added " + name + " to save file with " + e.getEnabled());
-                object.append((String) setting.name, e.getEnabled());
+                FileWriter writer = new FileWriter(path);
+
+                writer.write(object.toString());
+
+                writer.close();
             }
-            else if (setting instanceof ModeSetting e)
+            catch (IOException e)
             {
-                Waifuhax.Log("Added " + name + " to save file with " + e.getIndex());
-                object.append((String) setting.name, e.getIndex());
+                Waifuhax.Log("A module couldn't be loaded : " + e.toString());
             }
         }
-
-        System.out.println(object);
-
-        try
+        else
         {
-            FileWriter writer = new FileWriter("WaifuHax/modules/" + name + ".WaifuConfig");
-
-            writer.write(object.toString());
-
-            writer.close();
-        }catch (IOException e){
-            Waifuhax.Log("A module couldn't be saved : " + e.toString());
+            Create();
         }
     }
     public void Create()
     {
-        File file = new File("WaifuHax/modules/" + name + ".WaifuConfig");
+        File file = new File(path);
         if(!file.exists())
         {
             try
@@ -173,15 +181,17 @@ public abstract class AbstractModule implements IModule
 
                 try
                 {
-                    FileWriter writer = new FileWriter("WaifuHax/modules/" + name + ".WaifuConfig");
+                    FileWriter writer = new FileWriter(path);
 
                     writer.write(object.toString());
 
                     writer.close();
-                }catch (IOException ignored){}
+                }
+                catch (IOException ignored){}
             }
-            catch (IOException e){
-                Waifuhax.Log("A module couldn't be saved : " + e.toString());
+            catch (IOException e)
+            {
+                Waifuhax.Log("A module couldn't be loaded : " + e.toString());
             }
         }else{
             Load();
@@ -193,7 +203,7 @@ public abstract class AbstractModule implements IModule
         try {
             JsonParser jsonP = new JsonParser();
 
-            JsonObject json = (JsonObject)jsonP.parse(new FileReader("WaifuHax/modules/" + name + ".WaifuConfig"));
+            JsonObject json = (JsonObject)jsonP.parse(new FileReader(path));
 
             //settings.clear();
 
@@ -232,7 +242,8 @@ public abstract class AbstractModule implements IModule
                     }
                 }
             }
-        }catch (IOException e){
+        }catch (IOException e)
+        {
             Waifuhax.Log("A module couldn't be loaded : " + e.toString());
         }
     }

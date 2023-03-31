@@ -19,8 +19,8 @@ public class CheckBoxPanel extends SettingPanelBase
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, enabled.getName(), parent.parent.x + 5, parent.parent.y + parent.offset + offset + 4, -1);
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, enabled.getEnabled() ? "§2[V]§r" : "§4[X]§r", parent.parent.x + (int)(parent.parent.width - 20), parent.parent.y + parent.offset + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, enabled.getName(), parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, enabled.getEnabled() ? "§2[V]§r" : "§4[X]§r", parent.parent.xSet.getValueInt() + (int)(parent.parent.width - 20), parent.parent.ySet.getValueInt() + parent.offset + offset + 4, -1);
     }
 
     @Override

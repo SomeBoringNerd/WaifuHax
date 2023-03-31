@@ -42,7 +42,9 @@ ClickGUI's default key is right shift, if it dont work use the command
 == Note
 to change a setting, type in chat `-set ${module's name} ${parameter you want to change} ${new value}`
 
-or you can use the clickgui
+or you can use the clickgui.
+
+To know what each setting do, type -${module's name}
 
 = Credits
 
