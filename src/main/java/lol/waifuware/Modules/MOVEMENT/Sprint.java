@@ -15,6 +15,8 @@ public class Sprint extends AbstractModule
         Create();
     }
 
+
+
     @EventHandler
     public void onTick(OnTickEvent e){
         if(isEnabled && MinecraftClient.getInstance().player != null)

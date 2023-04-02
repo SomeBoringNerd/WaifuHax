@@ -58,10 +58,10 @@ public class ModeSetting extends Setting
     }
 
     public void cycle(){
-        if(index < modes.size())
+        if(index < modes.size() - 1)
         {
             index++;
-            mode = modes.get(index);
+            setMode(getModes().get(index));
         }else{
             index = 0;
         }

@@ -31,9 +31,9 @@ public class Strafe extends AbstractModule
         if(mc.player != null) {
             if ((mc.player.forwardSpeed != 0 || mc.player.sidewaysSpeed != 0))
             {
-                if (!mc.player.isSprinting())
+                if (!mc.player.isSprinting() && !Sprint.isEnabled())
                 {
-                    mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_SPRINTING));
+                    mc.player.setSprinting(true);
                 }
 
                 mc.player.setVelocity(new Vec3d(0, mc.player.getVelocity().y, 0));

@@ -69,6 +69,13 @@ public abstract class AbstractModule implements IModule
 
     public boolean isEnabled = false;
 
+    private static boolean amIEnabled;
+
+    public static boolean isEnabled()
+    {
+        return amIEnabled;
+    }
+
     public void Toggle()
     {
         Toggle(!isEnabled);
@@ -83,11 +90,13 @@ public abstract class AbstractModule implements IModule
         if(isEnabled)
         {
             onEnable();
+            amIEnabled = true;
             Waifuhax.EVENT_BUS.subscribe(this);
         }
         else
         {
             onDisable();
+            amIEnabled = false;
             Waifuhax.EVENT_BUS.unsubscribe(this);
         }
 
@@ -233,9 +242,6 @@ public abstract class AbstractModule implements IModule
                             else if (setting instanceof BooleanSetting)
                             {
                                 BooleanSetting e = (BooleanSetting)setting;
-                                Waifuhax.Log(entry.getValue().toString());
-                                Waifuhax.Log(setting.getName());
-                                Waifuhax.Log(String.valueOf(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true")));
                                 e.setEnabled(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true"));
 
                                 Waifuhax.Log(String.valueOf(e.getEnabled()));

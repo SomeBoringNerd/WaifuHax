@@ -5,17 +5,28 @@ import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.CATEGORY;
+import lol.waifuware.Settings.ModeSetting;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+
+import static java.util.Comparator.comparingInt;
 
 @Module(name = "ArrayList", key = 0, cat = CATEGORY.GUI)
 public class ArrayList extends AbstractModule
 {
+
+    public ModeSetting sortMode = new ModeSetting("Sort mode", "size", "how the arraylist is sorted", "size", "alphabet");
+
     public ArrayList() {
         super();
+
+        addSetting(sortMode);
+
         Create();
 
         desc[0] = "Show toggled modules";
@@ -36,13 +47,39 @@ public class ArrayList extends AbstractModule
         }
         MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
         int i = 10;
-        for (AbstractModule mod : ModuleManager.modules)
+        for (AbstractModule mod : sortedModules())
         {
             if(mod.isEnabled){
                 MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.name, 5, 15 + i, fromRGBA(255, 255, 255, 255));
                 i += 10;
             }
         }
+    }
+
+    public List<AbstractModule> sortedModules()
+    {
+        List<AbstractModule> enabled = getEnabledModules();
+
+        if(sortMode.getIndex() == 0)
+            enabled.sort(comparingInt(m -> (int) MinecraftClient.getInstance().textRenderer.getWidth(((AbstractModule)m).getName())).reversed());
+        else
+            enabled.sort(Comparator.comparing(AbstractModule::getName));
+
+        return enabled;
+    }
+
+    public List<AbstractModule> getEnabledModules()
+    {
+        List<AbstractModule> mods = new java.util.ArrayList<>();
+
+        for(AbstractModule mod : ModuleManager.modules){
+            if(mod.isEnabled)
+            {
+                mods.add(mod);
+            }
+        }
+
+        return mods;
     }
 
     private String getColorFromPing(int ping)
