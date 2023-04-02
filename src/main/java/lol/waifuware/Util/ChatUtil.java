@@ -13,4 +13,12 @@ public class ChatUtil
             MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
         }
     }
+
+    public static void ClearLine()
+    {
+        MutableText msg = Text.literal("     ");
+        if(MinecraftClient.getInstance().inGameHud != null) {
+            MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
+        }
+    }
 }

@@ -49,7 +49,7 @@ public class ClickGUI extends AbstractModule
         for(Setting set : getSettings()){
             if(set instanceof IntSetting && Objects.equals(set.getName(), name)){
                 e = (IntSetting) set;
-                return Color.decode("" + e.getValueInt());
+                return Color.decode(String.valueOf(e.getValueInt()));
             }
         }
         return Color.BLACK;

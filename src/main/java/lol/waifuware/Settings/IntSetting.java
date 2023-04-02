@@ -48,7 +48,6 @@ public class IntSetting extends Setting
 
     public void setValue(double value){
         value = clamp(value, this.min, this.max);
-        value = Math.round(value * (1.0 / this.increment) / (1.0 / this.increment));
         this.currentValue = value;
     }
 

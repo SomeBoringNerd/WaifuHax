@@ -13,9 +13,8 @@ public class Toggle extends AbstractCommand
     @Override
     public void Execute(String[] command)
     {
-        for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
+        for (AbstractModule mod : ModuleManager.modules)
         {
-            AbstractModule mod = modMap.getValue();
 
             if(mod.name.toLowerCase().equals(command[1].toLowerCase()))
             {

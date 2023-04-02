@@ -1,4 +1,4 @@
-package lol.waifuware.Modules.EXPLOITS;
+package lol.waifuware.Modules.AUTOMATION;
 
 import lol.waifuware.Events.OnTickEvent;
 import lol.waifuware.Modules.AbstractModule;
@@ -20,7 +20,7 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 
-@Module(name = "AutoFrameDupe", key = 0, cat = CATEGORY.EXPLOIT)
+@Module(name = "AutoFrameDupe", key = 0, cat = CATEGORY.BOT)
 public class AutoFrameDupe extends AbstractModule
 {
     int state = 0;

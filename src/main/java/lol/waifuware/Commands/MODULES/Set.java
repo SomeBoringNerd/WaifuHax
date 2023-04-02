@@ -23,9 +23,8 @@ public class Set extends AbstractCommand
         if(command.length < 3){
             ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
         }else{
-            for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
+            for (AbstractModule mod : ModuleManager.modules)
             {
-                AbstractModule mod = modMap.getValue();
                 if(mod.name.toLowerCase(Locale.ROOT).trim().equals(command[1].toLowerCase(Locale.ROOT).trim()))
                 {
                     if(command[2].toLowerCase().trim().equals("key"))

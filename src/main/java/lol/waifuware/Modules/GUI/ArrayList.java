@@ -36,9 +36,8 @@ public class ArrayList extends AbstractModule
         }
         MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
         int i = 10;
-        for (Map.Entry<String, AbstractModule> modMap : ModuleManager.modules.entrySet())
+        for (AbstractModule mod : ModuleManager.modules)
         {
-            AbstractModule mod = modMap.getValue();
             if(mod.isEnabled){
                 MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.name, 5, 15 + i, fromRGBA(255, 255, 255, 255));
                 i += 10;

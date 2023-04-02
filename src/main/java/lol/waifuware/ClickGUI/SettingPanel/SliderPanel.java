@@ -25,7 +25,7 @@ public class SliderPanel extends SettingPanelBase
     {
         if(setting.getVisible()) {
             MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getName() + " : ", parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + offset + 4, -1);
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, String.valueOf(integer.getValueInt()), parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + (offset + 18) + 4, -1);
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, String.valueOf(integer.getValueFloat()), parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + (offset + 18) + 4, -1);
         }
     }
 
@@ -34,10 +34,10 @@ public class SliderPanel extends SettingPanelBase
     {
         if(isHovered(mouseX, mouseY)) {
             if (button == 1 && integer.getValue() > integer.getMin()) {
-                integer.setValue(integer.getValue() - 1);
+                integer.setValue(integer.getValue() - integer.getIncrement());
                 parent.mod.Save();
             } else if (button == 0 && integer.getValue() < integer.getMax()) {
-                integer.setValue(integer.getValue() + 1);
+                integer.setValue(integer.getValue() + integer.getIncrement());
                 parent.mod.Save();
             }
         }

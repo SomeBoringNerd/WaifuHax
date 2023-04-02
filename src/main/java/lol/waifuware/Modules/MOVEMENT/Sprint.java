@@ -17,9 +17,8 @@ public class Sprint extends AbstractModule
 
     @EventHandler
     public void onTick(OnTickEvent e){
-        if(isEnabled)
+        if(isEnabled && MinecraftClient.getInstance().player != null)
         {
-            assert MinecraftClient.getInstance().player != null;
             if(!MinecraftClient.getInstance().player.isSprinting())
             {
                 MinecraftClient.getInstance().player.setSprinting(true);

@@ -4,12 +4,13 @@ import lol.waifuware.Modules.CHAT.Highlight;
 import lol.waifuware.Modules.CHAT.Suffix;
 import lol.waifuware.Modules.COMBAT.AutoTotem;
 import lol.waifuware.Modules.EXPLOITS.AntiHunger;
-import lol.waifuware.Modules.EXPLOITS.AutoFrameDupe;
+import lol.waifuware.Modules.AUTOMATION.AutoFrameDupe;
 import lol.waifuware.Modules.EXPLOITS.ChestOpenExploit;
 import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.ArrayList;
 import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Modules.MISC.PronounDB;
+import lol.waifuware.Modules.MOVEMENT.Strafe;
 import lol.waifuware.Modules.RENDER.FullBright;
 import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.MOVEMENT.BoatFly;
@@ -26,7 +27,7 @@ import java.util.*;
 public class ModuleManager
 {
 
-    public static HashMap<String, AbstractModule> modules = new HashMap<>();
+    public static java.util.ArrayList<AbstractModule> modules = new java.util.ArrayList<>();
 
     private static ModuleManager instance;
 
@@ -40,58 +41,35 @@ public class ModuleManager
     {
         CheckForFolder();
         instance = this;
-        Waifuhax.Log("Registering GUI modules");
-        modules.put("ArrayList", new ArrayList());
-        modules.put("Watermark", new Watermark());
-        modules.put("ClickGUI", new ClickGUI());
+        //@todo : auto-sort this shit
 
-        Waifuhax.Log("Registering render modules");
-        modules.put("FullBright", new FullBright());
-        modules.put("Xray", new Xray());
-
-        Waifuhax.Log("Registering automation modules");
-        modules.put("AutoFrameDupe", new AutoFrameDupe());
-
-        Waifuhax.Log("Registering chat modules");
-        modules.put("Highlight", new Highlight());
-        modules.put("Suffix", new Suffix());
-
-        Waifuhax.Log("Registering combat modules");
-        modules.put("AutoTotem", new AutoTotem());
-
-        Waifuhax.Log("Registering exploits");
-        modules.put("AntiHuger", new AntiHunger());
-        modules.put("ChestOpenExploit", new ChestOpenExploit());
-        modules.put("GamemodeDetector", new GameModeDetector());
-
-        Waifuhax.Log("Registering movement modules");
-        modules.put("BoatFly", new BoatFly());
-        modules.put("VanillaFly", new VanillaFly());
-        modules.put("Sprint", new Sprint());
-
-        Waifuhax.Log("Registering misc modules");
-        modules.put("PronounDB", new PronounDB());
-
-        List<AbstractModule> moduleToSort = new java.util.ArrayList<>(modules.values());
-
-        Collections.sort(moduleToSort, Comparator.comparing(AbstractModule::getName));
-
-        modules.clear();
-
-        for (AbstractModule mod: moduleToSort)
-        {
-            modules.put(mod.getName(), mod);
-        }
+        modules.add(new AntiHunger());
+        modules.add(new ArrayList());
+        modules.add(new AutoTotem());
+        modules.add(new AutoFrameDupe());
+        modules.add(new BoatFly());
+        modules.add(new ChestOpenExploit());
+        modules.add(new ClickGUI());
+        modules.add(new FullBright());
+        modules.add(new GameModeDetector());
+        modules.add(new Highlight());
+        modules.add(new PronounDB());
+        modules.add(new Sprint());
+        modules.add(new Strafe());
+        modules.add(new Suffix());
+        modules.add(new Xray());
+        modules.add(new VanillaFly());
+        modules.add(new Watermark());
     }
 
     public List<AbstractModule> getModsInCat(CATEGORY cat)
     {
         List<AbstractModule> mods = new java.util.ArrayList<>();
 
-        for(Map.Entry<String, AbstractModule> mod : modules.entrySet()){
-            if(mod.getValue().cat == cat)
+        for(AbstractModule mod : modules){
+            if(mod.cat == cat)
             {
-                mods.add(mod.getValue());
+                mods.add(mod);
             }
         }
 
@@ -133,11 +111,11 @@ public class ModuleManager
     public static void onKeyPressed(int keycode)
     {
         if(!bind) {
-            for (Map.Entry<String, AbstractModule> mod : modules.entrySet())
+            for (AbstractModule mod : modules)
             {
-                if (mod.getValue().key == keycode)
+                if (mod.key == keycode)
                 {
-                    mod.getValue().Toggle();
+                    mod.Toggle();
                 }
             }
         }else{

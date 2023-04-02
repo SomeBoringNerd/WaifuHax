@@ -23,8 +23,8 @@ public class Watermark extends AbstractModule
     {
         super();
         addSettings(ShowVersion, ShowUsername, ShowPronoun);
-        Create();
 
+        Create();
         desc[0] = "Fancy text on your screen";
     }
     boolean marked;
@@ -32,12 +32,7 @@ public class Watermark extends AbstractModule
     public void Render(OnRenderScreen event)
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
-        if(!marked)
-        {
-            if (Objects.equals(Pronoun.self_pronoun, "null")) Pronoun.self_pronoun = "§4(cracked)";
-            else Pronoun.self_pronoun = "§4Pronouns : " + Pronoun.self_pronoun;
-            marked = true;
-        }
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dWelcome to §5WaifuHax " + (ShowVersion.getEnabled() ?"V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4 ♥§c] " + (ShowPronoun.getEnabled() ? "§4(" + Pronoun.self_pronoun + ")§r" : ""), 5, 5, 0xFFFFFF);
+
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dWelcome to §5WaifuHax" + (ShowVersion.getEnabled() ?" V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4 ♥§c] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : ""), 5, 5, 0xFFFFFF);
     }
 }

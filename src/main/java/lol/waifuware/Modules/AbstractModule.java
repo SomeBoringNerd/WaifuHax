@@ -205,8 +205,6 @@ public abstract class AbstractModule implements IModule
 
             JsonObject json = (JsonObject)jsonP.parse(new FileReader(path));
 
-            //settings.clear();
-
             for(Map.Entry entry : json.entrySet())
             {
                 if(entry.getKey().toString().toLowerCase(Locale.ROOT).equals("key"))
@@ -216,28 +214,37 @@ public abstract class AbstractModule implements IModule
                 else if(entry.getKey().toString().toLowerCase(Locale.ROOT).equals("active"))
                 {
                     boolean tmp = entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true");
-                    if(tmp) {
-                        Toggle(tmp);
+                    if(tmp)
+                    {
+                        Toggle(true);
                     }
                 }
                 else
                 {
                     for(Setting setting : settings)
                     {
-                        if(setting.name == entry.getKey())
+                        if(setting.name.trim().equalsIgnoreCase(entry.getKey().toString().trim()))
                         {
-                            IntSetting e = (IntSetting)setting;
-                            e.setValue(Double.parseDouble(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
-                        }
-                        else if (setting instanceof BooleanSetting)
-                        {
-                            BooleanSetting e = (BooleanSetting)setting;
-                            e.setEnabled((entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")) == "true");
-                        }
-                        else if (setting instanceof ModeSetting)
-                        {
-                            ModeSetting e = (ModeSetting)setting;
-                            e.setIndex(Integer.parseInt(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
+                            if(setting instanceof IntSetting)
+                            {
+                                IntSetting e = (IntSetting)setting;
+                                e.setValue(Double.parseDouble(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
+                            }
+                            else if (setting instanceof BooleanSetting)
+                            {
+                                BooleanSetting e = (BooleanSetting)setting;
+                                Waifuhax.Log(entry.getValue().toString());
+                                Waifuhax.Log(setting.getName());
+                                Waifuhax.Log(String.valueOf(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true")));
+                                e.setEnabled(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true"));
+
+                                Waifuhax.Log(String.valueOf(e.getEnabled()));
+                            }
+                            else if (setting instanceof ModeSetting)
+                            {
+                                ModeSetting e = (ModeSetting)setting;
+                                e.setIndex(Integer.parseInt(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "")));
+                            }
                         }
                     }
                 }
