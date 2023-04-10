@@ -25,6 +25,11 @@ public class Strafe extends AbstractModule
         mc = MinecraftClient.getInstance();
     }
 
+    @Override
+    public String getDisplayName() {
+        return name + " §c[§r§4" + strafeSpeed.getValueFloat() + "§c]";
+    }
+
     @EventHandler
     public void onTick(OnTickEvent event)
     {

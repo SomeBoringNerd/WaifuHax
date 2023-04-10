@@ -20,7 +20,7 @@ import static java.util.Comparator.comparingInt;
 public class ArrayList extends AbstractModule
 {
 
-    public ModeSetting sortMode = new ModeSetting("Sort mode", "size", "how the arraylist is sorted", "size", "alphabet");
+    public ModeSetting sortMode = new ModeSetting("Sort mode", "alphabet", "how the arraylist is sorted", "size", "alphabet");
 
     public ArrayList() {
         super();
@@ -50,7 +50,7 @@ public class ArrayList extends AbstractModule
         for (AbstractModule mod : sortedModules())
         {
             if(mod.isEnabled){
-                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.name, 5, 15 + i, fromRGBA(255, 255, 255, 255));
+                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 15 + i, fromRGBA(255, 255, 255, 255));
                 i += 10;
             }
         }
@@ -80,6 +80,11 @@ public class ArrayList extends AbstractModule
         }
 
         return mods;
+    }
+
+    @Override
+    public String getDisplayName() {
+        return name + " §c[§4" + sortMode.getModeAtIndex() + "§c]";
     }
 
     private String getColorFromPing(int ping)

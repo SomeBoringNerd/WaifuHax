@@ -27,6 +27,12 @@ public class Watermark extends AbstractModule
         Create();
         desc[0] = "Fancy text on your screen";
     }
+
+    @Override
+    public String getDisplayName() {
+        return name + " §c[" + (ShowPronoun.getEnabled() ? "§2P" : "§4P") + "§r, " + (ShowUsername.getEnabled() ? "§2U" : "§4U") + "§r, " + (ShowVersion.getEnabled() ? "§2V" : "§4V") + "§c]";
+    }
+
     boolean marked;
     @EventHandler
     public void Render(OnRenderScreen event)

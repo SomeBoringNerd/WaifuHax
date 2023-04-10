@@ -103,6 +103,10 @@ public abstract class AbstractModule implements IModule
         Save();
     }
 
+    public String getDisplayName(){
+        return name;
+    }
+
     public void onEnable(){};
 
     public void onDisable(){};

@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static lol.waifuware.Waifuhax.Log;
+
 public class ModeSetting extends Setting
 {
     private String mode;
@@ -18,8 +20,9 @@ public class ModeSetting extends Setting
     {
         super(description);
         this.name = name;
-
+        Log(name + " has " + modes.length + " modes : ");
         this.modes = Arrays.asList(modes);
+
         this.index = this.modes.indexOf(defaultValue);
     }
 
@@ -45,6 +48,11 @@ public class ModeSetting extends Setting
         }else{
             ChatUtil.SendMessage("This mode do not exist for this setting");
         }
+    }
+
+    public String getModeAtIndex()
+    {
+        return modes.get(index);
     }
 
     public void setIndex(int index){
