@@ -8,6 +8,7 @@ import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Settings.ModeSetting;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 
 import java.util.Comparator;
@@ -45,13 +46,28 @@ public class ArrayList extends AbstractModule
             if(player.networkHandler.getPlayerListEntry(player.getUuid()) != null)
                 ping = player.networkHandler.getPlayerListEntry(player.getUuid()).getLatency();
         }
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
-        int i = 10;
-        for (AbstractModule mod : sortedModules())
+
+        if(Watermark.isEnabled())
         {
-            if(mod.isEnabled){
-                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 15 + i, fromRGBA(255, 255, 255, 255));
-                i += 10;
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
+            int i = 10;
+            for (AbstractModule mod : sortedModules())
+            {
+                if(mod.isEnabled){
+                    MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 15 + i, fromRGBA(255, 255, 255, 255));
+                    i += 10;
+                }
+            }
+        }else
+        {
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 5, fromRGBA(255, 255, 255, 255 ));
+            int i = 10;
+            for (AbstractModule mod : sortedModules())
+            {
+                if(mod.isEnabled){
+                    MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 5 + i, fromRGBA(255, 255, 255, 255));
+                    i += 10;
+                }
             }
         }
     }

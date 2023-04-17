@@ -5,6 +5,7 @@ import lol.waifuware.Settings.ModeSetting;
 import lol.waifuware.Settings.Setting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 
 public class ModePanel extends SettingPanelBase
 {
@@ -19,7 +20,7 @@ public class ModePanel extends SettingPanelBase
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mode.getName(), parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + offset + 4, -1);
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mode.getModes().get(mode.getIndex()), parent.parent.xSet.getValueInt() + (int)(parent.parent.width - 20), parent.parent.ySet.getValueInt()+ parent.offset + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mode.getModes().get(mode.getIndex()), (float) (parent.parent.xSet.getValueInt() - (MinecraftClient.getInstance().textRenderer.getWidth(mode.getModes().get(mode.getIndex())))  + (int)(parent.parent.width - 5)), parent.parent.ySet.getValueInt()+ parent.offset + offset + 4, -1);
     }
 
     @Override
