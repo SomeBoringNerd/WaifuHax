@@ -33,7 +33,7 @@ public class ClickGUI extends AbstractModule
 
     public ClickGUI()
     {
-        super();
+        super(true);
 
         addSettings(MainColor, BackgroundColor, ButtonColor, ButtonColorEnabled, ButtonColorHovered, ButtonColorHoveredAndEnabled);
 

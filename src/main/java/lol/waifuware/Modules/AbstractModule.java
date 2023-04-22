@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import lol.waifuware.Events.OnMessageReceive;
 import lol.waifuware.Modules.Interfaces.IModule;
 import lol.waifuware.Modules.Interfaces.Module;
+import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
 import lol.waifuware.Settings.ModeSetting;
@@ -50,6 +51,22 @@ public abstract class AbstractModule implements IModule
         path = "WaifuHax/modules/" + cat.name + "/" + name + ".WaifuConfig";
     }
 
+    public AbstractModule(boolean fakeModule)
+    {
+        Module module = this.getClass().getAnnotation(Module.class);
+
+        isFake = fakeModule;
+
+        name = module.name();
+        cat = module.cat();
+        key = module.key();
+
+        desc[0] = "[NO DESCRIPTION PROVIDED]";
+        Waifuhax.LOGGER.info("module " + name + " was loaded");
+
+        path = "WaifuHax/modules/" + cat.name + "/" + name + ".WaifuConfig";
+    }
+
     public List<Setting> getSettings(){
         return settings;
     }
@@ -85,8 +102,9 @@ public abstract class AbstractModule implements IModule
     {
         isEnabled = Forced;
 
-        ChatUtil.SendMessage("Module " + name + " was toggled " + (isEnabled ? "§aON§r" : "§4OFF§r"));
-
+        if(GlobalSettings.ToggleMessage.getEnabled()) {
+            ChatUtil.SendMessage("Module " + name + " was toggled " + (isEnabled ? "§aON§r" : "§4OFF§r"));
+        }
         if(isEnabled)
         {
             onEnable();
@@ -110,6 +128,17 @@ public abstract class AbstractModule implements IModule
     public void onEnable(){};
 
     public void onDisable(){};
+
+    private boolean isFake = false;
+
+    /**
+     *  Some modules need this to not be drawn in arraylist but can in clickgui (like DescriptionHUD, or GlobalSettings)
+      * @return
+     */
+    public boolean fakeModule()
+    {
+        return isFake;
+    }
 
     public void Save()
     {

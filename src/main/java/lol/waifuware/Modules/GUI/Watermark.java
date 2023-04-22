@@ -9,8 +9,6 @@ import lol.waifuware.Settings.BooleanSetting;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 
-import java.util.Objects;
-
 @Module(name = "Watermark", key = 0, cat = CATEGORY.GUI)
 public class Watermark extends AbstractModule
 {
@@ -26,12 +24,35 @@ public class Watermark extends AbstractModule
 
         Create();
         desc[0] = "Fancy text on your screen";
+
+        offset = isEnabled() ? 10 : 0;
+    }
+    private static int offset;
+    public static int getWatermarkOffset()
+    {
+        return offset;
     }
 
     @Override
     public String getDisplayName() {
         return name + " §c[" + (ShowPronoun.getEnabled() ? "§2P" : "§4P") + "§r, " + (ShowUsername.getEnabled() ? "§2U" : "§4U") + "§r, " + (ShowVersion.getEnabled() ? "§2V" : "§4V") + "§c]";
     }
+
+    // -------------------------------------------------------------------------------------------------------- //
+    //                          Trigger warning this is utterly fucking stupid                                  //
+    // -------------------------------------------------------------------------------------------------------- //
+    @Override                                                                                                   //
+    public void onEnable() {                                                                                    //
+        offset = 10;                                                                                            //
+    }                                                                                                           //
+    // -------------------------------------------------------------------------------------------------------- //
+    @Override                                                                                                   //
+    public void onDisable() {                                                                                   //
+        offset = 0;                                                                                             //
+    }                                                                                                           //
+    //                                                                                                          //
+    // -------------------------------------------------------------------------------------------------------- //
+    
 
     boolean marked;
     @EventHandler

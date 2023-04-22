@@ -6,6 +6,7 @@ import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Settings.ModeSetting;
+import lol.waifuware.Util.ChatUtil;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.DebugHud;
@@ -47,27 +48,13 @@ public class ArrayList extends AbstractModule
                 ping = player.networkHandler.getPlayerListEntry(player.getUuid()).getLatency();
         }
 
-        if(Watermark.isEnabled())
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 5 + Watermark.getWatermarkOffset(), fromRGBA(255, 255, 255, 255 ));
+        int i = 10;
+        for (AbstractModule mod : sortedModules())
         {
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 15, fromRGBA(255, 255, 255, 255 ));
-            int i = 10;
-            for (AbstractModule mod : sortedModules())
-            {
-                if(mod.isEnabled){
-                    MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 15 + i, fromRGBA(255, 255, 255, 255));
-                    i += 10;
-                }
-            }
-        }else
-        {
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§dActive Modules§c]§r | Ping : " + getColorFromPing(ping) + "§r | FPS : " + MinecraftClient.getInstance().getCurrentFps(), 5, 5, fromRGBA(255, 255, 255, 255 ));
-            int i = 10;
-            for (AbstractModule mod : sortedModules())
-            {
-                if(mod.isEnabled){
-                    MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 5 + i, fromRGBA(255, 255, 255, 255));
-                    i += 10;
-                }
+            if(mod.isEnabled && !mod.fakeModule()){
+                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 5 + i + Watermark.getWatermarkOffset(), fromRGBA(255, 255, 255, 255));
+                i += 10;
             }
         }
     }
@@ -89,7 +76,7 @@ public class ArrayList extends AbstractModule
         List<AbstractModule> mods = new java.util.ArrayList<>();
 
         for(AbstractModule mod : ModuleManager.modules){
-            if(mod.isEnabled)
+            if(mod.isEnabled && !mod.fakeModule())
             {
                 mods.add(mod);
             }

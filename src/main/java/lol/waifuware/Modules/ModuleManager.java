@@ -10,6 +10,7 @@ import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.ArrayList;
 import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Modules.GUI.Coordinates;
+import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.MISC.PronounDB;
 import lol.waifuware.Modules.MOVEMENT.Strafe;
 import lol.waifuware.Modules.RENDER.FullBright;
@@ -54,6 +55,7 @@ public class ModuleManager
         modules.add(new Coordinates());
         modules.add(new FullBright());
         modules.add(new GameModeDetector());
+        modules.add(new GlobalSettings());
         modules.add(new Highlight());
         modules.add(new PronounDB());
         modules.add(new Sprint());

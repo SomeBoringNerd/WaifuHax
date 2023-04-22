@@ -2,6 +2,7 @@ package lol.waifuware.ClickGUI;
 
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.GUI.ClickGUI;
+import lol.waifuware.Modules.MISC.GlobalSettings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -35,27 +36,25 @@ public class DescriptionPanel
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
-        x = MinecraftClient.getInstance().getWindow().getScaledWidth() - 255;
+        if(GlobalSettings.Description.getEnabled()) {
+            x = MinecraftClient.getInstance().getWindow().getScaledWidth() - 255;
 
-        DrawableHelper.fill(matrices, x - 1, y - 1, x + width + 1 , y + height + 1, ClickGUI.getInstance().getColor("MainColor").getRGB());
+            DrawableHelper.fill(matrices, x - 1, y - 1, x + width + 1, y + height + 1, ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        DrawableHelper.fill(matrices, x + 1, y + 1, x + width - 1, y + height - 1, ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
+            DrawableHelper.fill(matrices, x + 1, y + 1, x + width - 1, y + height - 1, ClickGUI.getInstance().getColor("BackgroundColor").getRGB());
 
-        DrawableHelper.fill(matrices, x - 1, y + 18, x + width + 1 , y + 20, ClickGUI.getInstance().getColor("MainColor").getRGB());
+            DrawableHelper.fill(matrices, x - 1, y + 18, x + width + 1, y + 20, ClickGUI.getInstance().getColor("MainColor").getRGB());
 
-        if(butt == null)
-        {
-            MinecraftClient.getInstance().textRenderer.draw(matrices, "Hover over a module to get its description", x + 8, y + 6, Color.white.getRGB());
-        }
-        else
-        {
-            MinecraftClient.getInstance().textRenderer.draw(matrices, "Description of " + butt.mod.name, x + 8, y + 6, Color.white.getRGB());
-            int offset = 26;
-            for(int i = 0; i < 5; i++){
-                MinecraftClient.getInstance().textRenderer.draw(matrices, butt.mod.desc[i], x + 6, y + offset, Color.white.getRGB());
-                offset += 15;
+            if (butt == null) {
+                MinecraftClient.getInstance().textRenderer.draw(matrices, "Hover over a module to get its description", x + 8, y + 6, Color.white.getRGB());
+            } else {
+                MinecraftClient.getInstance().textRenderer.draw(matrices, "Description of " + butt.mod.name, x + 8, y + 6, Color.white.getRGB());
+                int offset = 26;
+                for (int i = 0; i < 5; i++) {
+                    MinecraftClient.getInstance().textRenderer.draw(matrices, butt.mod.desc[i], x + 6, y + offset, Color.white.getRGB());
+                    offset += 15;
+                }
             }
-
         }
     }
 
