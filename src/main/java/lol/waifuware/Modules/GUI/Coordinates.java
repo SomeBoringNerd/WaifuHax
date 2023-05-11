@@ -4,6 +4,7 @@ import lol.waifuware.Events.OnRenderScreen;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
+import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Util.GlobalUtil;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
@@ -16,19 +17,36 @@ import net.minecraft.entity.boss.BossBar;
 import net.minecraft.util.annotation.Debug;
 import net.minecraft.util.math.Direction;
 
+import java.util.Random;
+
 @Module(name = "Coordinate", key = 0, cat = CATEGORY.GUI)
 public class Coordinates extends AbstractModule
 {
+
+    public BooleanSetting FakeCoordinates = new BooleanSetting("FakeCoordinates", false, "Display fake coordinates");
+
     public Coordinates()
     {
+        addSetting(FakeCoordinates);
         Create();
     }
 
     @EventHandler
     public void onRender(OnRenderScreen event)
     {
-        int x = MinecraftClient.getInstance().player.getBlockX();
-        int z = MinecraftClient.getInstance().player.getBlockZ();
+        Random r = new Random();
+        int low = -9999999;
+        int high = 9999999;
+        int result = r.nextInt(high-low) + low;
+
+        int x = (FakeCoordinates.getEnabled()) ? result : MinecraftClient.getInstance().player.getBlockX();
+
+        r = new Random();
+        low = -2364367;
+        high = 346931;
+        result = r.nextInt(high-low) + low;
+
+        int z = (FakeCoordinates.getEnabled()) ? result : MinecraftClient.getInstance().player.getBlockZ();
         int y = MinecraftClient.getInstance().player.getBlockY();
 
         if(MinecraftClient.getInstance().cameraEntity != null)
