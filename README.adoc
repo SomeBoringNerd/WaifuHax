@@ -35,12 +35,12 @@ open a terminal and use type `./gradlew build`
 === How to use
 
 ClickGUI's default key is right shift, if it dont work use the command
-`-set clickgui key` and then press right shift
+`-clickgui set_key` and then press right shift
 
 = Modules and their settings
 
 == Note
-to change a setting, type in chat `-set ${module's name} ${parameter you want to change} ${new value}`
+to change a setting, type in chat `-${module's name} ${parameter you want to change} ${new value}`
 
 or you can use the clickgui.
 

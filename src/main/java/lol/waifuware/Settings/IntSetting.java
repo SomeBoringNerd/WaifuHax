@@ -3,7 +3,7 @@ package lol.waifuware.Settings;
 public class IntSetting extends Setting
 {
     private double min, max, increment, defaultValue, currentValue;
-    public IntSetting(String name, double min, double max, double defaultValue, double increment, String description)
+    public IntSetting(String name, double min, double max, double defaultValue, double increment, String description, String shortName)
     {
         super(description);
         this.name = name;

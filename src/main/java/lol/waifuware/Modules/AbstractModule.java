@@ -2,7 +2,6 @@ package lol.waifuware.Modules;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import lol.waifuware.Events.OnMessageReceive;
 import lol.waifuware.Modules.Interfaces.IModule;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Modules.MISC.GlobalSettings;
@@ -12,7 +11,6 @@ import lol.waifuware.Settings.ModeSetting;
 import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Waifuhax;
-import meteordevelopment.orbit.EventHandler;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -133,7 +131,7 @@ public abstract class AbstractModule implements IModule
 
     /**
      *  Some modules need this to not be drawn in arraylist but can in clickgui (like DescriptionHUD, or GlobalSettings)
-      * @return
+      * @return isFake
      */
     public boolean fakeModule()
     {
@@ -165,8 +163,6 @@ public abstract class AbstractModule implements IModule
                     object.append((String) setting.name, e.getIndex());
                 }
             }
-
-            System.out.println(object);
 
             try
             {
@@ -206,17 +202,14 @@ public abstract class AbstractModule implements IModule
                 {
                     if(setting instanceof IntSetting e)
                     {
-                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getValue());
                         object.append((String) setting.name, e.getValue());
                     }
                     else if (setting instanceof BooleanSetting e)
                     {
-                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getEnabled());
                         object.append((String) setting.name, e.getEnabled());
                     }
                     else if (setting instanceof ModeSetting e)
                     {
-                        Waifuhax.Log("Loaded " + name + " to save file with " + e.getIndex());
                         object.append((String) setting.name, e.getIndex());
                     }
                 }

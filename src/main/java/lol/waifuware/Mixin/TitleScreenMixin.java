@@ -1,5 +1,6 @@
 package lol.waifuware.Mixin;
 
+import lol.waifuware.Screens.NewTitleScreen;
 import lol.waifuware.Waifuhax;
 import lol.waifuware.ClickGUI.ClickGUI;
 import net.minecraft.client.MinecraftClient;
@@ -22,9 +23,8 @@ public class TitleScreenMixin {
     @Inject(at = @At("HEAD"), method = "init()V")
     private void init(CallbackInfo info)
     {
-        COPYRIGHT = Text.literal("WaifuWare INC 2023");
-        Waifuhax.Log("Mixin title screen was loaded");
         new ClickGUI();
+        MinecraftClient.getInstance().setScreen(new NewTitleScreen());
     }
 
     @Inject(method = "render", at = @At("TAIL"))
@@ -34,9 +34,6 @@ public class TitleScreenMixin {
 
     private void Render(MatrixStack matrices)
     {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        int y = 5;
-        int x = 5;
-        mc.textRenderer.drawWithShadow(matrices, "WaifuHax by SomeBoringNerd", x, y, 0xFFFFFF);
+
     }
 }

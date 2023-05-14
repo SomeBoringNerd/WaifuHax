@@ -17,7 +17,7 @@ import java.net.URL;
 public class Pronoun extends AbstractCommand
 {
 
-    public static String username, self_pronoun;
+    public static String username, self_pronoun = "UNAVAILABLE";
 
     @Override
     public void Execute(String[] command)

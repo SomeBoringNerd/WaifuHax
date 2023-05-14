@@ -2,24 +2,16 @@ package lol.waifuware.Events;
 
 import meteordevelopment.orbit.ICancellable;
 
-import java.util.UUID;
-
-public class OnMessageReceive  implements ICancellable
+public class OnMessageSend implements ICancellable
 {
-    private static final OnMessageReceive ON_MESSAGE_SEND = new OnMessageReceive();
+    private static final OnMessageSend ON_MESSAGE_SEND = new OnMessageSend();
     private String message;
     private boolean modified;
 
-    private UUID sender;
-
-    private boolean cancelled;
-
-    public static OnMessageReceive get(String message, UUID sender) {
+    public static OnMessageSend get(String message) {
         ON_MESSAGE_SEND.setCancelled(false);
         ON_MESSAGE_SEND.message = message;
         ON_MESSAGE_SEND.modified = false;
-        ON_MESSAGE_SEND.cancelled = false;
-        ON_MESSAGE_SEND.sender = sender;
         return ON_MESSAGE_SEND;
     }
 
@@ -29,16 +21,12 @@ public class OnMessageReceive  implements ICancellable
     @Override
     public void setCancelled(boolean cancelled)
     {
-        this.cancelled = cancelled;
-    }
 
-    public UUID getSender(){
-        return sender;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return false;
     }
 
     public String getMessage()

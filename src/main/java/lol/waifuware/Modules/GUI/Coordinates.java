@@ -23,12 +23,15 @@ import java.util.Random;
 public class Coordinates extends AbstractModule
 {
 
-    public BooleanSetting FakeCoordinates = new BooleanSetting("FakeCoordinates", false, "Display fake coordinates");
+    public BooleanSetting FakeCoordinates = new BooleanSetting("FakeCoordinates", false, "Display fake coordinates", "--f");
 
     public Coordinates()
     {
         addSetting(FakeCoordinates);
         Create();
+
+        desc[0] = "Show your coordinates along with the";
+        desc[1] = "direction you are looking at";
     }
 
     @EventHandler

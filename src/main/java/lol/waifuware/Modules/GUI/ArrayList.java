@@ -22,7 +22,7 @@ import static java.util.Comparator.comparingInt;
 public class ArrayList extends AbstractModule
 {
 
-    public ModeSetting sortMode = new ModeSetting("Sort mode", "alphabet", "how the arraylist is sorted", "size", "alphabet");
+    public ModeSetting sortMode = new ModeSetting("Sort mode", "alphabet", "how the arraylist is sorted", "srt", "size", "alphabet");
 
     public ArrayList() {
         super();

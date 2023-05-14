@@ -3,20 +3,18 @@ package lol.waifuware.Modules.CHAT;
 import it.unimi.dsi.fastutil.chars.Char2CharMap;
 import it.unimi.dsi.fastutil.chars.Char2CharOpenHashMap;
 import lol.waifuware.Commands.MISC.Pronoun;
-import lol.waifuware.Events.OnMessageReceive;
+import lol.waifuware.Events.OnMessageSend;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.ModeSetting;
-import lol.waifuware.Util.ChatUtil;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.MinecraftClient;
 
 @Module(name = "Suffix", key = 0, cat = CATEGORY.CHAT)
 public class Suffix extends AbstractModule
 {
     private final Char2CharMap fancy_char_array = new Char2CharOpenHashMap();
-    public ModeSetting message = new ModeSetting("Message", "client_name", "stuff that get added at the end of the message", "client_name", "pronouns", "love");
+    public ModeSetting message = new ModeSetting("Message", "client_name", "stuff that get added at the end of the message", "m", "client_name", "pronouns", "love");
 
     public Suffix()
     {
@@ -34,7 +32,7 @@ public class Suffix extends AbstractModule
     }
 
     @EventHandler
-    public void OnSendMessage(OnMessageReceive event)
+    public void OnSendMessage(OnMessageSend event)
     {
         switch(message.getIndex())
         {

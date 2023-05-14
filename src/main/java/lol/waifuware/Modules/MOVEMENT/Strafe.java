@@ -16,7 +16,7 @@ public class Strafe extends AbstractModule
 
     private MinecraftClient mc;
 
-    public IntSetting strafeSpeed = new IntSetting("strafe speed", 0.15, 0.55, 0.25, 0.05, "Speed at which you go");
+    public IntSetting strafeSpeed = new IntSetting("strafe speed", 0.15, 0.55, 0.25, 0.05, "Speed at which you go", "ss");
     public Strafe()
     {
         addSetting(strafeSpeed);

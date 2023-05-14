@@ -16,7 +16,7 @@ public class ModeSetting extends Setting
 
     private int index;
 
-    public ModeSetting(String name, String defaultValue, String description, String... modes)
+    public ModeSetting(String name, String defaultValue, String description, String shortName, String... modes)
     {
         super(description);
         this.name = name;

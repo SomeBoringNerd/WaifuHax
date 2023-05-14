@@ -9,8 +9,8 @@ import lol.waifuware.Settings.BooleanSetting;
 public class GlobalSettings extends AbstractModule
 {
 
-    public final static BooleanSetting Description = new BooleanSetting("DescriptionHUD", true, "HUD that show what a module do");
-    public final static BooleanSetting ToggleMessage = new BooleanSetting("Toggle messages", true, "Send a message in chat (client side) when a module is toggled");
+    public final static BooleanSetting Description = new BooleanSetting("DescriptionHUD", true, "HUD that show what a module do", "ignore");
+    public final static BooleanSetting ToggleMessage = new BooleanSetting("Toggle messages", true, "Send a message in chat (client side) when a module is toggled", "ignore");
 
     public GlobalSettings()
     {

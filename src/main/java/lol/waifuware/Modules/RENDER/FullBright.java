@@ -17,8 +17,8 @@ public class FullBright extends AbstractModule
     {
         super();
         instance = this;
-        desc[0] = "\"Enciende las luces\"";
-        desc[1] = "- Sombra";
+        desc[0] = "\"Let there be light !\"";
+        desc[1] = "- God, Genesis 1:3 of the Torah";
         Create();
     }
 }

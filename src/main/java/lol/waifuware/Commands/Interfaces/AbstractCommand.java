@@ -1,6 +1,6 @@
 package lol.waifuware.Commands.Interfaces;
 
-import lol.waifuware.Events.OnMessageReceive;
+import lol.waifuware.Events.OnMessageSend;
 import lol.waifuware.Waifuhax;
 import meteordevelopment.orbit.EventHandler;
 
@@ -20,7 +20,7 @@ public abstract class AbstractCommand implements ICommand
     }
 
     @EventHandler
-    public void MessageEvent(OnMessageReceive event)
+    public void MessageEvent(OnMessageSend event)
     {
         if(!event.getMessage().startsWith("-" + name)) return;
 

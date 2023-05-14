@@ -1,12 +1,14 @@
 package lol.waifuware.Mixin;
 
 import lol.waifuware.Events.OnMessageReceive;
+import lol.waifuware.Events.OnMessageSend;
 import lol.waifuware.Events.OnPacketEvent;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
+import net.minecraft.network.packet.s2c.play.ChatMessageS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,7 +32,7 @@ public class ClientConnexionMixin
 
             String message = (((ChatMessageC2SPacket) packet).chatMessage());
 
-            OnMessageReceive e = Waifuhax.EVENT_BUS.post(OnMessageReceive.get(message));
+            OnMessageSend e = Waifuhax.EVENT_BUS.post(OnMessageSend.get(message));
 
             if(e.isModified() && !message.startsWith("-") && !message.startsWith("#"))
             {
@@ -41,6 +43,15 @@ public class ClientConnexionMixin
             }
 
             if(message.startsWith("-"))
+            {
+                ci.cancel();
+            }
+        }else if(packet instanceof ChatMessageS2CPacket)
+        {
+            ChatMessageS2CPacket messagePacket = ((ChatMessageS2CPacket) packet);
+            OnMessageReceive e = Waifuhax.EVENT_BUS.post(OnMessageReceive.get(messagePacket.unsignedContent().getString(), messagePacket.sender()));
+
+            if(e.isCancelled())
             {
                 ci.cancel();
             }

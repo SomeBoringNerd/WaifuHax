@@ -34,8 +34,8 @@ public class CategoryPanel
     public int /*x, y,*/ width, height, dragX, dragY;
     public CATEGORY category;
 
-    public IntSetting xSet = new IntSetting("xSet", 0, 9999, 0, 1, "X position of a panel");
-    public IntSetting ySet = new IntSetting("ySet", 0, 9999, 0, 1, "Y position of a panel");
+    public IntSetting xSet = new IntSetting("xSet", 0, 9999, 0, 1, "X position of a panel", "x");
+    public IntSetting ySet = new IntSetting("ySet", 0, 9999, 0, 1, "Y position of a panel", "y");
 
     public boolean isPressed;
 

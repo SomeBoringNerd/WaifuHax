@@ -1,14 +1,12 @@
 package lol.waifuware.Commands.MISC;
 
-import lol.waifuware.Events.OnMessageReceive;
+import lol.waifuware.Events.OnMessageSend;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Waifuhax;
 import meteordevelopment.orbit.EventHandler;
-
-import java.util.Map;
 
 public class SettingCommand
 {
@@ -18,7 +16,7 @@ public class SettingCommand
     }
 
     @EventHandler
-    public void onCommand(OnMessageReceive event)
+    public void onCommand(OnMessageSend event)
     {
         String[] args = event.getMessage().split(" ");
         args[0] = args[0].replace("-", "");
