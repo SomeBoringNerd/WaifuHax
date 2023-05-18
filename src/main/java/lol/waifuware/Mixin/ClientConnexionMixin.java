@@ -38,20 +38,12 @@ public class ClientConnexionMixin
             {
                 ci.cancel();
                 dontSend = true;
+                assert MinecraftClient.getInstance().player != null;
                 MinecraftClient.getInstance().player.networkHandler.sendChatMessage(e.getMessage());
                 dontSend = false;
             }
 
             if(message.startsWith("-"))
-            {
-                ci.cancel();
-            }
-        }else if(packet instanceof ChatMessageS2CPacket)
-        {
-            ChatMessageS2CPacket messagePacket = ((ChatMessageS2CPacket) packet);
-            OnMessageReceive e = Waifuhax.EVENT_BUS.post(OnMessageReceive.get(messagePacket.unsignedContent().getString(), messagePacket.sender()));
-
-            if(e.isCancelled())
             {
                 ci.cancel();
             }

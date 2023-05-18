@@ -3,6 +3,7 @@ package lol.waifuware.Commands.MISC;
 import lol.waifuware.Commands.Interfaces.AbstractCommand;
 import lol.waifuware.Commands.Interfaces.Command;
 import lol.waifuware.Util.ChatUtil;
+import lol.waifuware.Util.PronounDBUtil;
 import net.minecraft.client.MinecraftClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,8 +26,40 @@ public class Pronoun extends AbstractCommand
         if(command.length > 0){
             username = command[1];
 
-            Thread t = new Thread(new ThreadedRequest(username), "request");
-            t.start();
+            // the new system is more usable, but now I need
+            // to multithread the PronounDBUtil call. Fuck me.
+            Thread CallTheFuckingCode = new Thread(() -> {
+                String pronouns = PronounDBUtil.callPronounDBApi(username);
+
+                switch (pronouns) {
+                    case "any" -> {
+                        ChatUtil.SendMessage(username + " is okay with any pronouns");
+
+                    }
+                    case "other" -> {
+                        ChatUtil.SendMessage(username + " use another set of pronouns that PronounDB don't index");
+                    }
+                    case "ask" -> {
+                        ChatUtil.SendMessage(username + " prefer you ask directly");
+                    }
+                    case "avoid" -> {
+                        ChatUtil.SendMessage(username + " would rather not use pronouns, refer to " + Pronoun.username + " by username");
+
+                    }
+                    default -> {
+                        if (pronouns.equals("unspecified")) {
+                            ChatUtil.SendMessage(username + " either don't use PronounDB.org or haven't set their pronouns.");
+                        } else if (pronouns.equals("UNAVAILABLE")) {
+                            ChatUtil.SendMessage("the username you mentioned is not linked to any existing minecraft account.");
+                        } else {
+                            ChatUtil.SendMessage(username + " use the pronouns " + pronouns);
+                        }
+                    }
+                }
+            });
+
+
+            CallTheFuckingCode.start();
 
         }else{
             ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");

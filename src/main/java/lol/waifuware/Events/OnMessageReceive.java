@@ -10,11 +10,11 @@ public class OnMessageReceive  implements ICancellable
     private String message;
     private boolean modified;
 
-    private UUID sender;
+    private String sender;
 
     private boolean cancelled;
 
-    public static OnMessageReceive get(String message, UUID sender) {
+    public static OnMessageReceive get(String message, String sender) {
         ON_MESSAGE_SEND.setCancelled(false);
         ON_MESSAGE_SEND.message = message;
         ON_MESSAGE_SEND.modified = false;
@@ -23,8 +23,9 @@ public class OnMessageReceive  implements ICancellable
         return ON_MESSAGE_SEND;
     }
 
-
-
+    public static OnMessageReceive get(){
+        return ON_MESSAGE_SEND;
+    }
 
     @Override
     public void setCancelled(boolean cancelled)
@@ -32,7 +33,7 @@ public class OnMessageReceive  implements ICancellable
         this.cancelled = cancelled;
     }
 
-    public UUID getSender(){
+    public String getSender(){
         return sender;
     }
 

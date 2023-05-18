@@ -1,9 +1,11 @@
 package lol.waifuware.Mixin;
 
 import com.mojang.authlib.GameProfile;
-import lol.waifuware.Commands.MISC.ThreadedRequest;
+import lol.waifuware.Commands.MISC.Pronoun;
 import lol.waifuware.Events.OnTickEvent;
+import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.ModuleManager;
+import lol.waifuware.Util.PronounDBUtil;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,8 +30,9 @@ public class PlayerEntityMixin
     private void Update(CallbackInfo ci)
     {
         if(!once && MinecraftClient.getInstance().player != null){
-            Thread t = new Thread(new ThreadedRequest(MinecraftClient.getInstance().player.getEntityName(), true), "request");
-            t.start();
+
+            Pronoun.self_pronoun = PronounDBUtil.callPronounDBApi(MinecraftClient.getInstance().player.getEntityName());
+
             once = true;
         }
         Waifuhax.EVENT_BUS.post(OnTickEvent.get());
