@@ -10,6 +10,7 @@ import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.ArrayList;
 import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Modules.GUI.Coordinates;
+import lol.waifuware.Modules.MISC.Announcer;
 import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.MISC.PronounDB;
 import lol.waifuware.Modules.MOVEMENT.Strafe;
@@ -45,6 +46,7 @@ public class ModuleManager
         instance = this;
         //@todo : auto-sort this shit
 
+        modules.add(new Announcer());
         modules.add(new AntiHunger());
         modules.add(new ArrayList());
         modules.add(new AutoTotem());

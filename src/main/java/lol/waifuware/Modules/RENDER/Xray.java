@@ -9,5 +9,6 @@ public class Xray extends AbstractModule
 {
     public Xray() {
         super();
+        isWorkInProgress = true;
     }
 }

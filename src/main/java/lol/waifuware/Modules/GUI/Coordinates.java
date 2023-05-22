@@ -58,10 +58,12 @@ public class Coordinates extends AbstractModule
 
             if(!(MinecraftClient.getInstance().currentScreen instanceof ChatScreen))
             {
-                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5, MinecraftClient.getInstance().getWindow().getScaledHeight() - 12,0xFFFFFF);
+                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5,
+                        MinecraftClient.getInstance().getWindow().getScaledHeight() - 12,0xFFFFFF);
             }else
             {
-                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5, MinecraftClient.getInstance().getWindow().getScaledHeight() - 27,0xFFFFFF);
+                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5,
+                        MinecraftClient.getInstance().getWindow().getScaledHeight() - 27,0xFFFFFF);
             }
         }
     }

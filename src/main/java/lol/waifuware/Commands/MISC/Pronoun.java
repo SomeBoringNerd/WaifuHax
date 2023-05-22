@@ -1,6 +1,7 @@
 package lol.waifuware.Commands.MISC;
 
 import lol.waifuware.Commands.Interfaces.AbstractCommand;
+import lol.waifuware.Commands.Interfaces.BadCommandException;
 import lol.waifuware.Commands.Interfaces.Command;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Util.PronounDBUtil;
@@ -14,15 +15,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@Command(name = "pronoun")
+@Command(name = "pronoun", usage = "-pronoun <username>", description = "give the pronouns of a player for you, assuming they have set up PronounDB")
 public class Pronoun extends AbstractCommand
 {
 
     public static String username, self_pronoun = "UNAVAILABLE";
 
     @Override
-    public void Execute(String[] command)
-    {
+    public void Execute(String[] command) throws BadCommandException {
         if(command.length > 0){
             username = command[1];
 
@@ -34,7 +34,6 @@ public class Pronoun extends AbstractCommand
                 switch (pronouns) {
                     case "any" -> {
                         ChatUtil.SendMessage(username + " is okay with any pronouns");
-
                     }
                     case "other" -> {
                         ChatUtil.SendMessage(username + " use another set of pronouns that PronounDB don't index");
@@ -43,8 +42,7 @@ public class Pronoun extends AbstractCommand
                         ChatUtil.SendMessage(username + " prefer you ask directly");
                     }
                     case "avoid" -> {
-                        ChatUtil.SendMessage(username + " would rather not use pronouns, refer to " + Pronoun.username + " by username");
-
+                        ChatUtil.SendMessage(username + " would rather not use pronouns, refer to " + username + " by username");
                     }
                     default -> {
                         if (pronouns.equals("unspecified")) {
@@ -62,46 +60,7 @@ public class Pronoun extends AbstractCommand
             CallTheFuckingCode.start();
 
         }else{
-            ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
-        }
-    }
-
-    public static String getFormatedPronouns(String value){
-        switch (value){
-            case "hh":
-                return "he/him";
-            case "hi":
-                return "he/it";
-            case "hs":
-                return "he/she";
-            case "ht":
-                return "he/they";
-            case "ih":
-                return "it/him";
-            case "ii":
-                return "it/its";
-            case "is":
-                return "it/she";
-            case "it":
-                return "it/they";
-            case "shh":
-                return "she/he";
-            case "sh":
-                return "she/her";
-            case "si":
-                return "she/it";
-            case "st":
-                return "she/they";
-            case "th":
-                return "they/him";
-            case "ti":
-                return "they/its";
-            case "ts":
-                return "they/she";
-            case "tt":
-                return "they/they";
-            default:
-                return "%TO_REPLACE%";
+            throw new BadCommandException(getName() + " : " + getUsage());
         }
     }
 }

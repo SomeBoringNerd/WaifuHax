@@ -13,5 +13,6 @@ public class BoatFly extends AbstractModule
         super();
         Create();
         desc[0] = "Make boat go brrrrrrrrrrrr";
+        isWorkInProgress = true;
     }
 }

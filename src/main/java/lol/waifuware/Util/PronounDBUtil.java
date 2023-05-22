@@ -27,7 +27,7 @@ public class PronounDBUtil
     {
         StringBuilder response = new StringBuilder();
         AtomicReference<String> _UUID = new AtomicReference<>("");
-        
+
         Thread apiThread = new Thread(() -> {
             try {
                 String MojangEndpoint = "https://api.mojang.com/users/profiles/minecraft/" + username;
@@ -143,6 +143,8 @@ public class PronounDBUtil
                 return "they/she";
             case "tt":
                 return "they/they";
+            case "unspecified":
+                return "unspecified";
             default:
                 return "UNAVAILABLE";
         }

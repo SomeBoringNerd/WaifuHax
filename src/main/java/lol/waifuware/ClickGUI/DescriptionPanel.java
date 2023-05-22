@@ -48,7 +48,7 @@ public class DescriptionPanel
             if (butt == null) {
                 MinecraftClient.getInstance().textRenderer.draw(matrices, "Hover over a module to get its description", x + 8, y + 6, Color.white.getRGB());
             } else {
-                MinecraftClient.getInstance().textRenderer.draw(matrices, "Description of " + butt.mod.name, x + 8, y + 6, Color.white.getRGB());
+                MinecraftClient.getInstance().textRenderer.draw(matrices, "Description of " + butt.mod.name + (butt.mod.isWorkInProgress ? " (WIP)" : ""), x + 8, y + 6, Color.white.getRGB());
                 int offset = 26;
                 for (int i = 0; i < 5; i++) {
                     MinecraftClient.getInstance().textRenderer.draw(matrices, butt.mod.desc[i], x + 6, y + offset, Color.white.getRGB());

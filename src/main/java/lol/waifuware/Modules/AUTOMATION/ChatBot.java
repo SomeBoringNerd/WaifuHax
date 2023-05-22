@@ -15,5 +15,6 @@ public class ChatBot extends AbstractModule
         desc[0] = "Cool chat bot";
         desc[1] = "-chatbot to see how to set";
         desc[2] = "it up.";
+        isWorkInProgress = true;
     }
 }

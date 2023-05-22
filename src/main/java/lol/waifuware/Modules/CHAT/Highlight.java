@@ -14,5 +14,6 @@ public class Highlight extends AbstractModule
         Create();
 
         desc[0] = "Highlight your username in messages";
+        isWorkInProgress = true;
     }
 }

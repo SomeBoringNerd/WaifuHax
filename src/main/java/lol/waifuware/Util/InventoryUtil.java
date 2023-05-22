@@ -10,6 +10,7 @@ public class InventoryUtil
     public static int getItem(ItemStack target)
     {
         PlayerEntity player = MinecraftClient.getInstance().player;
+        assert player != null;
         if(player.getInventory().contains(target))
         {
             return player.getInventory().indexOf(target);

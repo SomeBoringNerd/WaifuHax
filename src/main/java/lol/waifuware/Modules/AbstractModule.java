@@ -35,6 +35,8 @@ public abstract class AbstractModule implements IModule
     
     private String path;
 
+    public boolean isWorkInProgress;
+
     public AbstractModule()
     {
         Module module = this.getClass().getAnnotation(Module.class);

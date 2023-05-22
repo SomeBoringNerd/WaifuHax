@@ -15,6 +15,7 @@ public class AutoWalk extends AbstractModule
         super();
         Create();
         desc[0] = "Walk so you dont have too";
+        isWorkInProgress = true;
     }
 
     @EventHandler

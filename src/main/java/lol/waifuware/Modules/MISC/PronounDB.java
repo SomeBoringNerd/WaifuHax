@@ -42,6 +42,7 @@ public class PronounDB extends AbstractModule
         desc[3] = "account";
 
         addSettings(debugMessage);
+        isWorkInProgress = true;
         Create();
     }
 

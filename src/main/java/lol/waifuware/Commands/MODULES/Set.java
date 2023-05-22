@@ -1,6 +1,7 @@
 package lol.waifuware.Commands.MODULES;
 
 import lol.waifuware.Commands.Interfaces.AbstractCommand;
+import lol.waifuware.Commands.Interfaces.BadCommandException;
 import lol.waifuware.Commands.Interfaces.Command;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
@@ -14,14 +15,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-@Command(name = "set")
+@Command(name = "set", usage = "-set <module> <setting name> <value>", description = "change mod settings")
 public class Set extends AbstractCommand
 {
     @Override
-    public void Execute(String[] command)
-    {
+    public void Execute(String[] command) throws BadCommandException {
         if(command.length < 3){
-            ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
+            throw new BadCommandException(getName() + " : " + getUsage());
         }else{
             for (AbstractModule mod : ModuleManager.modules)
             {
@@ -33,8 +33,7 @@ public class Set extends AbstractCommand
                         ChatUtil.SendMessage("Press any key to bind the module " + command[1]);
                     }else{
                         if(command.length < 4){
-                            ChatUtil.SendMessage("§4ERROR : NOT ENOUGH ARGUMENTS PROVIDED !§r");
-                            return;
+                            throw new BadCommandException(getName() + " : " + getUsage());
                         }
                         for(Setting setting : mod.getSettings())
                         {

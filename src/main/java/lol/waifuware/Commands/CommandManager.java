@@ -2,6 +2,7 @@ package lol.waifuware.Commands;
 
 import lol.waifuware.Commands.EXPLOITS.Crash;
 import lol.waifuware.Commands.Interfaces.AbstractCommand;
+import lol.waifuware.Commands.MISC.Commands;
 import lol.waifuware.Commands.MISC.Pronoun;
 import lol.waifuware.Commands.MISC.SettingCommand;
 import lol.waifuware.Commands.MODULES.Set;
@@ -19,6 +20,7 @@ public class CommandManager
         Commands.add(new Toggle());
         Commands.add(new Set());
         Commands.add(new Pronoun());
+        Commands.add(new Commands());
 
         new SettingCommand();
     }

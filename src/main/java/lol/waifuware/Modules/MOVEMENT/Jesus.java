@@ -15,5 +15,6 @@ public class Jesus extends AbstractModule
 
 
         Create();
+        isWorkInProgress = true;
     }
 }

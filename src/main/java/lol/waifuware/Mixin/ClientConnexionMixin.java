@@ -4,7 +4,9 @@ import lol.waifuware.Events.OnMessageReceive;
 import lol.waifuware.Events.OnMessageSend;
 import lol.waifuware.Events.OnPacketEvent;
 import lol.waifuware.Waifuhax;
+import net.fabricmc.fabric.mixin.content.registry.VillagerEntityMixin;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
@@ -48,5 +50,7 @@ public class ClientConnexionMixin
                 ci.cancel();
             }
         }
+
+        if(packet instanceof VillagerEntity)
     }
 }

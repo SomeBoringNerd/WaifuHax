@@ -3,6 +3,7 @@ package lol.waifuware.Modules.GUI;
 import lol.waifuware.Events.OnRenderScreen;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
+import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Settings.ModeSetting;
@@ -53,7 +54,7 @@ public class ArrayList extends AbstractModule
         for (AbstractModule mod : sortedModules())
         {
             if(mod.isEnabled && !mod.fakeModule()){
-                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + mod.getDisplayName(), 5, 5 + i + Watermark.getWatermarkOffset(), fromRGBA(255, 255, 255, 255));
+                MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§a> §r" + (GlobalSettings.MetaData.getEnabled() ? mod.getDisplayName() : mod.getName()), 5, 5 + i + Watermark.getWatermarkOffset(), fromRGBA(255, 255, 255, 255));
                 i += 10;
             }
         }

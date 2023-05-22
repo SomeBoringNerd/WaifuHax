@@ -60,9 +60,6 @@ public class ModuleButton
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
-
-        //DrawableHelper.fill(matrices, parent.x , parent.y + offset, parent.x + parent.width, parent.y + (offset) + 16 , new Color(255, 0, 0, 255).getRGB());
-
         if(isHovered(mouseX, mouseY))
         {
             DescriptionPanel.butt = this;
@@ -80,7 +77,7 @@ public class ModuleButton
             DrawableHelper.fill(matrices, parent.xSet.getValueInt() + 1 , parent.ySet.getValueInt() + offset + 2, parent.xSet.getValueInt() + parent.width - 1, parent.ySet.getValueInt() + (offset) + 14 , (mod.isEnabled ? ClickGUI.getInstance().getColor("ButtonColorEnabled").getRGB() : ClickGUI.getInstance().getColor("ButtonColor").getRGB()));
         }
 
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mod.name, parent.xSet.getValueInt() + 5, parent.ySet.getValueInt() + offset + 4, -1);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, mod.name + (mod.isWorkInProgress ? " (WIP)" : ""), parent.xSet.getValueInt() + 5, parent.ySet.getValueInt() + offset + 4, -1);
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, extended ? "[-]" : "[+]", parent.xSet.getValueInt() + (int)(parent.width - 20), parent.ySet.getValueInt() + offset + 4, -1);
 
         if(extended) {
