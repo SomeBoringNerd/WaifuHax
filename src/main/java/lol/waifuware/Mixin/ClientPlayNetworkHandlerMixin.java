@@ -32,11 +32,14 @@ public class ClientPlayNetworkHandlerMixin
     public void onPlayerDisconnect(PlayerRemoveS2CPacket packet, CallbackInfo ci)
     {
         previous_in = "";
-        PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
-        if(!Objects.equals(previous_out, playerListEntry.getProfile().getName()))
+        if(!packet.profileIds().isEmpty())
         {
-            previous_out = playerListEntry.getProfile().getName();
-            Waifuhax.EVENT_BUS.post(OnPlayerDisconnect.get(playerListEntry.getProfile().getName()));
+            PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
+            if(!Objects.equals(previous_out, playerListEntry.getProfile().getName()))
+            {
+                previous_out = playerListEntry.getProfile().getName();
+                Waifuhax.EVENT_BUS.post(OnPlayerDisconnect.get(playerListEntry.getProfile().getName()));
+            }
         }
     }
 /*
