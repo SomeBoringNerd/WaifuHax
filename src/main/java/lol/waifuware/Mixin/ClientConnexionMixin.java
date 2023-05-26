@@ -50,7 +50,5 @@ public class ClientConnexionMixin
                 ci.cancel();
             }
         }
-
-        if(packet instanceof VillagerEntity)
     }
 }

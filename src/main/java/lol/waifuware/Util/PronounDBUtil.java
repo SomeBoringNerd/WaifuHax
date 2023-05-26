@@ -1,6 +1,7 @@
 package lol.waifuware.Util;
 
 import lol.waifuware.Waifuhax;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -8,12 +9,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class PronounDBUtil
 {
 
-    public static String addDashesToUUID(String uuid) {
+    public static String addDashesToUUID(String uuid)
+    {
+        if(uuid.isEmpty())
+        {
+            return "INVALID";
+        }
         String dashedUUID = "";
         dashedUUID += uuid.substring(0, 8) + "-";
         dashedUUID += uuid.substring(8, 12) + "-";
@@ -71,29 +78,51 @@ public class PronounDBUtil
 
         Thread apiThread = new Thread(() -> {
             try {
-                String pronounDBEndpoint = "https://pronoundb.org/api/v1/lookup?platform=minecraft&id=%UUID%";
+                String pronounDBEndpoint = "https://pronoundb.org/api/v2/lookup?platform=minecraft&ids=%UUID%";
+                String uid = addDashesToUUID(getUUIDFromUsername(username));
+                if(uid.equals("INVALID"))
+                {
+                    Pronouns.set("UNAVAILABLE");
+                }else {
+                    pronounDBEndpoint = pronounDBEndpoint.replace("%UUID%", uid);
+                    URL url = new URL(pronounDBEndpoint);
+                    Waifuhax.Log(pronounDBEndpoint);
 
-                pronounDBEndpoint = pronounDBEndpoint.replace("%UUID%", addDashesToUUID(getUUIDFromUsername(username)));
-                URL url = new URL(pronounDBEndpoint);
-                Waifuhax.Log(pronounDBEndpoint);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
 
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            response.append(line);
+                        }
+                        JSONObject json = new JSONObject(response.toString());
+                        if (Objects.equals(json.toString(), "{}")) {
+                            Pronouns.set("EMPTY");
+                        } else {
+                            JSONObject innerObject = new JSONObject(json.getJSONObject(addDashesToUUID(getUUIDFromUsername(username))).toString());
+                            JSONObject setsObject = innerObject.getJSONObject("sets");
+                            JSONArray pronouns = setsObject.getJSONArray("en");
+                            if (pronouns.length() == 0) {
+                                Pronouns.set("EMPTY");
+                            } else if (pronouns.length() == 1) {
+                                Pronouns.set(getFormatedPronouns(pronouns.getString(0)));
+                            } else {
+                                for (int i = 0; i < pronouns.length(); i++) {
+                                    Pronouns.set(Pronouns.get() + "/" + pronouns.getString(i));
+                                }
+                                Pronouns.set(Pronouns.get().substring(1));
+                            }
+                        }
+                        reader.close();
                     }
-                    JSONObject json = new JSONObject(response.toString());
-                    System.out.println(json.toString());
-                    Pronouns.set(json.getString("pronouns"));
-                    reader.close();
+                    connection.disconnect();
                 }
-                connection.disconnect();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
+                Pronouns.set("UNAVAILABLE");
                 e.printStackTrace();
             }
         });
@@ -106,45 +135,35 @@ public class PronounDBUtil
             e.printStackTrace();
         }
 
-        return getFormatedPronouns(Pronouns.get());
+        return Pronouns.get();
+    }
+
+    public static String removeLastCharacter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        return str.substring(0, str.length() - 1);
     }
 
     private static String getFormatedPronouns(String value){
         switch (value){
-            case "hh":
+            case "he":
                 return "he/him";
-            case "hi":
-                return "he/it";
-            case "hs":
-                return "he/she";
-            case "ht":
-                return "he/they";
-            case "ih":
-                return "it/him";
-            case "ii":
-                return "it/its";
-            case "is":
-                return "it/she";
             case "it":
-                return "it/they";
-            case "shh":
-                return "she/he";
-            case "sh":
-                return "she/her";
-            case "si":
-                return "she/it";
-            case "st":
-                return "she/they";
-            case "th":
-                return "they/him";
-            case "ti":
-                return "they/its";
-            case "ts":
-                return "they/she";
-            case "tt":
-                return "they/they";
-            case "unspecified":
-                return "unspecified";
+                return "he/it";
+            case "she":
+                return "he/she";
+            case "they":
+                return "he/they";
+            case "any":
+                return "any pronouns";
+            case "ask":
+                return "ASK";
+            case "avoid":
+                return "no pronouns, refer by name";
+            case "other":
+                return "pronouns that dont exist on pronoundb";
             default:
                 return "UNAVAILABLE";
         }

@@ -32,34 +32,29 @@ public class Pronoun extends AbstractCommand
                 String pronouns = PronounDBUtil.callPronounDBApi(username);
 
                 switch (pronouns) {
-                    case "any" -> {
-                        ChatUtil.SendMessage(username + " is okay with any pronouns");
+                    case "ASK" -> {
+                        ChatUtil.SendMessage(username + " want you to ask for pronouns");
                     }
-                    case "other" -> {
-                        ChatUtil.SendMessage(username + " use another set of pronouns that PronounDB don't index");
+                    case "EMPTY" -> {
+                        ChatUtil.SendMessage(username + " do not have pronoundb");
                     }
-                    case "ask" -> {
-                        ChatUtil.SendMessage(username + " prefer you ask directly");
-                    }
-                    case "avoid" -> {
-                        ChatUtil.SendMessage(username + " would rather not use pronouns, refer to " + username + " by username");
-                    }
-                    default -> {
-                        if (pronouns.equals("unspecified")) {
-                            ChatUtil.SendMessage(username + " either don't use PronounDB.org or haven't set their pronouns.");
-                        } else if (pronouns.equals("UNAVAILABLE")) {
+                    default ->
+                    {
+                        if (pronouns.equals("UNAVAILABLE"))
+                        {
                             ChatUtil.SendMessage("the username you mentioned is not linked to any existing minecraft account.");
-                        } else {
+                        }
+                        else
+                        {
                             ChatUtil.SendMessage(username + " use the pronouns " + pronouns);
                         }
                     }
                 }
             });
-
-
             CallTheFuckingCode.start();
-
-        }else{
+        }
+        else
+        {
             throw new BadCommandException(getName() + " : " + getUsage());
         }
     }
