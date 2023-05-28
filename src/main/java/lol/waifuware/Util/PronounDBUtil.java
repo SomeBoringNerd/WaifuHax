@@ -2,6 +2,7 @@ package lol.waifuware.Util;
 
 import lol.waifuware.Waifuhax;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -99,21 +100,34 @@ public class PronounDBUtil
                             response.append(line);
                         }
                         JSONObject json = new JSONObject(response.toString());
-                        if (Objects.equals(json.toString(), "{}")) {
+
+                        // if there's no pronoundb account linked to that minecraft UUID
+                        if (Objects.equals(json.toString(), "{}"))
+                        {
                             Pronouns.set("EMPTY");
-                        } else {
+                        }
+                        else
+                        {
                             JSONObject innerObject = new JSONObject(json.getJSONObject(addDashesToUUID(getUUIDFromUsername(username))).toString());
                             JSONObject setsObject = innerObject.getJSONObject("sets");
-                            JSONArray pronouns = setsObject.getJSONArray("en");
-                            if (pronouns.length() == 0) {
-                                Pronouns.set("EMPTY");
-                            } else if (pronouns.length() == 1) {
-                                Pronouns.set(getFormatedPronouns(pronouns.getString(0)));
-                            } else {
-                                for (int i = 0; i < pronouns.length(); i++) {
-                                    Pronouns.set(Pronouns.get() + "/" + pronouns.getString(i));
+                            try {
+                                JSONArray pronouns = setsObject.getJSONArray("en");
+
+                                if (pronouns.length() == 0) {
+                                    Pronouns.set("EMPTY");
+                                } else if (pronouns.length() == 1) {
+                                    Pronouns.set(getFormatedPronouns(pronouns.getString(0)));
+                                } else
+                                {
+                                    for (int i = 0; i < pronouns.length(); i++) {
+                                        Pronouns.set(Pronouns.get() + "/" + pronouns.getString(i));
+                                    }
+                                    Pronouns.set(Pronouns.get().substring(1));
                                 }
-                                Pronouns.set(Pronouns.get().substring(1));
+
+                            }catch (JSONException e)
+                            {
+                                Pronouns.set(("UNSPECIFIED"));
                             }
                         }
                         reader.close();
@@ -138,14 +152,6 @@ public class PronounDBUtil
         return Pronouns.get();
     }
 
-    public static String removeLastCharacter(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
-        }
-
-        return str.substring(0, str.length() - 1);
-    }
-
     private static String getFormatedPronouns(String value){
         switch (value){
             case "he":
@@ -153,17 +159,19 @@ public class PronounDBUtil
             case "it":
                 return "he/it";
             case "she":
-                return "he/she";
+                return "she/her";
             case "they":
                 return "he/they";
             case "any":
-                return "any pronouns";
+                return "ANY";
             case "ask":
                 return "ASK";
             case "avoid":
-                return "no pronouns, refer by name";
+                return "AVOID";
             case "other":
-                return "pronouns that dont exist on pronoundb";
+                return "OTHER";
+            case "UNSPECIFIED":
+                return "UNSPECIFIED";
             default:
                 return "UNAVAILABLE";
         }

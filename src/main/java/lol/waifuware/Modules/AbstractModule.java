@@ -11,6 +11,7 @@ import lol.waifuware.Settings.ModeSetting;
 import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Waifuhax;
+import net.minecraft.client.MinecraftClient;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -198,8 +199,6 @@ public abstract class AbstractModule implements IModule
                 object.append("active", false);
                 object.append("key", key);
 
-                Waifuhax.Log("Setting list for " + name + " is " + getSettings().size());
-
                 for(Setting setting : settings)
                 {
                     if(setting instanceof IntSetting e)
@@ -271,8 +270,6 @@ public abstract class AbstractModule implements IModule
                             {
                                 BooleanSetting e = (BooleanSetting)setting;
                                 e.setEnabled(entry.getValue().toString().replace("[", "").replace("]", "").replace("\"", "").equals("true"));
-
-                                Waifuhax.Log(String.valueOf(e.getEnabled()));
                             }
                             else if (setting instanceof ModeSetting)
                             {

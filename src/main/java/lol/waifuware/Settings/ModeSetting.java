@@ -20,7 +20,6 @@ public class ModeSetting extends Setting
     {
         super(description);
         this.name = name;
-        Log(name + " has " + modes.length + " modes : ");
         this.modes = Arrays.asList(modes);
 
         this.index = this.modes.indexOf(defaultValue);

@@ -32,7 +32,7 @@ public class PronounDB extends AbstractModule
 
     private HashMap<String, String> playerModMap = new HashMap<>();
 
-    private BooleanSetting debugMessage = new BooleanSetting("Show Debug Messages", true, "e", "sdm");
+    private BooleanSetting debugMessage = new BooleanSetting("Debug messages", true, "e", "sdm");
 
     public PronounDB()
     {

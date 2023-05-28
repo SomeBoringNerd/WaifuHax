@@ -31,12 +31,31 @@ public class Pronoun extends AbstractCommand
             Thread CallTheFuckingCode = new Thread(() -> {
                 String pronouns = PronounDBUtil.callPronounDBApi(username);
 
-                switch (pronouns) {
-                    case "ASK" -> {
+                switch (pronouns)
+                {
+                    case "ASK" ->
+                    {
                         ChatUtil.SendMessage(username + " want you to ask for pronouns");
                     }
-                    case "EMPTY" -> {
+                    case "EMPTY" ->
+                    {
                         ChatUtil.SendMessage(username + " do not have pronoundb");
+                    }
+                    case "ANY" ->
+                    {
+                        ChatUtil.SendMessage(username + " goes by any pronouns");
+                    }
+                    case "OTHER" ->
+                    {
+                        ChatUtil.SendMessage(username + " use pronouns that are not indexed on PronounDB");
+                    }
+                    case "AVOID" ->
+                    {
+                        ChatUtil.SendMessage(username + " would rather be called by name");
+                    }
+                    case "UNSPECIFIED" ->
+                    {
+                        ChatUtil.SendMessage(username + " has PronounDB but haven't set pronouns yet");
                     }
                     default ->
                     {

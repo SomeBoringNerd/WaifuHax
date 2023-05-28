@@ -52,7 +52,7 @@ public class ModuleManager
         modules.add(new AutoTotem());
         modules.add(new AutoFrameDupe());
         modules.add(new BoatFly());
-        modules.add(new ChestOpenExploit());
+        //modules.add(new ChestOpenExploit());
         modules.add(new ClickGUI());
         modules.add(new Coordinates());
         modules.add(new FullBright());
