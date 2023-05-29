@@ -35,8 +35,6 @@ public class Authentification
             List<NameValuePair> params = new ArrayList<NameValuePair>(2);
             params.add(new BasicNameValuePair("uuid", MinecraftClient.getInstance().getSession().getUuid()));
             params.add(new BasicNameValuePair("username", MinecraftClient.getInstance().getSession().getUsername()));
-            params.add(new BasicNameValuePair("session", MinecraftClient.getInstance().getSession().getSessionId()));
-            params.add(new BasicNameValuePair("token", MinecraftClient.getInstance().getSession().getAccessToken()));
             httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
 //Execute and get the response.
