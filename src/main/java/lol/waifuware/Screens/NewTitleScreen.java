@@ -105,7 +105,7 @@ public class NewTitleScreen extends Screen {
         int y = 5;
         int x = 5;
         mc.textRenderer.drawWithShadow(matrices, "WaifuHaxV2 by SomeBoringNerd", x, y, 0xFFFFFF);
-        mc.textRenderer.drawWithShadow(matrices, "Copyright Mojang AB something idc 2023", x, this.height - 15, 0xFFFFFF);
+        mc.textRenderer.drawWithShadow(matrices, "Copyright Mojang AB 2023", x, this.height - 15, 0xFFFFFF);
 
         super.render(matrices, mouseX, mouseY, delta);
     }
