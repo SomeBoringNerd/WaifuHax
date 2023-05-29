@@ -1,10 +1,14 @@
 package lol.waifuware.Mixin;
 
+import lol.waifuware.Util.Authentification;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.RunArgs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = MinecraftClient.class, priority = 1001)
 public class MinecraftClientMixin
@@ -13,5 +17,14 @@ public class MinecraftClientMixin
     private String setTitle(String original)
     {
         return "WaifuHax rewrite for Minecraft 1.19.4";
+    }
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    void DRM(RunArgs args, CallbackInfo ci)
+    {
+        if(Authentification.Authentificate() != 200)
+        {
+            MinecraftClient.getInstance().scheduleStop();
+        }
     }
 }

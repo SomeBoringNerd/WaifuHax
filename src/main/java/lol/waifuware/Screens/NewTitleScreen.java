@@ -1,6 +1,7 @@
 package lol.waifuware.Screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import lol.waifuware.Util.Authentification;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.CubeMapRenderer;
 import net.minecraft.client.gui.LogoDrawer;

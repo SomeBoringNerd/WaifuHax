@@ -2,8 +2,10 @@ package lol.waifuware;
 
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Commands.CommandManager;
+import lol.waifuware.Util.Authentification;
 import meteordevelopment.orbit.EventBus;
 import meteordevelopment.orbit.IEventBus;
+import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.api.ModInitializer;

@@ -5,6 +5,7 @@ import lol.waifuware.Commands.MISC.Pronoun;
 import lol.waifuware.Events.OnTickEvent;
 import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.ModuleManager;
+import lol.waifuware.Util.Authentification;
 import lol.waifuware.Util.PronounDBUtil;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
@@ -29,12 +30,12 @@ public class PlayerEntityMixin
     @Inject(method = "tick", at = @At("TAIL"))
     private void Update(CallbackInfo ci)
     {
-        if(!once && MinecraftClient.getInstance().player != null){
-
+        if(!once && MinecraftClient.getInstance().player != null)
+        {
             Pronoun.self_pronoun = PronounDBUtil.callPronounDBApi(MinecraftClient.getInstance().player.getEntityName());
-
             once = true;
         }
+
         Waifuhax.EVENT_BUS.post(OnTickEvent.get());
     }
 }
