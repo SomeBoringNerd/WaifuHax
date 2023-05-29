@@ -6,6 +6,7 @@ import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.BooleanSetting;
+import lol.waifuware.Util.Authentification;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 
@@ -33,7 +34,7 @@ public class Watermark extends AbstractModule
 
         offset = isEnabled() ? 10 : 0;
 
-        latestHash = executeGitCommand();
+        latestHash = Authentification.getLatestCommitHash();
     }
     private static int offset;
     public static int getWatermarkOffset()
@@ -62,35 +63,12 @@ public class Watermark extends AbstractModule
     // -------------------------------------------------------------------------------------------------------- //
 
 
-    public static String executeGitCommand()
-    {
-        StringBuilder output = new StringBuilder();
-
-        try {
-            Process process = Runtime.getRuntime().exec("git ls-remote -h git@github.com:SomeBoringNerd/WaifuHax.git");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                output.append(line);
-            }
-
-            reader.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return output.substring(0, 7);
-    }
-
     boolean marked;
     @EventHandler
     public void Render(OnRenderScreen event)
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
 
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§5WaifuHax git-" + latestHash + (ShowVersion.getEnabled() ?" V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : ""), 1, 1, 0xFFFFFF);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§5WaifuHax" + (latestHash.isEmpty() ? "" : " git-" + latestHash) + (ShowVersion.getEnabled() ?" V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : ""), 1, 1, 0xFFFFFF);
     }
 }
