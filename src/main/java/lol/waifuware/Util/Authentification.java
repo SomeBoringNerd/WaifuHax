@@ -91,7 +91,14 @@ public class Authentification
                     // Process the response and extract the desired information.
                     // For example, if the response is in JSON format, you can use a JSON library to parse it.
                     JSONObject jsonResponse = new JSONObject(responseString);
-                    String hash = jsonResponse.getString("hash").substring(0, 6);
+                    String hash = "";
+                    try {
+                        hash = jsonResponse.getString("hash").substring(0, 6);
+                    }catch (StringIndexOutOfBoundsException e)
+                    {
+                        hash = "0x00000";
+                    }
+
                     ApiResponse.set(hash);
                 }
             }

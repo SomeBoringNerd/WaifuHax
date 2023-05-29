@@ -1,6 +1,7 @@
 package lol.waifuware.ClickGUI;
 
 import lol.waifuware.Modules.CATEGORY;
+import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
@@ -58,6 +59,9 @@ public class ClickGUI extends Screen
         // sometime the arraylist is not movable unless I use this hack (or toggle it on and off manually)
         lol.waifuware.Modules.GUI.ArrayList.getInstance().Toggle();
         lol.waifuware.Modules.GUI.ArrayList.getInstance().Toggle();
+
+        Watermark.getInstance().Toggle();
+        Watermark.getInstance().Toggle();
     }
 
     @Override
@@ -72,6 +76,11 @@ public class ClickGUI extends Screen
         if(lol.waifuware.Modules.GUI.ArrayList.isEnabled())
         {
             lol.waifuware.Modules.GUI.ArrayList.getInstance().UpdatePosition(mouseX, mouseY);
+        }
+
+        if(Watermark.isEnabled())
+        {
+            Watermark.getInstance().UpdatePosition(mouseX, mouseY);
         }
 
         descPan.render(matrices, mouseX, mouseY, delta);
@@ -92,6 +101,11 @@ public class ClickGUI extends Screen
             lol.waifuware.Modules.GUI.ArrayList.getInstance().mouseClicked(mouseX, mouseY, button);
         }
 
+        if(Watermark.isEnabled())
+        {
+            Watermark.getInstance().mouseClicked(mouseX, mouseY, button);
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -106,6 +120,11 @@ public class ClickGUI extends Screen
         if(lol.waifuware.Modules.GUI.ArrayList.isEnabled())
         {
             lol.waifuware.Modules.GUI.ArrayList.getInstance().mouseRelease(mouseX, mouseY, button);
+        }
+
+        if(Watermark.isEnabled())
+        {
+            Watermark.getInstance().mouseRelease(mouseX, mouseY, button);
         }
 
         descPan.mouseRelease(mouseX, mouseY, button);

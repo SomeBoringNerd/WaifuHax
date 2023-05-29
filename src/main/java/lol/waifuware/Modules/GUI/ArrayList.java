@@ -58,11 +58,6 @@ public class ArrayList extends AbstractModule
     }
     int width;
 
-    public boolean isHovered(double mouseX, double mouseY)
-    {
-        return (mouseX > xPos.getValueInt()) && (mouseX < xPos.getValueInt() + width) && (mouseY > yPos.getValueInt()) && (mouseY < yPos.getValueInt() + 17);
-    }
-
     @EventHandler
     public void Render(OnRenderScreen event)
     {
@@ -132,6 +127,8 @@ public class ArrayList extends AbstractModule
         return name + " §c[§4" + sortMode.getModeAtIndex() + "§c]";
     }
 
+
+
     private String getColorFromPing(int ping)
     {
         if(ping <= -1){
@@ -149,6 +146,11 @@ public class ArrayList extends AbstractModule
         }
     }
 
+    public boolean isHovered(double mouseX, double mouseY)
+    {
+        return (mouseX > xPos.getValueInt()) && (mouseX < xPos.getValueInt() + width) && (mouseY > yPos.getValueInt()) && (mouseY < yPos.getValueInt() + 17);
+    }
+
     public boolean isPressed;
 
     int dragX, dragY;
@@ -161,7 +163,6 @@ public class ArrayList extends AbstractModule
             dragX = (int) (mouseX - xPos.getValueInt());
             dragY = (int) (mouseY - yPos.getValueInt());
             UpdatePosition(mouseX, mouseY);
-            Waifuhax.Log("1");
         }
     }
 
@@ -176,7 +177,6 @@ public class ArrayList extends AbstractModule
     {
         if(isPressed)
         {
-            Waifuhax.Log("2");
             xPos.setValue((int)(mouseX - dragX));
             yPos.setValue((int)(mouseY - dragY));
         }
