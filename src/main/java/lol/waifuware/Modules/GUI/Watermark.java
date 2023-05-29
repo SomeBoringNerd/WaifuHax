@@ -91,6 +91,6 @@ public class Watermark extends AbstractModule
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
 
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§5WaifuHax git-" + latestHash + (ShowVersion.getEnabled() ?" V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4 ♥§c] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : ""), 5, 5, 0xFFFFFF);
+        MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§5WaifuHax git-" + latestHash + (ShowVersion.getEnabled() ?" V2" : "") + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : ""), 1, 1, 0xFFFFFF);
     }
 }
