@@ -104,7 +104,7 @@ public class NewTitleScreen extends Screen {
         MinecraftClient mc = MinecraftClient.getInstance();
         int y = 5;
         int x = 5;
-        mc.textRenderer.drawWithShadow(matrices, "WaifuHaxV2 by WaifuWare", x, y, 0xFFFFFF);
+        mc.textRenderer.drawWithShadow(matrices, "WaifuHaxV2 by SomeBoringNerd", x, y, 0xFFFFFF);
         mc.textRenderer.drawWithShadow(matrices, "Copyright Mojang AB 2023", x, this.height - 15, 0xFFFFFF);
 
         super.render(matrices, mouseX, mouseY, delta);
