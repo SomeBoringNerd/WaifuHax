@@ -30,6 +30,6 @@ public class Waifuhax implements ModInitializer
 
     public static void Log(String message)
     {
-        LOGGER.info("[WAIFUWARE INC] : " + message);
+        LOGGER.info("[WAIFUWARE] : " + message);
     }
 }
