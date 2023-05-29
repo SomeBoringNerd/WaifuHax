@@ -143,6 +143,9 @@ public abstract class AbstractModule implements IModule
 
     public void Save()
     {
+        // dont save modules if the game is shutting down, as it fuck up some saved settings
+        if(!MinecraftClient.getInstance().isRunning()) return;
+
         File file = new File(path);
         if(file.exists())
         {
