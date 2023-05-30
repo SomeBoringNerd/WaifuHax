@@ -1,34 +1,6 @@
 = WaifuHax
 
-THIS CLIENT IS NOT READY FOR ACTUAL USE.
-
-= Infos
-
-WaifuHax was a private client for the feurgroup as a side client to FeurHax.
-
-Now I just use it as an excuse to write Minecraft cheats and see what I can do
-
-This client contain no skidded code, which is why it is terrible
-
-made public on the 7th of march 2023, so people could laugh at this pathetic attempt at making a minecraft cheat.
-
-This client aim to replicate the feeling of 2014 clients like Nodus.
-
-We do not condomne the use of WaifuHax on servers that explicitly ban cheating. It is an anarchy client.
-
-= Features
-
->it compile (most of the time)
-
->no backdoor
-
->sick ClickGUI according to most of the people I've talked to
-
->weeb jokes
-
->easy to skid
-
-= How to compile
+=== How to compile
 
 open a terminal and use type `./gradlew build`
 
@@ -39,7 +11,7 @@ ClickGUI's default key is right shift, if it dont work use the command
 
 = Modules and their settings
 
-== Note
+=== Note
 to change a setting, type in chat `-${module's name} ${parameter you want to change} ${new value}`
 
 or you can use the clickgui.

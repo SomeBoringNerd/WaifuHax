@@ -42,14 +42,4 @@ public class ClientPlayNetworkHandlerMixin
             }
         }
     }
-/*
-    @Inject(method = "onPlayerList", at = @At("HEAD"))
-    public void onPlayerLogin(PlayerListS2CPacket packet, CallbackInfo ci)
-    {
-        previous_out = "";
-        if(Objects.equals(packet.getPlayerAdditionEntries().get(0).profile().getName(), previous_in)){
-            previous_in = packet.getPlayerAdditionEntries().get(0).profile().getName();
-            Waifuhax.EVENT_BUS.post(OnPlayerConnect.get(packet.getPlayerAdditionEntries().get(0).profile().getName()));
-        }
-    }*/
 }

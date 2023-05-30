@@ -85,7 +85,6 @@ public class Watermark extends AbstractModule
         String display = "§c[§5WaifuHax" + (latestHash.isEmpty() ? "" : " git-" + latestHash) + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : "");
 
         width = MinecraftClient.getInstance().textRenderer.getWidth(display);
-        Waifuhax.Log(width + "");
         MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), display, xPos.getValueInt(), yPos.getValueInt(), 0xFFFFFF);
     }
 
