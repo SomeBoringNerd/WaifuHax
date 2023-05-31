@@ -1,31 +1,27 @@
 package lol.waifuware.Modules;
 
+import lol.waifuware.Modules.AUTOMATION.AutoFrameDupe;
 import lol.waifuware.Modules.CHAT.Highlight;
 import lol.waifuware.Modules.CHAT.Suffix;
 import lol.waifuware.Modules.COMBAT.AutoTotem;
 import lol.waifuware.Modules.EXPLOITS.AntiHunger;
-import lol.waifuware.Modules.AUTOMATION.AutoFrameDupe;
-import lol.waifuware.Modules.EXPLOITS.ChestOpenExploit;
 import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
-import lol.waifuware.Modules.GUI.ArrayList;
-import lol.waifuware.Modules.GUI.ClickGUI;
-import lol.waifuware.Modules.GUI.Coordinates;
+import lol.waifuware.Modules.GUI.*;
 import lol.waifuware.Modules.MISC.Announcer;
 import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.MISC.PronounDB;
-import lol.waifuware.Modules.MOVEMENT.Strafe;
-import lol.waifuware.Modules.RENDER.FullBright;
-import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.MOVEMENT.BoatFly;
 import lol.waifuware.Modules.MOVEMENT.Sprint;
+import lol.waifuware.Modules.MOVEMENT.Strafe;
 import lol.waifuware.Modules.MOVEMENT.VanillaFly;
+import lol.waifuware.Modules.RENDER.FullBright;
 import lol.waifuware.Modules.RENDER.Xray;
-import lol.waifuware.Waifuhax;
 import lol.waifuware.Util.ChatUtil;
+import lol.waifuware.Waifuhax;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
-import java.util.*;
+import java.util.List;
 
 public class ModuleManager
 {
@@ -59,6 +55,7 @@ public class ModuleManager
         modules.add(new GameModeDetector());
         modules.add(new GlobalSettings());
         modules.add(new Highlight());
+        modules.add(new Pride());
         modules.add(new PronounDB());
         modules.add(new Sprint());
         modules.add(new Strafe());
