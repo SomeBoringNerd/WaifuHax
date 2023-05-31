@@ -88,7 +88,7 @@ public class CategoryPanel
         DrawableHelper.fill(matrices, xSet.getValueInt() - 2, ySet.getValueInt() + 12, xSet.getValueInt() + width + 2, ySet.getValueInt() + 14 , ClickGUI.getInstance().getColor("MainColor").getRGB());
 
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "『" + category.name + "』", xSet.getValueInt() + 2 , ySet.getValueInt() + 2, Color.white.getRGB());
-        int e = ("[" + moduleAmount + "]").length();
+
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "[" + moduleAmount + "]", xSet.getValueInt() + (width - 20) , ySet.getValueInt() + 2, Color.white.getRGB());
 
         if(showModule())
@@ -159,7 +159,7 @@ public class CategoryPanel
                     {
                         if(panel.setting.getVisible())
                         {
-                            if(panel instanceof SliderPanel) offset += 36;
+                            if(panel instanceof SliderPanel) offset += 26;
                             else offset += 18;
                         }
                     }

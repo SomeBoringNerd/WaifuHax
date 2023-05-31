@@ -42,7 +42,7 @@ public class ModuleButton
             if(setting instanceof IntSetting e)
             {
                 panels.add(new SliderPanel(setting, this, setOffset));
-                setOffset += 36;
+                setOffset += 26;
             }
             else if (setting instanceof BooleanSetting e)
             {
@@ -81,7 +81,14 @@ public class ModuleButton
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, extended ? "[-]" : "[+]", parent.xSet.getValueInt() + (int)(parent.width - 20), parent.ySet.getValueInt() + offset + 4, -1);
 
         if(extended) {
-            for (SettingPanelBase set : panels) {
+            for (SettingPanelBase set : panels)
+            {
+                if(set instanceof SliderPanel)
+                {
+                    IntSetting integer = ((SliderPanel) set).integer;
+                    int renderWidth = (int) (parent.width * (((integer.getValue() - integer.getMin()) / (integer.getMax() - integer.getMin()))));
+                    DrawableHelper.fill(matrices, parent.xSet.getValueInt(), parent.ySet.getValueInt(), parent.width + renderWidth, parent.ySet.getValueInt() + 18, 0xff0000);
+                }
                 set.render(matrices, mouseX, mouseY, delta);
             }
         }

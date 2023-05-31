@@ -6,6 +6,7 @@ import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
+import lol.waifuware.Settings.NumberType;
 import lol.waifuware.Settings.SettingDescription;
 import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Util.InventoryUtil;
@@ -25,9 +26,9 @@ public class AutoFrameDupe extends AbstractModule
 {
     int state = 0;
 
-    public IntSetting MaxFrame = new IntSetting("MaxFrame", 1, 8, 4, 1, "Maximum of frames that will be targeted", "mf");
+    public IntSetting MaxFrame = new IntSetting("MaxFrame", 1, 8, 4, 1, "Maximum of frames that will be targeted", "mf", NumberType.INT);
 
-    public IntSetting Hit = new IntSetting("Hit", 1, 20, 5, 1, "Number of hits per second", "h");
+    public IntSetting Hit = new IntSetting("Hit", 1, 20, 5, 1, "Number of hits per second", "h", NumberType.INT);
 
     public BooleanSetting AutoPlace = new BooleanSetting("AutoPlace", false, "Maximum of frames that can be hit per tick", "ap");
 

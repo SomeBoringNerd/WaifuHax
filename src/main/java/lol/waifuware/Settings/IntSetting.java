@@ -3,12 +3,28 @@ package lol.waifuware.Settings;
 public class IntSetting extends Setting
 {
     private double min, max, increment, defaultValue, currentValue;
+
+    NumberType type;
+    public IntSetting(String name, double min, double max, double defaultValue, double increment, String description, String shortName, NumberType type)
+    {
+        super(description);
+        this.name = name;
+        this.min = min;
+        this.max = max;
+        this.type = type;
+
+        this.defaultValue = defaultValue;
+        this.currentValue = defaultValue;
+        this.increment = increment;
+    }
+
     public IntSetting(String name, double min, double max, double defaultValue, double increment, String description, String shortName)
     {
         super(description);
         this.name = name;
         this.min = min;
         this.max = max;
+        this.type = NumberType.FLOAT;
 
         this.defaultValue = defaultValue;
         this.currentValue = defaultValue;
@@ -46,8 +62,13 @@ public class IntSetting extends Setting
         return max;
     }
 
-    public void setValue(double value){
+    public void setValue(double value)
+    {
         value = clamp(value, this.min, this.max);
+        if(type == NumberType.INT)
+        {
+            value = (int)value;
+        }
         this.currentValue = value;
     }
 
@@ -56,3 +77,4 @@ public class IntSetting extends Setting
         setValue(getValue() + (positive ? getIncrement() : - getIncrement()));
     }
 }
+

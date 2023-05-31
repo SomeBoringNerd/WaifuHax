@@ -10,7 +10,6 @@
     "ClientPlayNetworkHandlerMixin",
     "MinecraftClientMixin",
     "PlayerEntityMixin",
-    "InGameOverlayRendererMixin",
     "InGameHudMixin",
     "ChatHudMixin",
     "ClientConnexionMixin",

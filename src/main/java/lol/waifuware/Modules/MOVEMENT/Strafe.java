@@ -5,6 +5,7 @@ import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.IntSetting;
+import lol.waifuware.Settings.NumberType;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
@@ -16,7 +17,7 @@ public class Strafe extends AbstractModule
 
     private MinecraftClient mc;
 
-    public IntSetting strafeSpeed = new IntSetting("strafe speed", 0.15, 0.55, 0.25, 0.05, "Speed at which you go", "ss");
+    public IntSetting strafeSpeed = new IntSetting("strafe speed", 0.15, 1, 0.25, 0.05, "Speed at which you go", "ss", NumberType.FLOAT);
     public Strafe()
     {
         addSetting(strafeSpeed);

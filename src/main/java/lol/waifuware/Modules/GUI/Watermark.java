@@ -33,6 +33,9 @@ public class Watermark extends AbstractModule
         super();
         addSettings(ShowUsername, ShowPronoun, xPos, yPos);
 
+        xPos.setVisible(false);
+        yPos.setVisible(false);
+
         Create();
         desc[0] = "Fancy text on your screen";
 
