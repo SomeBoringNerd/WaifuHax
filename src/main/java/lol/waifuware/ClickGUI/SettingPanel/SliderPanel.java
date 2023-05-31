@@ -54,7 +54,7 @@ public class SliderPanel extends SettingPanelBase
 
             MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, integer.getName() + " : " + String.valueOf(integer.getValueFloat()), parent.parent.xSet.getValueInt() + 5, parent.parent.ySet.getValueInt() + parent.offset + offset + 4, -1);
             MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "§7--------------------", parent.parent.xSet.getValueInt() + 2 , parent.parent.ySet.getValueInt() + parent.offset + offset + 4 + 10, -1);
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "§8|", parent.parent.xSet.getValueInt() + renderWidth, parent.parent.ySet.getValueInt() + parent.offset + offset + 4 + 10, -1);
+            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrices, "§8§l|", parent.parent.xSet.getValueInt() + renderWidth, parent.parent.ySet.getValueInt() + parent.offset + offset + 4 + 10, -1);
 
         }
     }
