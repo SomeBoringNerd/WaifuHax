@@ -32,7 +32,7 @@ public class ClientPlayNetworkHandlerMixin
     @Inject(method = "onPlayerRemove", at = @At("HEAD"))
     public void onPlayerDisconnect(PlayerRemoveS2CPacket packet, CallbackInfo ci)
     {
-        if(MinecraftClient.getInstance().player == null) return;
+        if(MinecraftClient.getInstance().player == null || MinecraftClient.getInstance().player.age < 30) return;
         if(!packet.profileIds().isEmpty())
         {
             PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
@@ -48,7 +48,7 @@ public class ClientPlayNetworkHandlerMixin
     @Inject(method = "onPlayerList", at = @At("HEAD"))
     public void onPlayerLogin(PlayerListS2CPacket packet, CallbackInfo ci)
     {
-        if(MinecraftClient.getInstance().player == null) return;
+        if(MinecraftClient.getInstance().player == null || MinecraftClient.getInstance().player.age < 30) return;
         if(packet.getActions().contains(PlayerListS2CPacket.Action.ADD_PLAYER) && !packet.getEntries().isEmpty())
         {
             if(previous_in != packet.getEntries().get(0).profile().getName() && packet.getEntries().get(0).profile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
