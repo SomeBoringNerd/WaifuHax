@@ -6,6 +6,7 @@ import lol.waifuware.Events.OnTickEvent;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
+import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Util.ChatUtil;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
@@ -24,17 +25,41 @@ public class Announcer extends AbstractModule
     private final List<PlayerEntity> entityList = new ArrayList<>();
     private final List<PlayerEntity> oldPlayerList = new ArrayList<>();
 
+    public BooleanSetting RenderDistance = new BooleanSetting("Player render", true, "Send you a message when a player enter your render distance", "-pr");
+    public BooleanSetting Welcomer = new BooleanSetting("Welcomer", true, "send a message in chat when a player join or leave", "-w");
+
     public Announcer() {
         super();
+        addSettings(RenderDistance, Welcomer);
         Create();
         isWorkInProgress = true;
     }
 
 
     @EventHandler
-    private void onTick(OnTickEvent e) {
+    private void OnPlayerConnect(OnPlayerConnect e)
+    {
+        if(!Welcomer.getEnabled()) return;
+        if(MinecraftClient.getInstance().getNetworkHandler() == null) return;
+        MinecraftClient.getInstance().getNetworkHandler().sendChatMessage("Welcome, " + e.getPlayer());
+    }
+
+    @EventHandler
+    private void OnPlayerLeave(OnPlayerDisconnect e)
+    {
+        if(!Welcomer.getEnabled()) return;
+        if(MinecraftClient.getInstance().getNetworkHandler() == null) return;
+        MinecraftClient.getInstance().getNetworkHandler().sendChatMessage("Goodbye, " + e.getPlayer());
+    }
+
+    @EventHandler
+    private void onTick(OnTickEvent e)
+    {
         if (MinecraftClient.getInstance().world == null || MinecraftClient.getInstance().player == null)
             return;
+
+
+        if(!RenderDistance.getEnabled()) return;
 
         entityList.clear();
 

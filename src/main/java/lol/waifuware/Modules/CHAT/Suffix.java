@@ -52,6 +52,8 @@ public class Suffix extends AbstractModule
             prefix = event.getMessage() + fancy(" ➣ WaifuHax V2");
         } else if (message.getIndex() == 1) {
             prefix = event.getMessage() + " ➣ " + fancy(Pronoun.self_pronoun);
+        }else{
+            prefix = event.getMessage();
         }
 
         event.setMessage(AntiAntiSpam.getEnabled() ? prefix + " " + emoji[rng] : prefix);

@@ -27,18 +27,35 @@ public class ClientPlayNetworkHandlerMixin
 {
     @Shadow @Final private Map<UUID, PlayerListEntry> playerListEntries;
     String previous_out = "";
+
     String previous_in = "";
     @Inject(method = "onPlayerRemove", at = @At("HEAD"))
     public void onPlayerDisconnect(PlayerRemoveS2CPacket packet, CallbackInfo ci)
     {
-        previous_in = "";
+        if(MinecraftClient.getInstance().player == null) return;
         if(!packet.profileIds().isEmpty())
         {
             PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
-            if(!Objects.equals(previous_out, playerListEntry.getProfile().getName()))
+            if(previous_out != playerListEntry.getProfile().getName() && playerListEntry.getProfile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
             {
                 previous_out = playerListEntry.getProfile().getName();
+                previous_in = "";
                 Waifuhax.EVENT_BUS.post(OnPlayerDisconnect.get(playerListEntry.getProfile().getName()));
+            }
+        }
+    }
+
+    @Inject(method = "onPlayerList", at = @At("HEAD"))
+    public void onPlayerLogin(PlayerListS2CPacket packet, CallbackInfo ci)
+    {
+        if(MinecraftClient.getInstance().player == null) return;
+        if(packet.getActions().contains(PlayerListS2CPacket.Action.ADD_PLAYER) && !packet.getEntries().isEmpty())
+        {
+            if(previous_in != packet.getEntries().get(0).profile().getName() && packet.getEntries().get(0).profile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
+            {
+                previous_in = packet.getEntries().get(0).profile().getName();
+                previous_out = "";
+                Waifuhax.EVENT_BUS.post(OnPlayerConnect.get(packet.getEntries().get(0).profile().getName()));
             }
         }
     }
