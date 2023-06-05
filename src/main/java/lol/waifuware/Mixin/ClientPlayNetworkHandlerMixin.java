@@ -36,6 +36,7 @@ public class ClientPlayNetworkHandlerMixin
         if(!packet.profileIds().isEmpty())
         {
             PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
+
             if(previous_out != playerListEntry.getProfile().getName() && playerListEntry.getProfile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
             {
                 previous_out = playerListEntry.getProfile().getName();

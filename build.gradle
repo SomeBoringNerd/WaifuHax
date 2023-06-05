@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id("com.github.sgtsilvio.gradle.proguard") version "0.5.0"
 }
 
 version = project.mod_version
@@ -32,71 +33,23 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
-processResources {
-    inputs.property "version", project.version
-    filteringCharset "UTF-8"
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
+task obfuscate(type: proguard.taskClass, dependsOn: [remapJar])
+{
+    addInput {
+        classpath.from(tasks.shadowJar)
     }
-}
-
-def targetJavaVersion = 17
-tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
+    addOutput {
+        archiveFile.set(base.libsDirectory.file("${project.name}-${project.version}-proguarded.jar"))
     }
-}
+    jdkModules.add("java.base")
+    mappingFile.set(base.libsDirectory.file("${project.name}-${project.version}-mapping.txt"))
 
-java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-    archivesBaseName = project.archives_base_name
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
-}
-
-shadowJar {
-    configurations = [ project.configurations.shadow ]
-
-    dependencies {
-        exclude {
-            it.moduleGroup == "org.slf4j"
-        }
-    }
-}
-
-processResources {
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "devbuild": project.findProperty("devbuild") ?: "",
-                "commit": project.findProperty("commit") ?: ""
-    }
-}
-
-jar {
-    from "LICENSE"
-
-    manifest {
-        attributes("Main-Class": "lol.waifuware.waifuhax.Waifuhax")
-    }
-}
-
-remapJar {
-    dependsOn shadowJar
-    inputFile.set(shadowJar.archiveFile)
-}
-
-javadoc {
-    options.addStringOption("Xdoclint:none", "-quiet")
-    options.encoding = "UTF-8"
+    rules.addAll(
+            "-dontoptimize",
+            "-dontwarn !lol.waifuware.**",
+            "-flattenpackagehierarchy",
+            "-keep class lol.waifuware.Waifuhax { public void onInitialize(); }",
+            "-keepattributes Signature,InnerClasses,*Annotation*"
+    )
 }
