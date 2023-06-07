@@ -7,6 +7,7 @@ import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.CATEGORY;
+import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
 import lol.waifuware.Settings.ModeSetting;
 import lol.waifuware.Util.ChatUtil;
@@ -29,7 +30,8 @@ public class ArrayList extends AbstractModule
 {
 
     public ModeSetting sortMode = new ModeSetting("Sort mode", "alphabet", "how the arraylist is sorted", "srt", "size", "alphabet");
-    
+
+    public BooleanSetting reversed = new BooleanSetting("Reverse sort", false, "reverse the sorting mode choosen", "-rs");
     public IntSetting xPos = new IntSetting("X pos", 0, 1920, 4, 1, "X position of arraylist", "-x");
     public IntSetting yPos = new IntSetting("Y pos", 0, 1080, 4, 1, "Y position of arraylist", "-y");
 
@@ -39,7 +41,7 @@ public class ArrayList extends AbstractModule
         xPos.setVisible(false);
         yPos.setVisible(false);
 
-        addSettings(sortMode, xPos, yPos);
+        addSettings(sortMode, xPos, yPos, reversed);
         instance = this;
         Create();
 
@@ -100,11 +102,18 @@ public class ArrayList extends AbstractModule
     {
         List<AbstractModule> enabled = getEnabledModules();
 
-        if(sortMode.getIndex() == 0)
-            enabled.sort(comparingInt(m -> (int) MinecraftClient.getInstance().textRenderer.getWidth(((AbstractModule)m).getName())).reversed());
-        else
-            enabled.sort(Comparator.comparing(AbstractModule::getName));
-
+        if(!reversed.getEnabled()) {
+            if (sortMode.getIndex() == 0)
+                enabled.sort(comparingInt(m -> (int) MinecraftClient.getInstance().textRenderer.getWidth(((AbstractModule) m).getDisplayName())).reversed());
+            else
+                enabled.sort(Comparator.comparing(AbstractModule::getName));
+        }else
+        {
+            if (sortMode.getIndex() == 0)
+                enabled.sort(comparingInt(m -> (int) MinecraftClient.getInstance().textRenderer.getWidth(((AbstractModule) m).getDisplayName())));
+            else
+                enabled.sort(Comparator.comparing(AbstractModule::getName).reversed());
+        }
         return enabled;
     }
 
