@@ -31,6 +31,12 @@ public class Pride extends AbstractModule
             Toggle(true);
         }
     }
+
+    @Override
+    public String getDisplayName()
+    {
+        return name + " §c[§4" + Flag.getMode() + "§c]";
+    }
     
     @EventHandler
     void OnRenderEvent(OnRenderScreen event)

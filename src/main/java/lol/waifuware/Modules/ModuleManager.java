@@ -44,17 +44,17 @@ public class ModuleManager
 
         modules.add(new Announcer());
         modules.add(new AntiHunger());
-        modules.add(new ArrayList());
+        modules.add(new ModuleList());
         modules.add(new AutoTotem());
         modules.add(new AutoFrameDupe());
         modules.add(new BoatFly());
-        //modules.add(new ChestOpenExploit());
         modules.add(new ClickGUI());
         modules.add(new Coordinates());
         modules.add(new FullBright());
         modules.add(new GameModeDetector());
         modules.add(new GlobalSettings());
         modules.add(new Highlight());
+        modules.add(new HUDEditor());
         modules.add(new Pride());
         modules.add(new PronounDB());
         modules.add(new Sprint());
@@ -113,7 +113,8 @@ public class ModuleManager
 
     public static void onKeyPressed(int keycode)
     {
-        if(!bind) {
+        if(!bind)
+        {
             for (AbstractModule mod : modules)
             {
                 if (mod.key == keycode)
@@ -121,14 +122,15 @@ public class ModuleManager
                     mod.Toggle();
                 }
             }
-        }else{
+        }
+        else
+        {
             if(keycode != 335 && keycode != 257)
             {
                 toBind.key = keycode;
                 ChatUtil.SendMessage(toBind.name + " was bound to §4" + GLFW.glfwGetKeyName(keycode, GLFW.glfwGetKeyScancode(keycode)));
                 bind = false;
                 toBind.Save();
-
             }
         }
     }

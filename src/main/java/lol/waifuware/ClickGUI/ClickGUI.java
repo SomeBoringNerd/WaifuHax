@@ -1,6 +1,7 @@
 package lol.waifuware.ClickGUI;
 
 import lol.waifuware.Modules.CATEGORY;
+import lol.waifuware.Modules.GUI.ModuleList;
 import lol.waifuware.Modules.GUI.Watermark;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Waifuhax;
@@ -52,35 +53,14 @@ public class ClickGUI extends Screen
     }
 
     @Override
-    protected void init()
-    {
-        super.init();
-
-        // sometime the arraylist is not movable unless I use this hack (or toggle it on and off manually)
-        lol.waifuware.Modules.GUI.ArrayList.getInstance().Toggle();
-        lol.waifuware.Modules.GUI.ArrayList.getInstance().Toggle();
-
-        Watermark.getInstance().Toggle();
-        Watermark.getInstance().Toggle();
-    }
-
-    @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
+        DrawableHelper.fill(matrices, 0, 0, MinecraftClient.getInstance().getWindow().getScaledWidth(), MinecraftClient.getInstance().getWindow().getScaledHeight(), new Color(0, 0, 0, 200).getRGB());
+
         for(CategoryPanel panel : panels)
         {
             panel.render(matrices, mouseX, mouseY, delta);
             panel.UpdatePosition(mouseX, mouseY);
-        }
-
-        if(lol.waifuware.Modules.GUI.ArrayList.isEnabled())
-        {
-            lol.waifuware.Modules.GUI.ArrayList.getInstance().UpdatePosition(mouseX, mouseY);
-        }
-
-        if(Watermark.isEnabled())
-        {
-            Watermark.getInstance().UpdatePosition(mouseX, mouseY);
         }
 
         descPan.render(matrices, mouseX, mouseY, delta);
@@ -96,16 +76,6 @@ public class ClickGUI extends Screen
 
         descPan.mouseClicked(mouseX, mouseY, button);
 
-        if(lol.waifuware.Modules.GUI.ArrayList.isEnabled())
-        {
-            lol.waifuware.Modules.GUI.ArrayList.getInstance().mouseClicked(mouseX, mouseY, button);
-        }
-
-        if(Watermark.isEnabled())
-        {
-            Watermark.getInstance().mouseClicked(mouseX, mouseY, button);
-        }
-
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -115,16 +85,6 @@ public class ClickGUI extends Screen
         for(CategoryPanel panel : panels)
         {
             panel.mouseRelease(mouseX, mouseY, button);
-        }
-
-        if(lol.waifuware.Modules.GUI.ArrayList.isEnabled())
-        {
-            lol.waifuware.Modules.GUI.ArrayList.getInstance().mouseRelease(mouseX, mouseY, button);
-        }
-
-        if(Watermark.isEnabled())
-        {
-            Watermark.getInstance().mouseRelease(mouseX, mouseY, button);
         }
 
         descPan.mouseRelease(mouseX, mouseY, button);

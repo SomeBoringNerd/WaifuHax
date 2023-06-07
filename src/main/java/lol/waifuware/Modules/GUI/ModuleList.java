@@ -1,6 +1,5 @@
 package lol.waifuware.Modules.GUI;
 
-import lol.waifuware.ClickGUI.ModuleButton;
 import lol.waifuware.Events.OnRenderScreen;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
@@ -10,23 +9,18 @@ import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
 import lol.waifuware.Settings.ModeSetting;
-import lol.waifuware.Util.ChatUtil;
-import lol.waifuware.Waifuhax;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 
-import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.Comparator.comparingInt;
 
 @Module(name = "ArrayList", key = 0, cat = CATEGORY.GUI)
-public class ArrayList extends AbstractModule
+public class ModuleList extends AbstractModule
 {
 
     public ModeSetting sortMode = new ModeSetting("Sort mode", "alphabet", "how the arraylist is sorted", "srt", "size", "alphabet");
@@ -35,7 +29,7 @@ public class ArrayList extends AbstractModule
     public IntSetting xPos = new IntSetting("X pos", 0, 1920, 4, 1, "X position of arraylist", "-x");
     public IntSetting yPos = new IntSetting("Y pos", 0, 1080, 4, 1, "Y position of arraylist", "-y");
 
-    public ArrayList() {
+    public ModuleList() {
         super();
 
         xPos.setVisible(false);
@@ -48,9 +42,9 @@ public class ArrayList extends AbstractModule
         desc[0] = "Show toggled modules";
     }
 
-    private static ArrayList instance;
+    private static ModuleList instance;
 
-    public static ArrayList getInstance()
+    public static ModuleList getInstance()
     {
         return instance;
     }

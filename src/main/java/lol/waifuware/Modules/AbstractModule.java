@@ -103,7 +103,7 @@ public abstract class AbstractModule implements IModule
     {
         isEnabled = Forced;
 
-        if(GlobalSettings.ToggleMessage.getEnabled()) {
+        if(GlobalSettings.ToggleMessage.getEnabled() && !isFake) {
             ChatUtil.SendMessage("Module " + name + " was toggled " + (isEnabled ? "§aON§r" : "§4OFF§r"));
         }
         if(isEnabled)

@@ -1,5 +1,6 @@
 package lol.waifuware.Mixin;
 
+import lol.waifuware.Screens.HUDEditor;
 import lol.waifuware.Screens.NewTitleScreen;
 import lol.waifuware.Waifuhax;
 import lol.waifuware.ClickGUI.ClickGUI;
@@ -24,6 +25,7 @@ public class TitleScreenMixin {
     private void init(CallbackInfo info)
     {
         new ClickGUI();
+        new HUDEditor();
         MinecraftClient.getInstance().setScreen(new NewTitleScreen());
     }
 
