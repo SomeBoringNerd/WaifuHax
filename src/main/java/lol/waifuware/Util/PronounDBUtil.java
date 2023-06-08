@@ -1,6 +1,5 @@
 package lol.waifuware.Util;
 
-import lol.waifuware.Waifuhax;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,7 +86,7 @@ public class PronounDBUtil
                 }else {
                     pronounDBEndpoint = pronounDBEndpoint.replace("%UUID%", uid);
                     URL url = new URL(pronounDBEndpoint);
-                    Waifuhax.Log(pronounDBEndpoint);
+                    ChatUtil.Log(pronounDBEndpoint);
 
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");

@@ -8,12 +8,9 @@ import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
 import lol.waifuware.Modules.GUI.ClickGUI;
-import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
-import lol.waifuware.Settings.ModeSetting;
 import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
-import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -26,7 +23,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class CategoryPanel
@@ -195,7 +191,7 @@ public class CategoryPanel
         }
         catch (IOException e)
         {
-            Waifuhax.Log("A panel couldn't be saved : " + e.toString());
+            ChatUtil.Log("A panel couldn't be saved : " + e.toString());
         }
     }
     public void Create()
@@ -227,7 +223,7 @@ public class CategoryPanel
                 }catch (IOException ignored){}
             }
             catch (IOException e){
-                Waifuhax.Log("A panel couldn't be created : " + e.toString());
+                ChatUtil.Log("A panel couldn't be created : " + e.toString());
             }
         }
         else
@@ -240,7 +236,7 @@ public class CategoryPanel
     {
         try
         {
-            Waifuhax.Log("Load " + category.name);
+            ChatUtil.Log("Load " + category.name);
             JsonParser jsonP = new JsonParser();
 
             JsonObject json = (JsonObject)jsonP.parse(new FileReader("WaifuHax/cat/" + category.name + ".WaifuConfig"));
@@ -261,7 +257,7 @@ public class CategoryPanel
         }
         catch (IOException e)
         {
-            Waifuhax.Log("A panel couldn't be loaded : " + e.toString());
+            ChatUtil.Log("A panel couldn't be loaded : " + e.toString());
         }
     }
 }

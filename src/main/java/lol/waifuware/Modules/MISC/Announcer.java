@@ -30,8 +30,11 @@ public class Announcer extends AbstractModule
 
     public Announcer() {
         super();
+        ChatUtil.Log("Fuck");
         addSettings(RenderDistance, Welcomer);
+        ChatUtil.Log("This");
         Create();
+        ChatUtil.Log("Shit");
         isWorkInProgress = true;
     }
 

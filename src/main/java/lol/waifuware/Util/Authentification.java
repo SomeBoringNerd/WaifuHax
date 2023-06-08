@@ -1,11 +1,9 @@
 package lol.waifuware.Util;
 
-import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -14,8 +12,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +46,7 @@ public class Authentification
                         responseBuilder.append(line);
                     }
                     String responseString = responseBuilder.toString();
-                    Waifuhax.Log(responseString);
+                    ChatUtil.Log(responseString);
 
                     // Process the response and extract the desired information.
                     // For example, if the response is in JSON format, you can use a JSON library to parse it.
@@ -84,7 +80,7 @@ public class Authentification
                         responseBuilder.append(line);
                     }
                     String responseString = responseBuilder.toString();
-                    Waifuhax.Log(responseString);
+                    ChatUtil.Log(responseString);
 
                     // Process the response and extract the desired information.
                     // For example, if the response is in JSON format, you can use a JSON library to parse it.

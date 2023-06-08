@@ -17,7 +17,6 @@ import lol.waifuware.Modules.MOVEMENT.VanillaFly;
 import lol.waifuware.Modules.RENDER.FullBright;
 import lol.waifuware.Modules.RENDER.Xray;
 import lol.waifuware.Util.ChatUtil;
-import lol.waifuware.Waifuhax;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -105,7 +104,7 @@ public class ModuleManager
 
             if(!file.exists())
             {
-                Waifuhax.Log("Creating folder " + cat.name);
+                ChatUtil.Log("Creating folder " + cat.name);
                 file.mkdir();
             }
         }

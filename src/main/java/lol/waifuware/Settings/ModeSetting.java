@@ -2,12 +2,9 @@ package lol.waifuware.Settings;
 
 import lol.waifuware.Util.ChatUtil;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import static lol.waifuware.Waifuhax.Log;
 
 public class ModeSetting extends Setting
 {

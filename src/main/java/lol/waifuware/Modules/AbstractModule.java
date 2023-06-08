@@ -47,7 +47,7 @@ public abstract class AbstractModule implements IModule
         key = module.key();
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
-        Waifuhax.LOGGER.info("module " + name + " was loaded");
+        ChatUtil.LOGGER.info("module " + name + " was loaded");
         
         path = "WaifuHax/modules/" + cat.name + "/" + name + ".WaifuConfig";
     }
@@ -63,7 +63,7 @@ public abstract class AbstractModule implements IModule
         key = module.key();
 
         desc[0] = "[NO DESCRIPTION PROVIDED]";
-        Waifuhax.LOGGER.info("module " + name + " was loaded");
+        ChatUtil.LOGGER.info("module " + name + " was loaded");
 
         path = "WaifuHax/modules/" + cat.name + "/" + name + ".WaifuConfig";
     }
@@ -180,7 +180,7 @@ public abstract class AbstractModule implements IModule
             }
             catch (IOException e)
             {
-                Waifuhax.Log("A module couldn't be loaded : " + e.toString());
+                ChatUtil.Log("A module couldn't be loaded : " + e.toString());
             }
         }
         else
@@ -230,7 +230,7 @@ public abstract class AbstractModule implements IModule
             }
             catch (IOException e)
             {
-                Waifuhax.Log("A module couldn't be loaded : " + e.toString());
+                ChatUtil.Log("A module couldn't be loaded : " + e.toString());
             }
         }else{
             Load();
@@ -285,7 +285,7 @@ public abstract class AbstractModule implements IModule
             }
         }catch (IOException e)
         {
-            Waifuhax.Log("A module couldn't be loaded : " + e.toString());
+            ChatUtil.Log("A module couldn't be loaded : " + e.toString());
         }
     }
 }
