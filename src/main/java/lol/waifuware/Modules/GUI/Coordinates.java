@@ -1,10 +1,13 @@
 package lol.waifuware.Modules.GUI;
 
 import lol.waifuware.Events.OnRenderScreen;
+import lol.waifuware.Events.OnScreenshotSave;
+import lol.waifuware.Events.OnScreenshotTake;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.BooleanSetting;
+import lol.waifuware.Util.ChatUtil;
 import lol.waifuware.Util.GlobalUtil;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
@@ -13,6 +16,7 @@ import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.option.ChatVisibility;
+import net.minecraft.client.util.ScreenshotRecorder;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.util.annotation.Debug;
 import net.minecraft.util.math.Direction;
@@ -29,7 +33,7 @@ public class Coordinates extends AbstractModule
     {
         addSetting(FakeCoordinates);
         Create();
-
+        FakeCoordinates.setVisible(false);
         desc[0] = "Show your coordinates along with the";
         desc[1] = "direction you are looking at";
     }
@@ -42,14 +46,15 @@ public class Coordinates extends AbstractModule
         int high = 9999999;
         int result = r.nextInt(high-low) + low;
 
-        int x = (FakeCoordinates.getEnabled()) ? result : MinecraftClient.getInstance().player.getBlockX();
+
 
         r = new Random();
         low = -2364367;
         high = 346931;
         result = r.nextInt(high-low) + low;
 
-        int z = (FakeCoordinates.getEnabled()) ? result : MinecraftClient.getInstance().player.getBlockZ();
+        int x = (fakeCoords) ? result : MinecraftClient.getInstance().player.getBlockX();
+        int z = (fakeCoords) ? result : MinecraftClient.getInstance().player.getBlockZ();
         int y = MinecraftClient.getInstance().player.getBlockY();
 
         if(MinecraftClient.getInstance().cameraEntity != null)
@@ -66,6 +71,20 @@ public class Coordinates extends AbstractModule
                         MinecraftClient.getInstance().getWindow().getScaledHeight() - 27,0xFFFFFF);
             }
         }
+    }
+    boolean fakeCoords = false;
+    @EventHandler
+    public void OnScreenshot(OnScreenshotTake e)
+    {
+        if(FakeCoordinates.getEnabled())
+        {
+            fakeCoords = true;
+        }
+    }
+    @EventHandler
+    public void OnScreenshot(OnScreenshotSave e)
+    {
+        fakeCoords = false;
     }
 
     private String getFormatedDirection(Direction direction)

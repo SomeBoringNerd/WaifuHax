@@ -72,7 +72,8 @@ public class AutoFrameDupe extends AbstractModule
                 current++;
                 tick = 0;
             }else{
-                getNearbyItemFrames();
+                Toggle();
+                Toggle();
             }
         }
 

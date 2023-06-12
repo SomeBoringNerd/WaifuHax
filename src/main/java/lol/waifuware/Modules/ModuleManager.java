@@ -8,6 +8,7 @@ import lol.waifuware.Modules.EXPLOITS.AntiHunger;
 import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.*;
 import lol.waifuware.Modules.MISC.Announcer;
+import lol.waifuware.Modules.MISC.AntiAim;
 import lol.waifuware.Modules.MISC.GlobalSettings;
 import lol.waifuware.Modules.MISC.PronounDB;
 import lol.waifuware.Modules.MOVEMENT.BoatFly;
@@ -42,6 +43,7 @@ public class ModuleManager
         //@todo : auto-sort this shit
 
         modules.add(new Announcer());
+        modules.add(new AntiAim());
         modules.add(new AntiHunger());
         modules.add(new ModuleList());
         modules.add(new AutoTotem());

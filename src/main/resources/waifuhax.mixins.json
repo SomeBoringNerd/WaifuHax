@@ -6,15 +6,18 @@
   "mixins": [
   ],
   "client": [
-    "TitleScreenMixin",
-    "ClientPlayNetworkHandlerMixin",
-    "MinecraftClientMixin",
-    "PlayerEntityMixin",
-    "InGameHudMixin",
+    "BlockRenderManagerMixin",
     "ChatHudMixin",
     "ClientConnexionMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "GameRendererMixin",
+    "InGameHudMixin",
     "KeyBoardMixin",
-    "LightMapRenderer"
+    "LightMapRenderer",
+    "MinecraftClientMixin",
+    "PlayerEntityMixin",
+    "ScreenshotRecorderMixin",
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

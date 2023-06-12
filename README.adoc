@@ -6,7 +6,7 @@ open a terminal and use type `./gradlew build`
 
 === How to use
 
-ClickGUI's default key is right shift, if it dont work use the command
+ClickGUI's default key is right shift, if it don't work use the command
 `-clickgui set_key` and then press right shift
 
 = Modules and their settings
