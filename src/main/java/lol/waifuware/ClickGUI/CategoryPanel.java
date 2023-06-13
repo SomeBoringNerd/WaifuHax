@@ -5,9 +5,9 @@ import com.google.gson.JsonParser;
 import lol.waifuware.ClickGUI.SettingPanel.SettingPanelBase;
 import lol.waifuware.ClickGUI.SettingPanel.SliderPanel;
 import lol.waifuware.Modules.CATEGORY;
+import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.ModuleManager;
-import lol.waifuware.Modules.GUI.ClickGUI;
 import lol.waifuware.Settings.IntSetting;
 import lol.waifuware.Settings.Setting;
 import lol.waifuware.Util.ChatUtil;
@@ -98,8 +98,9 @@ public class CategoryPanel
 
     public void mouseClicked(double mouseX, double mouseY, int button)
     {
-        if(isHovered(mouseX, mouseY) && button == 0)
+        if(isHovered(mouseX, mouseY) && button == 0 && (lol.waifuware.ClickGUI.ClickGUI.instance.SelectedPanel == this || lol.waifuware.ClickGUI.ClickGUI.instance.SelectedPanel == null))
         {
+            lol.waifuware.ClickGUI.ClickGUI.instance.SelectedPanel = this;
             isPressed = true;
             dragX = (int) (mouseX - xSet.getValueInt());
             dragY = (int) (mouseY - ySet.getValueInt());
@@ -118,8 +119,9 @@ public class CategoryPanel
     public void mouseRelease(double mouseX, double mouseY, int button)
     {
         if(button == 0 && isPressed) isPressed = false;
-
-        for(ModuleButton buttons : modList){
+        lol.waifuware.ClickGUI.ClickGUI.instance.SelectedPanel = null;
+        for(ModuleButton buttons : modList)
+        {
             buttons.mouseRelease(mouseX, mouseY, button);
         }
 

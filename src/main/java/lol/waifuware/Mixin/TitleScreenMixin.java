@@ -28,14 +28,4 @@ public class TitleScreenMixin {
         new HUDEditor();
         MinecraftClient.getInstance().setScreen(new NewTitleScreen());
     }
-
-    @Inject(method = "render", at = @At("TAIL"))
-    private void onRender(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
-        Render(matrices);
-    }
-
-    private void Render(MatrixStack matrices)
-    {
-
-    }
 }

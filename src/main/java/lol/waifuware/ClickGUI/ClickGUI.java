@@ -19,6 +19,8 @@ public class ClickGUI extends Screen
 {
     public static ClickGUI instance;
     public DescriptionPanel descPan;
+
+    public CategoryPanel SelectedPanel;
     private List<CategoryPanel> panels;
 
     public ClickGUI()

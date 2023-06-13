@@ -1,5 +1,6 @@
 package lol.waifuware.Modules.GUI;
 
+import lol.waifuware.ClickGUI.CategoryPanel;
 import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.AbstractModule;
 import lol.waifuware.Modules.Interfaces.Module;
@@ -14,6 +15,8 @@ import java.util.Objects;
 public class ClickGUI extends AbstractModule
 {
     private static ClickGUI instance;
+
+
     public static ClickGUI getInstance()
     {
         return instance;
