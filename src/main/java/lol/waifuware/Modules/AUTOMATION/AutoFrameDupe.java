@@ -118,8 +118,14 @@ public class AutoFrameDupe extends AbstractModule
                 }
 
             }
-
-            ChatUtil.SendMessage(("Found " + i + " item frames"));
+            if(i == 0)
+            {
+                ChatUtil.SendMessage("Couldn't find item frames in range");
+            }
+            else
+            {
+                ChatUtil.SendMessage(("Found " + i + " item frames"));
+            }
         }
     }
 
