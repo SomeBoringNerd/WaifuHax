@@ -57,16 +57,13 @@ public class Coordinates extends AbstractModule
         int z = (fakeCoords) ? result : MinecraftClient.getInstance().player.getBlockZ();
         int y = MinecraftClient.getInstance().player.getBlockY();
 
-        if(MinecraftClient.getInstance().cameraEntity != null)
-        {
+        if (MinecraftClient.getInstance().cameraEntity != null) {
             Direction direction = MinecraftClient.getInstance().cameraEntity.getHorizontalFacing();
 
-            if(!(MinecraftClient.getInstance().currentScreen instanceof ChatScreen))
-            {
+            if(!(MinecraftClient.getInstance().currentScreen instanceof ChatScreen)) {
                 MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5,
                         MinecraftClient.getInstance().getWindow().getScaledHeight() - 12,0xFFFFFF);
-            }else
-            {
+            } else {
                 MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), "§c[§7" + getFormatedDirection(direction) + "§c] §dX : " + x + " §f|§d Y : " + y + " §f|§d Z : " + z, 5,
                         MinecraftClient.getInstance().getWindow().getScaledHeight() - 27,0xFFFFFF);
             }
