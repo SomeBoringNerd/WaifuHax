@@ -79,10 +79,15 @@ public class AutoFrameDupe extends AbstractModule
 
         tick++;
     }
+    @Override
+    public String getDisplayName() {
+        return name + " §c[§r§4" + MaxFrame.getValueInt() + ", " + Hit.getValueInt() + ", " + (AutoPlace.getEnabled() ? "§2A" : "§4A") + "§c]";
+    }
+
 
     private void getNearbyItemFrames()
     {
-                                        // current setting system is dumb
+        frames = new ItemFrameEntity[8];
         if(AutoPlace.getEnabled())
         {
             PlayerEntity player = MinecraftClient.getInstance().player;
