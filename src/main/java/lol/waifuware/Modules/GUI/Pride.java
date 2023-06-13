@@ -13,7 +13,8 @@ import java.util.Date;
 @Module(name = "Pride", key = 0, cat = CATEGORY.GUI)
 public class Pride extends AbstractModule {
 
-    public ModeSetting Flag = new ModeSetting("Pride flag", "rainbow", "what prideflag to display", "pf", "rainbow", "bisexual", "trans", "lesbian");
+    public ModeSetting Flag = new ModeSetting("Pride flag", "rainbow", "what prideflag to display", "pf",
+            "rainbow", "bisexual", "lesbian", "straight", "pan-sexual", "trans", "non-binary", "poly");
 
     public Pride() {
         super();
@@ -62,6 +63,7 @@ public class Pride extends AbstractModule {
                 else if(index == 5) return 0x732982;
                 break;
             case 1:
+                // bisexual
                 if(index == 0) return 0xD60270;
                 else if(index == 1) return 0xD60270;
                 else if(index == 2) return 0x9B4F96;
@@ -70,6 +72,34 @@ public class Pride extends AbstractModule {
                 else if(index == 5) return 0x0038A8;
                 break;
             case 2:
+                // lesbian
+                if(index == 0) return 0xEF7627;
+                else if(index == 1) return 0xFF9A56;
+                else if(index == 2) return 0xFFFFFF;
+                else if(index == 3) return 0xD162A4;
+                else if(index == 4) return 0xB55690;
+                else if(index == 5) return 0xA30262;
+                break;
+            case 3:
+                // straight
+                if(index == 0) return 0xFFFFFF;
+                else if(index == 1) return 0x000000;
+                else if(index == 2) return 0xFFFFFF;
+                else if(index == 3) return 0x000000;
+                else if(index == 4) return 0xFFFFFF;
+                else if(index == 5) return 0x000000;
+                break;
+            case 4:
+                // pansexual
+                if(index == 0) return 0xFF218C;
+                else if(index == 1) return 0xFF218C;
+                else if(index == 2) return 0xFFD800;
+                else if(index == 3) return 0xFFD800;
+                else if(index == 4) return 0x21B1FF;
+                else if(index == 5) return 0x21B1FF;
+                break;
+            case 5:
+                // trans
                 if(index == 0) return 0x5BCEFA;
                 else if(index == 1) return 0xF5A9B8;
                 else if(index == 2) return 0xFFFFFF;
@@ -77,13 +107,23 @@ public class Pride extends AbstractModule {
                 else if(index == 4) return 0xF5A9B8;
                 else if(index == 5) return 0x5BCEFA;
                 break;
-            case 3:
-                if(index == 0) return 0xEF7627;
-                else if(index == 1) return 0xFF9A56;
+            case 6:
+                // non binary
+                if(index == 0) return 0x000000;
+                else if(index == 1) return 0xFCF434;
                 else if(index == 2) return 0xFFFFFF;
-                else if(index == 3) return 0xD162A4;
-                else if(index == 4)  return 0xB55690;
-                else if(index == 5) return 0xA30262;
+                else if(index == 3) return 0x9C59D1;
+                else if(index == 4) return 0x2C2C2C;
+                else if(index == 5) return 0x000000;
+                break;
+            case 7:
+                // poly
+                if(index == 0) return 0x0000FF;
+                else if(index == 1) return 0x0000FF;
+                else if(index == 2) return 0xFF0000;
+                else if(index == 3) return 0xFF0000;
+                else if(index == 4) return 0x000000;
+                else if(index == 5) return 0x000000;
                 break;
         }
         return 0x000000;
