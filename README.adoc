@@ -33,3 +33,5 @@ Pr3roxDLC for showing me how to use @interfaces
 Tex06 for the good "medicinal plants" that I smoked while working on this.
 
 Nodus client for the general aesthetic, Earthhack for some ideas.
+
+TaxMachine for obfuscation along with isma67 for support
