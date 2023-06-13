@@ -15,3 +15,8 @@ jobs:
           distribution: 'temurin'
       - name: Build with gradle
         run: ./gradlew build
+      - run: mkdir staging && cp build/libs/waifuhax-2.0.jar staging
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: staging
