@@ -24,6 +24,5 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: false
           title: "Development Build"
-          files: |
-            LICENSE.txt
+          files:
             staging/waifuhax-2.0.jar
