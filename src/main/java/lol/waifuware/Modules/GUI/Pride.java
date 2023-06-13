@@ -152,9 +152,11 @@ public class Pride extends AbstractModule
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int month = cal.get(Calendar.MONTH);
-        if(month == Calendar.JUNE)
+        if(MinecraftClient.getInstance().player.getGameProfile().getId().toString() != "64a7dadab6d4433d9b803c96f91ed370")
         {
-            Toggle(true);
+            if (month == Calendar.JUNE) {
+                Toggle(true);
+            }
         }
     }
 }

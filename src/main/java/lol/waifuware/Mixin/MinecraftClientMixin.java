@@ -25,8 +25,18 @@ public class MinecraftClientMixin
         int month = cal.get(Calendar.MONTH);
         if(month == Calendar.JUNE)
         {
-            return "WaifuHax for Minecraft 1.19.4 wish you a happy pride month";
-        }else{
+            if(MinecraftClient.getInstance().player != null) {
+                if (MinecraftClient.getInstance().player.getGameProfile().getId().toString() != "64a7dadab6d4433d9b803c96f91ed370") {
+                    return "WaifuHax for Minecraft 1.19.4 wish you a happy pride month";
+                } else {
+                    return "WaifuHax for Minecraft 1.19.4";
+                }
+            } else {
+                return "WaifuHax for Minecraft 1.19.4";
+            }
+        }
+        else
+        {
             return "WaifuHax for Minecraft 1.19.4";
         }
 
