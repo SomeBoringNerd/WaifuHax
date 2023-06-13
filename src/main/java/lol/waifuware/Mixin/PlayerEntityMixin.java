@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,8 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin
+public abstract class PlayerEntityMixin
 {
+
+    @Shadow public abstract String getEntityName();
 
     // imma be honest boss, i'm going too far for that one joke
     boolean once = false;
@@ -32,10 +35,16 @@ public class PlayerEntityMixin
     {
         if(!once && MinecraftClient.getInstance().player != null)
         {
-            Pronoun.self_pronoun = PronounDBUtil.callPronounDBApi(MinecraftClient.getInstance().player.getEntityName());
-            once = true;
+            if(getEntityName() == MinecraftClient.getInstance().player.getEntityName()) {
+                Pronoun.self_pronoun = PronounDBUtil.callPronounDBApi(MinecraftClient.getInstance().player.getEntityName());
+                once = true;
+            }else{
+                once = false;
+            }
         }
-
-        Waifuhax.EVENT_BUS.post(OnTickEvent.get());
+        if(getEntityName() == MinecraftClient.getInstance().player.getEntityName())
+        {
+            Waifuhax.EVENT_BUS.post(OnTickEvent.get());
+        }
     }
 }

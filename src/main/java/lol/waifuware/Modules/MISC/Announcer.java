@@ -14,27 +14,25 @@ import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Module(name = "Announcer", key = 0, cat = CATEGORY.MISC)
 public class Announcer extends AbstractModule
 {
-    private final List<PlayerEntity> entityList = new ArrayList<>();
-    private final List<PlayerEntity> oldPlayerList = new ArrayList<>();
+
 
     public BooleanSetting RenderDistance = new BooleanSetting("Player render", true, "Send you a message when a player enter your render distance", "-pr");
     public BooleanSetting Welcomer = new BooleanSetting("Welcomer", true, "send a message in chat when a player join or leave", "-w");
-
-    public Announcer() {
+    String username;
+    public Announcer()
+    {
         super();
-        ChatUtil.Log("Fuck");
         addSettings(RenderDistance, Welcomer);
-        ChatUtil.Log("This");
         Create();
-        ChatUtil.Log("Shit");
         isWorkInProgress = true;
     }
 
@@ -55,53 +53,52 @@ public class Announcer extends AbstractModule
         MinecraftClient.getInstance().getNetworkHandler().sendChatMessage("Goodbye, " + e.getPlayer());
     }
 
+    private final Set<PlayerEntity> entityList = new HashSet<>();
+    private final Set<PlayerEntity> oldPlayerList = new HashSet<>();
+    private final Map<String, PlayerEntity> playerMap = new HashMap<>();
+
     @EventHandler
-    private void onTick(OnTickEvent e)
-    {
-        if (MinecraftClient.getInstance().world == null || MinecraftClient.getInstance().player == null)
+    private void onTick(OnTickEvent e) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.world == null || client.player == null)
             return;
 
+        if (username == null) {
+            username = client.player.getEntityName();
+        }
 
-        if(!RenderDistance.getEnabled()) return;
+        if (!RenderDistance.getEnabled())
+            return;
 
         entityList.clear();
 
-        for (Entity entity : MinecraftClient.getInstance().world.getEntities())
-        {
-            if(entity != null) {
-                EntityType<?> type = entity.getType();
-                if (type == EntityType.PLAYER) {
-                    PlayerEntity player = (PlayerEntity) entity;
-                    if (!Objects.equals(player.getEntityName(), MinecraftClient.getInstance().player.getEntityName())) {
-                        entityList.add(player);
-                    }
-                }
+        for (Entity entity : client.world.getEntities()) {
+            if (entity instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) entity;
+                entityList.add(player);
             }
         }
 
         for (PlayerEntity player : entityList) {
-            if (!oldPlayerList.contains(player)) {
+            if (!oldPlayerList.contains(player) && !Objects.equals(username, player.getEntityName())) {
                 ChatUtil.SendMessage("§8" + player.getEntityName() + " §7entered visual range");
             }
         }
 
-        for (PlayerEntity player : oldPlayerList)
-        {
-            if (!entityList.contains(player))
-            {
+        for (PlayerEntity player : oldPlayerList) {
+            if (!entityList.contains(player)) {
                 boolean found = false;
-                for(PlayerListEntry player2 : MinecraftClient.getInstance().getNetworkHandler().getPlayerList())
-                {
-                    if(player2.getProfile().getName().equals(player.getEntityName()))
-                    {
+                for (PlayerListEntry player2 : client.getNetworkHandler().getPlayerList()) {
+                    if (Objects.equals(player2.getProfile().getName(), player.getEntityName()) && !Objects.equals(username, player2.getProfile().getName())) {
                         ChatUtil.SendMessage("§8" + player.getEntityName() + " §7exited visual range");
                         found = true;
+                        break;
                     }
                 }
 
-                if(!found)
-                {
-                    ChatUtil.SendMessage("§8" + player.getEntityName() + " §7disconnected at §2X:" + (int)player.getPos().x + " Y:" + (int)player.getPos().y + " Z:" + (int)player.getPos().z);
+                if (!found) {
+                    Vec3d pos = player.getPos();
+                    ChatUtil.SendMessage("§8" + player.getEntityName() + " §7disconnected at §2X:" + (int) pos.x + " Y:" + (int) pos.y + " Z:" + (int) pos.z);
                 }
             }
         }
