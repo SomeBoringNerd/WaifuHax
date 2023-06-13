@@ -16,7 +16,14 @@ jobs:
       - name: Build with gradle
         run: ./gradlew build
       - run: mkdir staging && cp build/libs/waifuhax-2.0.jar staging
-      - uses: actions/upload-artifact@v3
+
+      - name: Release build
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          name: Package
-          path: staging
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Development Build"
+          files: |
+            LICENSE.txt
+            staging/waifuhax-2.0.jar
