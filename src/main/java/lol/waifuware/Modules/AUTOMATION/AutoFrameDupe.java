@@ -26,13 +26,13 @@ public class AutoFrameDupe extends AbstractModule
 {
     int state = 0;
 
-    public IntSetting MaxFrame = new IntSetting("MaxFrame", 1, 8, 4, 1, "Maximum of frames that will be targeted", "mf", NumberType.INT);
+    public IntSetting MaxFrame = new IntSetting("MaxFrame", 1, 24, 4, 1, "Maximum of frames that will be targeted", "mf", NumberType.INT);
 
     public IntSetting Hit = new IntSetting("Hit", 1, 20, 5, 1, "Number of hits per second", "h", NumberType.INT);
 
     public BooleanSetting AutoPlace = new BooleanSetting("AutoPlace", false, "Maximum of frames that can be hit per tick", "ap");
 
-    ItemFrameEntity[] frames = new ItemFrameEntity[8];
+    ItemFrameEntity[] frames = new ItemFrameEntity[MaxFrame.getValueInt()];
 
     public AutoFrameDupe()
     {
@@ -87,7 +87,7 @@ public class AutoFrameDupe extends AbstractModule
 
     private void getNearbyItemFrames()
     {
-        frames = new ItemFrameEntity[8];
+        frames = new ItemFrameEntity[MaxFrame.getValueInt()];
         if(AutoPlace.getEnabled())
         {
             PlayerEntity player = MinecraftClient.getInstance().player;
@@ -110,7 +110,7 @@ public class AutoFrameDupe extends AbstractModule
                 {
                     ItemFrameEntity entity = (ItemFrameEntity) e;
 
-                    if(entity.getHeldItemStack().getItem() == Items.AIR && i <= MaxFrame.getValueInt())
+                    if(entity.getHeldItemStack().getItem() == Items.AIR && i < MaxFrame.getValueInt())
                     {
                         frames[i] = entity;
                         i++;
@@ -121,6 +121,7 @@ public class AutoFrameDupe extends AbstractModule
             if(i == 0)
             {
                 ChatUtil.SendMessage("Couldn't find item frames in range");
+                Toggle(false);
             }
             else
             {

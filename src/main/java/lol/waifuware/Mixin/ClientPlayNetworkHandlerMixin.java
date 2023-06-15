@@ -36,6 +36,7 @@ public class ClientPlayNetworkHandlerMixin
         if(!packet.profileIds().isEmpty())
         {
             PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.profileIds().get(0));
+            if(playerListEntry == null) return;
             if(previous_out != playerListEntry.getProfile().getName() && playerListEntry.getProfile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
             {
                 previous_out = playerListEntry.getProfile().getName();
@@ -51,6 +52,9 @@ public class ClientPlayNetworkHandlerMixin
         if(MinecraftClient.getInstance().player == null || MinecraftClient.getInstance().player.age < 30) return;
         if(packet.getActions().contains(PlayerListS2CPacket.Action.ADD_PLAYER) && !packet.getEntries().isEmpty())
         {
+            PlayerListEntry playerListEntry = MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(packet.getEntries().get(0).profile().getId());
+
+            if(playerListEntry == null) return;
             if(previous_in != packet.getEntries().get(0).profile().getName() && packet.getEntries().get(0).profile().getName() != MinecraftClient.getInstance().player.getGameProfile().getName())
             {
                 previous_in = packet.getEntries().get(0).profile().getName();
