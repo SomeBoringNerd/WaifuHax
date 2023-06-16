@@ -79,7 +79,8 @@ public class Announcer extends AbstractModule
             }
         }
 
-        for (PlayerEntity player : entityList) {
+        for (PlayerEntity player : entityList)
+        {
             if (!oldPlayerList.contains(player) && !Objects.equals(username, player.getEntityName())) {
                 ChatUtil.SendMessage("§8" + player.getEntityName() + " §7entered visual range");
             }

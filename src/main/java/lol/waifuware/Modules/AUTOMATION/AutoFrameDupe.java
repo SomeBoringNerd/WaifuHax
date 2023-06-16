@@ -32,7 +32,7 @@ public class AutoFrameDupe extends AbstractModule
 
     public BooleanSetting AutoPlace = new BooleanSetting("AutoPlace", false, "Maximum of frames that can be hit per tick", "ap");
 
-    ItemFrameEntity[] frames = new ItemFrameEntity[MaxFrame.getValueInt()];
+    ItemFrameEntity[] frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
 
     public AutoFrameDupe()
     {
@@ -87,7 +87,7 @@ public class AutoFrameDupe extends AbstractModule
 
     private void getNearbyItemFrames()
     {
-        frames = new ItemFrameEntity[MaxFrame.getValueInt()];
+        frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
         if(AutoPlace.getEnabled())
         {
             PlayerEntity player = MinecraftClient.getInstance().player;
@@ -133,6 +133,6 @@ public class AutoFrameDupe extends AbstractModule
     @Override
     public void onDisable()
     {
-        frames = new ItemFrameEntity[8];
+        frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
     }
 }
