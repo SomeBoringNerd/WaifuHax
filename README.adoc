@@ -1,20 +1,39 @@
 image::https://img.shields.io/github/downloads/SomeBoringNerd/waifuhax/total[total download]
 image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax[contributors]
-
+'''
 = WaifuHax
 
-former private client, now public, free and open source
+former private client, now public, free and open source.
 
-=== How to compile
+== How to compile
+==== Windows
+[cols="~,~"]
+|===
 
-open a terminal and use type `./gradlew build`
+| Step 1
+| git clone it using github desktop or CLI
+
+| step 2
+| gradlew build
+|===
+
+==== MacOS / Linux
+[cols="~,~"]
+|===
+
+| Step 1
+| git clone https://github.com/SomeBoringNerd/WaifuHax
+
+| step 2
+| ./gradlew build
+|===
 
 === How to use
 
 ClickGUI's default key is right shift, if it don't work use the command
-`-clickgui set_key` and then press right shift
+`-set clickgui key` and then press right shift
 
-= Modules and their settings
+== Modules and their settings
 
 === Note
 to change a setting, type in chat `-${module's name} ${parameter you want to change} ${new value}`
@@ -23,20 +42,20 @@ or you can use the clickgui.
 
 To know what each setting do, type -${module's name}
 
-= Credits
+== Credits
 
-me for the code
+[cols="~,~"]
+|===
 
-google for the json stuff
+| SomeBoringNerd
+| Client base
 
-Meteordev for their event system
+| MeteorDev
+| Orbit system, fast and easy event system
 
-cyyynthia for creating PronounDB and supporting Minecraft
+| Cyyynthia
+| PronounDB API
 
-Pr3roxDLC for showing me how to use @interfaces
-
-Tex06 for the good "medicinal plants" that I smoked while working on this.
-
-Nodus client for the general aesthetic, Earthhack for some ideas.
-
-TaxMachine along with isma67 for support
+| Pr3roxDLC
+| Some tips to improve WaifuHax
+|===
