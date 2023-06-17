@@ -1,5 +1,5 @@
-image::https://img.shields.io/github/downloads/SomeBoringNerd/waifuhax/total
-image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax
+image::https://img.shields.io/github/downloads/SomeBoringNerd/waifuhax/total[total download]
+image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax[contributors]
 
 = WaifuHax
 
