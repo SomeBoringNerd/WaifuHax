@@ -7,14 +7,9 @@ import lol.waifuware.Modules.CATEGORY;
 import lol.waifuware.Modules.Interfaces.Module;
 import lol.waifuware.Settings.BooleanSetting;
 import lol.waifuware.Settings.IntSetting;
-import lol.waifuware.Util.Authentification;
 import lol.waifuware.Waifuhax;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 @Module(name = "Watermark", key = 0, cat = CATEGORY.GUI)
 public class Watermark extends AbstractModule
@@ -26,8 +21,6 @@ public class Watermark extends AbstractModule
     public IntSetting xPos = new IntSetting("X pos", 0, 1920, 4, 1, "X position of arraylist", "-x");
     public IntSetting yPos = new IntSetting("Y pos", 0, 1080, 4, 1, "Y position of arraylist", "-y");
 
-    String latestHash = "";
-
     public Watermark()
     {
         super();
@@ -35,13 +28,12 @@ public class Watermark extends AbstractModule
 
         xPos.setVisible(false);
         yPos.setVisible(false);
-
+        Toggle(true);
         Create();
         desc[0] = "Fancy text on your screen";
 
         offset = isEnabled() ? 10 : 0;
         instance = this;
-        latestHash = Authentification.getLatestCommitHash();
     }
 
     private static Watermark instance;
@@ -85,7 +77,7 @@ public class Watermark extends AbstractModule
     public void Render(OnRenderScreen event)
     {
         String name = MinecraftClient.getInstance().player.getEntityName();
-        String display = "§c[§5WaifuHax" + (latestHash.isEmpty() ? "" : " git-" + latestHash) + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : "");
+        String display = "§c[§5WaifuHax" + (Waifuhax.VERSION.isEmpty() ? "" : " git-" + Waifuhax.VERSION) + "§d" + (ShowUsername.getEnabled() ? (", " + name) : "") + "§4] " + (ShowPronoun.getEnabled() ? (Pronoun.self_pronoun != null ? "§4Pronouns : " + Pronoun.self_pronoun : "") + "§r" : "");
 
         width = MinecraftClient.getInstance().textRenderer.getWidth(display);
         MinecraftClient.getInstance().textRenderer.drawWithShadow(event.getMatrices(), display, xPos.getValueInt(), yPos.getValueInt(), 0xFFFFFF);

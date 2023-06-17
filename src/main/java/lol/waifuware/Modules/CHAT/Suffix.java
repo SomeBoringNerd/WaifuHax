@@ -35,7 +35,7 @@ public class Suffix extends AbstractModule
     public Suffix()
     {
         super();
-
+        Toggle(true);
         addSettings(message, type, AntiAntiSpam);
 
         Create();

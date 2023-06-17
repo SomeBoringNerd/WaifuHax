@@ -14,6 +14,21 @@ repositories {
     }
 }
 
+String getGitHash() {
+    // git hash
+    def command = Runtime.getRuntime().exec("git rev-parse --short HEAD")
+    def result = command.waitFor()
+    if (result != 0) {
+        throw new IOException("Command 'getGitHash()' exited with " + result)
+    }
+
+    String gitCommitHash = command.inputStream.text.trim()
+
+    println("getGitHash() : " + gitCommitHash)
+
+    return gitCommitHash
+}
+
 configurations {
     implementation.extendsFrom(library)
     shadow.extendsFrom(library)
@@ -36,11 +51,11 @@ dependencies {
 }
 
 processResources {
-    inputs.property "version", project.version
+    inputs.property "version", getGitHash()
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": getGitHash()
     }
 }
 

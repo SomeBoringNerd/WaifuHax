@@ -1,4 +1,9 @@
+image::https://img.shields.io/github/downloads/SomeBoringNerd/waifuhax/total
+image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax
+
 = WaifuHax
+
+former private client, now public, free and open source
 
 === How to compile
 
@@ -34,4 +39,4 @@ Tex06 for the good "medicinal plants" that I smoked while working on this.
 
 Nodus client for the general aesthetic, Earthhack for some ideas.
 
-TaxMachine for obfuscation along with isma67 for support
+TaxMachine along with isma67 for support

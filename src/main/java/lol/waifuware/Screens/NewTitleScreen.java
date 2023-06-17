@@ -1,28 +1,18 @@
 package lol.waifuware.Screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import lol.waifuware.Util.Authentification;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.CubeMapRenderer;
 import net.minecraft.client.gui.LogoDrawer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerWarningScreen;
-import net.minecraft.client.gui.screen.option.AccessibilityOptionsScreen;
-import net.minecraft.client.gui.screen.option.CreditsAndAttributionScreen;
-import net.minecraft.client.gui.screen.option.LanguageOptionsScreen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.PressableTextWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceFinder;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 
 import java.awt.*;
 import java.io.IOException;

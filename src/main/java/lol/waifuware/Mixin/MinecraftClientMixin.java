@@ -1,11 +1,9 @@
 package lol.waifuware.Mixin;
 
-import lol.waifuware.Util.Authentification;
 import lol.waifuware.Waifuhax;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -30,14 +28,5 @@ public class MinecraftClientMixin
         if(month == Calendar.JUNE) return "WaifuHax for Minecraft 1.19.4 wish you a happy pride month";
 
         return "WaifuHax for Minecraft 1.19.4";
-    }
-
-    @Inject(method = "<init>", at = @At("TAIL"))
-    void DRM(RunArgs args, CallbackInfo ci)
-    {
-        if(Authentification.Authentificate() != 200)
-        {
-            MinecraftClient.getInstance().scheduleStop();
-        }
     }
 }
