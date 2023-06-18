@@ -30,14 +30,15 @@ public class AutoFrameDupe extends AbstractModule
 
     public IntSetting Hit = new IntSetting("Hit", 1, 20, 5, 1, "Number of hits per second", "h", NumberType.INT);
 
-    public BooleanSetting AutoPlace = new BooleanSetting("AutoPlace", false, "Maximum of frames that can be hit per tick", "ap");
+    public BooleanSetting NoDelay = new BooleanSetting("NoDelay", false, "Interact with every frame instead of only one", "nd");
 
     ItemFrameEntity[] frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
+    boolean[] marked = new boolean[(int) MaxFrame.getMax()];
 
     public AutoFrameDupe()
     {
         super();
-        addSettings(MaxFrame, Hit, AutoPlace);
+        addSettings(MaxFrame, Hit, NoDelay);
         Create();
 
         desc[0] = "Automatically perform the frame";
@@ -58,22 +59,52 @@ public class AutoFrameDupe extends AbstractModule
             getNearbyItemFrames();
         }
         assert MinecraftClient.getInstance().player != null;
-        if(tick >= (int)(20 / Hit.getValueInt()))
+        if(NoDelay.getEnabled())
         {
-            if (frames[current] == null) current = 0;
-            else if(frames[current].isAlive())
-            {
-                if (frames[current].getHeldItemStack().getItem() != Items.AIR)
-                {
-                    MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.attack(frames[current], false));
-                } else {
-                    MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.interact(frames[current], false, Hand.MAIN_HAND));
+            int i = 0;
+            if(tick >= (int)(20 / Hit.getValueInt())) {
+                for (ItemFrameEntity entity : frames) {
+                    if (entity == null) return;
+                    else if (entity.isAlive()) {
+                        if (entity.getHeldItemStack().getItem() == Items.AIR)
+                        {
+                            MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.interact(entity, false, Hand.MAIN_HAND));
+                            marked[i] = false;
+                        }
+                        else if (entity.getHeldItemStack().getItem() != Items.AIR && !marked[i])
+                        {
+                            MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.attack(entity, false));
+                            marked[i] = true;
+                        }
+                        tick = 0;
+                        i++;
+                    }
                 }
-                current++;
-                tick = 0;
-            }else{
-                Toggle();
-                Toggle();
+            }
+        }
+        else
+        {
+            if(tick >= (int)(20 / Hit.getValueInt()))
+            {
+                if (frames[current] == null) current = 0;
+                else if(frames[current].isAlive())
+                {
+                    if (frames[current].getHeldItemStack().getItem() == Items.AIR)
+                    {
+                        MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.interact(frames[current], false, Hand.MAIN_HAND));
+                        marked[current] = false;
+                    }
+                    else if(!marked[current])
+                    {
+                        MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.attack(frames[current], false));
+                        marked[current] = true;
+                    }
+                    current++;
+                    tick = 0;
+                }else{
+                    Toggle();
+                    Toggle();
+                }
             }
         }
 
@@ -81,52 +112,37 @@ public class AutoFrameDupe extends AbstractModule
     }
     @Override
     public String getDisplayName() {
-        return name + " §c[§r§4" + MaxFrame.getValueInt() + ", " + Hit.getValueInt() + ", " + (AutoPlace.getEnabled() ? "§2A" : "§4A") + "§c]";
+        return name + " §c[§r§4" + MaxFrame.getValueInt() + ", " + Hit.getValueInt() + ", " + (NoDelay.getEnabled() ? "§2ND" : "§4ND") + "§c]";
     }
 
 
     private void getNearbyItemFrames()
     {
         frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
-        if(AutoPlace.getEnabled())
+        int i = 0;
+        for (Entity e : MinecraftClient.getInstance().world.getEntities())
         {
-            PlayerEntity player = MinecraftClient.getInstance().player;
-            if(player.getInventory().getMainHandStack() != Items.ITEM_FRAME.getDefaultStack())
+            if(e instanceof ItemFrameEntity && e.distanceTo(MinecraftClient.getInstance().player) <= 4)
             {
-                int slot = InventoryUtil.getItem(Items.ITEM_FRAME.getDefaultStack());
-                if (slot < 0) {
-                    ChatUtil.SendMessage("There is no item frame in your inventory");
-                    AutoPlace.Toggle();
-                    return;
+                ItemFrameEntity entity = (ItemFrameEntity) e;
+
+                if(i < MaxFrame.getValueInt())
+                {
+                    frames[i] = entity;
+                    marked[i] = false;
+                    i++;
                 }
             }
+
+        }
+        if(i == 0)
+        {
+            ChatUtil.SendMessage("Couldn't find item frames in range");
+            Toggle(false);
         }
         else
         {
-            int i = 0;
-            for (Entity e : MinecraftClient.getInstance().world.getEntities())
-            {
-                if(e instanceof ItemFrameEntity && e.distanceTo(MinecraftClient.getInstance().player) <= 4)
-                {
-                    ItemFrameEntity entity = (ItemFrameEntity) e;
-
-                    if(entity.getHeldItemStack().getItem() == Items.AIR && i < MaxFrame.getValueInt())
-                    {
-                        frames[i] = entity;
-                        i++;
-                    }
-                }
-
-            }
-            if(i == 0)
-            {
-                ChatUtil.SendMessage("Couldn't find item frames in range");
-                Toggle(false);
-            }
-            else
-            {
-                ChatUtil.SendMessage(("Found " + i + " item frames"));
-            }
+            ChatUtil.SendMessage(("Found " + i + " item frames"));
         }
     }
 

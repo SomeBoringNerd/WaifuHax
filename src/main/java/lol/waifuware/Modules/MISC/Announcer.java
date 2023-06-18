@@ -58,54 +58,63 @@ public class Announcer extends AbstractModule
     private final Map<String, PlayerEntity> playerMap = new HashMap<>();
 
     @EventHandler
-    private void onTick(OnTickEvent e) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.world == null || client.player == null)
-            return;
+    private void onTick(OnTickEvent e)
+    {
+        try {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.world == null || client.player == null)
+                return;
 
-        if (username == null) {
-            username = client.player.getEntityName();
-        }
-
-        if (!RenderDistance.getEnabled())
-            return;
-
-        entityList.clear();
-
-        for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entity;
-                entityList.add(player);
+            if (username == null) {
+                username = client.player.getEntityName();
             }
-        }
 
-        for (PlayerEntity player : entityList)
-        {
-            if (!oldPlayerList.contains(player) && !Objects.equals(username, player.getEntityName())) {
-                ChatUtil.SendMessage("§8" + player.getEntityName() + " §7entered visual range");
+            if (!RenderDistance.getEnabled())
+                return;
+
+            entityList.clear();
+
+            for (Entity entity : client.world.getEntities()) {
+                if (entity instanceof PlayerEntity) {
+                    PlayerEntity player = (PlayerEntity) entity;
+                    entityList.add(player);
+                }
             }
-        }
 
-        for (PlayerEntity player : oldPlayerList) {
-            if (!entityList.contains(player)) {
-                boolean found = false;
-                for (PlayerListEntry player2 : client.getNetworkHandler().getPlayerList()) {
-                    if (Objects.equals(player2.getProfile().getName(), player.getEntityName()) && !Objects.equals(username, player2.getProfile().getName())) {
-                        ChatUtil.SendMessage("§8" + player.getEntityName() + " §7exited visual range");
-                        found = true;
-                        break;
+            for (PlayerEntity player : entityList)
+            {
+                if (!oldPlayerList.contains(player) && !Objects.equals(username, player.getEntityName()))
+                {
+                    ChatUtil.SendMessage("§8" + player.getEntityName() + " §7entered visual range");
+                }
+            }
+
+            for (PlayerEntity player : oldPlayerList) {
+                if (!entityList.contains(player)) {
+                    boolean found = false;
+                    for (PlayerListEntry player2 : client.getNetworkHandler().getPlayerList())
+                    {
+                        if (Objects.equals(player2.getProfile().getName(), player.getEntityName()) && !Objects.equals(username, player2.getProfile().getName()))
+                        {
+                            ChatUtil.SendMessage("§8" + player.getEntityName() + " §7exited visual range");
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        Vec3d pos = player.getPos();
+                        assert MinecraftClient.getInstance().player != null;
+                        if(player.getEntityName() != MinecraftClient.getInstance().player.getEntityName()) {
+                            ChatUtil.SendMessage("§8" + player.getEntityName() + " §7disconnected at §2X:" + (int) pos.x + " Y:" + (int) pos.y + " Z:" + (int) pos.z);
+                        }
                     }
                 }
-
-                if (!found) {
-                    Vec3d pos = player.getPos();
-                    ChatUtil.SendMessage("§8" + player.getEntityName() + " §7disconnected at §2X:" + (int) pos.x + " Y:" + (int) pos.y + " Z:" + (int) pos.z);
-                }
             }
-        }
 
-        oldPlayerList.clear();
-        oldPlayerList.addAll(entityList);
+            oldPlayerList.clear();
+            oldPlayerList.addAll(entityList);
+        }catch (Exception ignored){}
     }
 
 
