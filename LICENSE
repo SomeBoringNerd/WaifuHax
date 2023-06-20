@@ -1,21 +1,27 @@
-The MIT License (MIT)
+The WaifuWare License (WWL)
 
-Copyright (c) 2022 SomeBoringNerd, TaxMachine
+Copyright (c) 2023 SomeBoringNerd
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This document explain every use cases under which the software can be distributed.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+1) Forking for contributing
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+You are allowed to create a modified version (fork) of the software in order to contribute to its development.
+
+2) Creating your own version of the software
+
+You are allowed to create a modified version of the software in order to create your own based on this one.
+
+in order to count as a modified version, most of the source code (51%) need to be rewritten, deleted or otherwise altered in a significant way.
+
+2.a) Releasing said software
+
+Your modified version of the software cannot be distributed under another licence, need to be open source and not contain malicious code.
+
+The author of this software cannot be held accountable for the damages a modified version of the software caused.
+
+3) case per case
+
+If the distribution of the software does not fall under any of those two categories, you are not allowed to distribute, release or share in anyway your modified fork.
+
+if you want to distribute it anyway, contact the author of the software and ask for permission with as much details as possible.
