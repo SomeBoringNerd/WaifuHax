@@ -40,6 +40,7 @@ public class AutoFrameDupe extends AbstractModule
     public IntSetting Hit = new IntSetting("Hit", 1, 20, 5, 1, "Number of hits per second", "h", NumberType.INT);
 
     public BooleanSetting NoDelay = new BooleanSetting("NoDelay", false, "Interact with every frame instead of only one", "nd");
+    public BooleanSetting AutoRefill = new BooleanSetting("AutoRefill", false, "Weird shit that somehow work", "nd");
 
     ItemFrameEntity[] frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
     boolean[] marked = new boolean[(int) MaxFrame.getMax()];
@@ -47,7 +48,7 @@ public class AutoFrameDupe extends AbstractModule
     public AutoFrameDupe()
     {
         super();
-        addSettings(MaxFrame, Hit, NoDelay);
+        addSettings(MaxFrame, Hit, NoDelay, AutoRefill);
         Create();
 
         desc[0] = "Automatically perform the frame";
@@ -134,9 +135,16 @@ public class AutoFrameDupe extends AbstractModule
     public String getDisplayName() {
         return name + " §c[§r§4" + MaxFrame.getValueInt() + ", " + Hit.getValueInt() + ", " + (NoDelay.getEnabled() ? "§2ND" : "§4ND") + "§c]";
     }
-
+    int hotbar = -1;
     void Refill()
     {
+        if(!AutoRefill.getEnabled()) return;
+        if(hotbar == -1)
+        {
+            hotbar = MinecraftClient.getInstance().player.getInventory().selectedSlot;
+        }else{
+            MinecraftClient.getInstance().getNetworkHandler().sendPacket(new UpdateSelectedSlotC2SPacket(hotbar));
+        }
         int e = 0;
         for(int j = 0; j < MinecraftClient.getInstance().player.getInventory().size(); j++)
         {
@@ -198,7 +206,7 @@ public class AutoFrameDupe extends AbstractModule
     public void onDisable()
     {
         frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
-
+        hotbar = -1;
     }
 
     @Override
