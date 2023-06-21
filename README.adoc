@@ -3,11 +3,7 @@ image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax[c
 '''
 = WaifuHax
 
-former private client, now public, free and open source.
-
-= support :
-
-https://discord.gg/JRMNy8QSw6
+WaifuHax is no longer maintained, you are free to do whatever the fuck you want.
 
 == How to compile
 ==== Windows
