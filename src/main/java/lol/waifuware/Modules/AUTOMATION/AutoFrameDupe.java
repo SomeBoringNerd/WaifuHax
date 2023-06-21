@@ -142,7 +142,9 @@ public class AutoFrameDupe extends AbstractModule
         if(hotbar == -1)
         {
             hotbar = MinecraftClient.getInstance().player.getInventory().selectedSlot;
-        }else{
+        }
+        else
+        {
             MinecraftClient.getInstance().getNetworkHandler().sendPacket(new UpdateSelectedSlotC2SPacket(hotbar));
         }
         int e = 0;
@@ -151,8 +153,8 @@ public class AutoFrameDupe extends AbstractModule
             MinecraftClient.getInstance().player.getInventory();
             if(PlayerInventory.isValidHotbarIndex(j))
             {
-                ChatUtil.Log(PlayerInventory.isValidHotbarIndex(j) + " " + j);
-                if (MinecraftClient.getInstance().player.getInventory().getStack(j).getItem() != Items.AIR) {
+                if (MinecraftClient.getInstance().player.getInventory().getStack(j).getItem() != Items.AIR)
+                {
                     //ChatUtil.SendMessage(MinecraftClient.getInstance().player.getInventory().getStack(j).getItem().getDefaultStack().getName().getString() + " at " + j);
                     //ChatUtil.SendMessage(Objects.equals(MinecraftClient.getInstance().player.getInventory().getStack(j).getItem().getDefaultStack().getName().getString(), hold) + "");
 
