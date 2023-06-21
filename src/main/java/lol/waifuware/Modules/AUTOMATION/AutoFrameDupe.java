@@ -205,6 +205,18 @@ public class AutoFrameDupe extends AbstractModule
     @Override
     public void onDisable()
     {
+        int i = 0;
+        for (ItemFrameEntity entity : frames)
+        {
+            if (entity == null) return;
+            else if (entity.isAlive())
+            {
+                if (entity.getHeldItemStack().getItem() != Items.AIR && !marked[i])
+                {
+                    MinecraftClient.getInstance().player.networkHandler.sendPacket(PlayerInteractEntityC2SPacket.attack(entity, false));
+                }
+            }
+        }
         frames = new ItemFrameEntity[(int) MaxFrame.getMax()];
         hotbar = -1;
     }
