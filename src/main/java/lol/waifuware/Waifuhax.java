@@ -19,7 +19,6 @@ public class Waifuhax implements ModInitializer
     public static ModMetadata MOD_META;
     public static String VERSION;
     public static final String MOD_ID = "waifuhax";
-    public static final List<String> NO_JUNE_UUIDS = List.of("64a7dadab6d4433d9b803c96f91ed370", "3a16450f8b124335acf3dc7413c76a99", "80320fa7120a4ed0ad195e449a8c0023");
 
     @Override
     public void onInitialize()

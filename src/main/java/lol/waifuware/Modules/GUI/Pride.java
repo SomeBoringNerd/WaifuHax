@@ -21,15 +21,6 @@ public class Pride extends AbstractModule {
         desc[0] = "show a nice pride flag on your screen";
         addSettings(Flag);
         Create();
-
-        String uuid = MinecraftClient.getInstance().getSession().getUuid();
-        if (Waifuhax.NO_JUNE_UUIDS.contains(uuid)) return;
-
-        java.util.Date date= new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int month = cal.get(Calendar.MONTH);
-        if(month == Calendar.JUNE) Toggle(true);
     }
 
     @Override
@@ -127,18 +118,5 @@ public class Pride extends AbstractModule {
                 break;
         }
         return 0x000000;
-    }
-
-    @Override
-    public void onDisable()
-    {
-        String uuid = MinecraftClient.getInstance().getSession().getUuid();
-        if (Waifuhax.NO_JUNE_UUIDS.contains(uuid)) return;
-
-        java.util.Date date= new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int month = cal.get(Calendar.MONTH);
-        if (month == Calendar.JUNE) Toggle(true);
     }
 }
