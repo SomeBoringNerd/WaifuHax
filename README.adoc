@@ -1,9 +1,18 @@
-image::https://img.shields.io/github/downloads/SomeBoringNerd/waifuhax/total[total download]
 image::https://img.shields.io/github/contributors-anon/SomeBoringNerd/waifuhax[contributors]
 '''
 = WaifuHax
 
-WaifuHax is no longer maintained, you are free to do whatever the fuck you want.
+WaifuHax is a client base for Minecraft 1.19.4.
+
+It was made for anarchy servers, this base contain :
+
+>A save system
+
+>A click GUI
+
+>Custom main menu
+
+>read the code and see for yourself
 
 == How to compile
 ==== Windows
@@ -52,9 +61,6 @@ To know what each setting do, type -${module's name}
 
 | MeteorDev
 | Orbit system, fast and easy event system
-
-| Cyyynthia
-| PronounDB API
 
 | Pr3roxDLC
 | Some tips to improve WaifuHax

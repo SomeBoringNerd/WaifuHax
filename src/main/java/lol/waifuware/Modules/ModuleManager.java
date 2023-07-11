@@ -1,19 +1,12 @@
 package lol.waifuware.Modules;
 
-import lol.waifuware.Modules.AUTOMATION.AutoFrameDupe;
-import lol.waifuware.Modules.CHAT.Highlight;
 import lol.waifuware.Modules.CHAT.Suffix;
-import lol.waifuware.Modules.COMBAT.AutoTotem;
-import lol.waifuware.Modules.EXPLOITS.AntiHunger;
 import lol.waifuware.Modules.EXPLOITS.GameModeDetector;
 import lol.waifuware.Modules.GUI.*;
 import lol.waifuware.Modules.MISC.*;
-import lol.waifuware.Modules.MOVEMENT.BoatFly;
 import lol.waifuware.Modules.MOVEMENT.Sprint;
-import lol.waifuware.Modules.MOVEMENT.Strafe;
 import lol.waifuware.Modules.MOVEMENT.VanillaFly;
 import lol.waifuware.Modules.RENDER.FullBright;
-import lol.waifuware.Modules.RENDER.Xray;
 import lol.waifuware.Util.ChatUtil;
 import org.lwjgl.glfw.GLFW;
 
@@ -37,29 +30,19 @@ public class ModuleManager
     {
         CheckForFolder();
         instance = this;
-        //@todo : auto-sort this shit
 
         modules.add(new AFK());
         modules.add(new Announcer());
-        modules.add(new AntiAim());
-        modules.add(new AntiHunger());
         modules.add(new ModuleList());
-        modules.add(new AutoTotem());
-        modules.add(new AutoFrameDupe());
-        modules.add(new BoatFly());
         modules.add(new ClickGUI());
         modules.add(new Coordinates());
         modules.add(new FullBright());
         modules.add(new GameModeDetector());
         modules.add(new GlobalSettings());
-        modules.add(new Highlight());
         modules.add(new HUDEditor());
         modules.add(new Pride());
-        modules.add(new PronounDB());
         modules.add(new Sprint());
-        modules.add(new Strafe());
         modules.add(new Suffix());
-        modules.add(new Xray());
         modules.add(new VanillaFly());
         modules.add(new Watermark());
     }

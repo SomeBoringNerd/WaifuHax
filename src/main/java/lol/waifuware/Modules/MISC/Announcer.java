@@ -117,29 +117,4 @@ public class Announcer extends AbstractModule
         oldPlayerList.clear();
         oldPlayerList.addAll(entityList);
     }
-
-
-
-    /*@EventHandler
-    private void onPlayerDisconnect(OnPlayerDisconnect event)
-    {
-        boolean found = false;
-        for (PlayerEntity player : oldPlayerList)
-        {
-            if(player.getEntityName().equals(event.getPlayer()))
-            {
-                found = true;
-            }
-        }
-        if(!found){
-            ChatUtil.SendMessage("§7" + event.getPlayer() + " §7has disconnected");
-        }
-    }
-
-    @EventHandler
-    private void onPlayerConnect(OnPlayerConnect event)
-    {
-        ChatUtil.SendMessage("§7" + event.getPlayer() + " §7logged in");
-    }*/
-
 }
